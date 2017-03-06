@@ -38,12 +38,27 @@
                         android:textSize="20sp"
                         android:textStyle="bold"/>
 
-                    <android.support.v7.widget.AppCompatSpinner
-                        android:id="@+id/gravity_selection_spinner"
+                    <RadioGroup
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:entries="@array/cfdialog_gravity"/>
+                        android:orientation="horizontal"
+                        android:paddingTop="12dp">
+
+                        <RadioButton
+                            android:id="@+id/center_dialog_gravity_radio_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:checked="true"
+                            android:text="Center"/>
+
+                        <RadioButton
+                            android:id="@+id/bottom_dialog_gravity_radio_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Bottom"/>
+                    </RadioGroup>
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
@@ -108,15 +123,16 @@
                             android:id="@+id/icon_show_radio_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Show"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:text="Show"/>
+
                         <RadioButton
                             android:id="@+id/icon_hide_radio_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Hide"
+                            android:layout_weight="1"
                             android:checked="true"
-                            android:layout_weight="1"/>
+                            android:text="Hide"/>
                     </RadioGroup>
 
                     <TextView
@@ -137,15 +153,16 @@
                             android:id="@+id/image_content_show_radio_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Show"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:text="Show"/>
+
                         <RadioButton
                             android:id="@+id/image_content_hide_radio_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Hide"
+                            android:layout_weight="1"
                             android:checked="true"
-                            android:layout_weight="1"/>
+                            android:text="Hide"/>
                     </RadioGroup>
 
                 </LinearLayout>
@@ -212,7 +229,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:entries="@array/cfdialog_text_gravity"/>
+                        android:entries="@array/cfdialog_button_gravity"/>
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -316,15 +333,16 @@
                             android:id="@+id/dark_theme_radio_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Dark"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:text="Dark"/>
+
                         <RadioButton
                             android:id="@+id/light_theme_radio_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Light"
+                            android:layout_weight="1"
                             android:checked="true"
-                            android:layout_weight="1"/>
+                            android:text="Light"/>
                     </RadioGroup>
 
                 </LinearLayout>

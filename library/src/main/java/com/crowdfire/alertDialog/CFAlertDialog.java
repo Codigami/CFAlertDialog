@@ -4,8 +4,6 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.StringRes;
@@ -31,33 +29,25 @@ import android.widget.TextView;
 
 import com.crowdfire.alertDialog.utils.DeviceUtil;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CFAlertDialog extends AppCompatDialog {
 
-    static final String BUTTON_ID_KEY = "button_id_key";
-    static final int BUTTON_CLICKED_MESSAGE = 0x46;
-
     private DialogParams params;
 
-    private Handler dialogHandler;
-    private Message onButtonClickedMessage;
-
-    private LinearLayout cfDialogHeaderLinearLayout, buttonContainerLinearLayout, cfDialogFooterLinearLayout, iconTitleContainer, selectableItemsContainer;
+    private LinearLayout cfDialogHeaderLinearLayout, buttonContainerLinearLayout,
+            cfDialogFooterLinearLayout, iconTitleContainer, selectableItemsContainer;
     private CardView dialogCardView;
     private TextView dialogTitleTextView, dialogMessageTextView;
     private ImageView cfDialogIconImageView;
 
     private CFAlertDialog(Context context) {
         super(context, R.style.CFDialogStyle);
-        dialogHandler = new ListenersHandler(this);
     }
 
     private CFAlertDialog(Context context, int theme) {
         super(context, theme);
-        dialogHandler = new ListenersHandler(this);
     }
 
     @Override
@@ -85,10 +75,10 @@ public class CFAlertDialog extends AppCompatDialog {
 
     private void initDialog(DialogParams params) {
         if (params.iconDrawableId != -1) {
-            setIconDrawable(params.iconDrawableId);
+            setIcon(params.iconDrawableId);
         } else if (params.iconDrawable != null) {
-            setIconDrawable(params.iconDrawable);
-        } else { setIconDrawable(null); }
+            setIcon(params.iconDrawable);
+        } else { setIcon(null); }
         setTitle(params.title);
         setMessage(params.message);
         setCancelable(params.cancelable);
@@ -207,11 +197,11 @@ public class CFAlertDialog extends AppCompatDialog {
         setHeaderView(view);
     }
 
-    public void setIconDrawable(@DrawableRes int iconDrawableId) {
-        setIconDrawable(ContextCompat.getDrawable(getContext(), iconDrawableId));
+    public void setIcon(@DrawableRes int iconDrawableId) {
+        setIcon(ContextCompat.getDrawable(getContext(), iconDrawableId));
     }
 
-    public void setIconDrawable(Drawable iconDrawable) {
+    public void setIcon(Drawable iconDrawable) {
         if (iconDrawable == null) {
             cfDialogIconImageView.setVisibility(View.GONE);
             if (dialogTitleTextView.getVisibility() == View.GONE) {
@@ -314,7 +304,7 @@ public class CFAlertDialog extends AppCompatDialog {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onButtonClicked(CFAlertDialogButton.getButtonId());
+                CFAlertDialogButton.getOnClickListener().onClick(CFAlertDialog.this, 0);
             }
         });
 
@@ -357,23 +347,6 @@ public class CFAlertDialog extends AppCompatDialog {
             button.setBackground(backgroundDrawable);
         } else {
             button.setBackgroundDrawable(backgroundDrawable);
-        }
-    }
-
-    private void onButtonClicked(int buttonId) {
-        if (onButtonClickedMessage != null) {
-            Bundle bundle = new Bundle();
-            bundle.putInt(BUTTON_ID_KEY, buttonId);
-            onButtonClickedMessage.setData(bundle);
-            Message.obtain(onButtonClickedMessage).sendToTarget();
-        }
-    }
-
-    public void setOnButtonClickedListener(OnButtonClickedListener onButtonClickedListener) {
-        if (onButtonClickedListener != null) {
-            onButtonClickedMessage = dialogHandler.obtainMessage(BUTTON_CLICKED_MESSAGE, onButtonClickedListener);
-        } else {
-            onButtonClickedMessage = null;
         }
     }
 
@@ -492,52 +465,47 @@ public class CFAlertDialog extends AppCompatDialog {
             this.params.theme = theme;
         }
 
-        public Builder message(CharSequence message) {
+        public Builder setMessage(CharSequence message) {
             this.params.message = message;
             return this;
         }
 
-        public Builder title(CharSequence title) {
+        public Builder setTitle(CharSequence title) {
             this.params.title = title;
             return this;
         }
 
-        public Builder message(@StringRes int messageId) {
+        public Builder setMessage(@StringRes int messageId) {
             this.params.message = params.context.getString(messageId);
             return this;
         }
 
-        public Builder title(@StringRes int titleId) {
+        public Builder setTitle(@StringRes int titleId) {
             this.params.title = params.context.getString(titleId);
             return this;
         }
 
-        public Builder contentImageDrawable(@DrawableRes int contentImageDrawableId) {
+        public Builder setContentImageDrawable(@DrawableRes int contentImageDrawableId) {
             this.params.contentImageDrawableId = contentImageDrawableId;
             this.params.contentImageDrawable = null;
             return this;
         }
 
-        public Builder contentImageDrawable(Drawable contentImageDrawable) {
+        public Builder setContentImageDrawable(Drawable contentImageDrawable) {
             this.params.contentImageDrawable = contentImageDrawable;
             this.params.contentImageDrawableId = -1;
             return this;
         }
 
-        public Builder iconDrawable(@DrawableRes int iconDrawableId) {
+        public Builder setIcon(@DrawableRes int iconDrawableId) {
             this.params.iconDrawableId = iconDrawableId;
             this.params.iconDrawable = null;
             return this;
         }
 
-        public Builder iconDrawable(Drawable iconDrawable) {
+        public Builder setIcon(Drawable iconDrawable) {
             this.params.iconDrawable = iconDrawable;
             this.params.iconDrawableId = -1;
-            return this;
-        }
-
-        public Builder onButtonClickListener(OnButtonClickedListener onButtonClickedListener) {
-            this.params.onButtonClickedListener = onButtonClickedListener;
             return this;
         }
 
@@ -549,7 +517,7 @@ public class CFAlertDialog extends AppCompatDialog {
         /**
          * @param dialogGravity @see android.view.Gravity
          */
-        public Builder dialogVerticalGravity(int dialogGravity) {
+        public Builder setDialogVerticalGravity(int dialogGravity) {
             this.params.dialogGravity = dialogGravity;
             return this;
         }
@@ -557,7 +525,7 @@ public class CFAlertDialog extends AppCompatDialog {
         /**
          * @param textGravity @see android.view.Gravity
          */
-        public Builder textGravity(int textGravity) {
+        public Builder setTextGravity(int textGravity) {
             this.params.textGravity = textGravity;
             return this;
         }
@@ -567,18 +535,18 @@ public class CFAlertDialog extends AppCompatDialog {
             return this;
         }
 
-        public Builder addPositiveButton(String buttonText) {
-            addButton(CFAlertDialogButton.getPositiveButton(buttonText));
+        public Builder addPositiveButton(String buttonText, OnClickListener onClickListener) {
+            addButton(CFAlertDialogButton.getPositiveButton(buttonText, onClickListener));
             return this;
         }
 
-        public Builder addNegativeButton(String buttonText) {
-            addButton(CFAlertDialogButton.getNegativeButton(buttonText));
+        public Builder addNegativeButton(String buttonText, OnClickListener onClickListener) {
+            addButton(CFAlertDialogButton.getNegativeButton(buttonText, onClickListener));
             return this;
         }
 
-        public Builder addNeutralButton(String buttonText) {
-            addButton(CFAlertDialogButton.getNeutralButton(buttonText));
+        public Builder addNeutralButton(String buttonText, OnClickListener onClickListener) {
+            addButton(CFAlertDialogButton.getNeutralButton(buttonText, onClickListener));
             return this;
         }
 
@@ -602,25 +570,25 @@ public class CFAlertDialog extends AppCompatDialog {
             return this;
         }
 
-        public Builder headerView(View headerView) {
+        public Builder setHeaderView(View headerView) {
             this.params.headerView = headerView;
             this.params.headerViewId = -1;
             return this;
         }
 
-        public Builder headerView(@LayoutRes int headerViewId) {
+        public Builder setHeaderView(@LayoutRes int headerViewId) {
             this.params.headerViewId = headerViewId;
             this.params.headerView = null;
             return this;
         }
 
-        public Builder footerView(View footerView) {
+        public Builder setFooterView(View footerView) {
             this.params.footerView = footerView;
             this.params.footerViewId = -1;
             return this;
         }
 
-        public Builder footerView(@LayoutRes int footerViewId) {
+        public Builder setFooterView(@LayoutRes int footerViewId) {
             this.params.footerViewId = footerViewId;
             this.params.footerView = null;
             return this;
@@ -631,7 +599,7 @@ public class CFAlertDialog extends AppCompatDialog {
          *
          * @param cancelable
          */
-        public Builder cancelable(boolean cancelable) {
+        public Builder setCancelable(boolean cancelable) {
             this.params.cancelable = cancelable;
             return this;
         }
@@ -643,7 +611,6 @@ public class CFAlertDialog extends AppCompatDialog {
             } else {
                 cfAlertDialog = new CFAlertDialog(params.context, params.theme);
             }
-            cfAlertDialog.setOnButtonClickedListener(params.onButtonClickedListener);
             cfAlertDialog.setOnDismissListener(params.onDismissListener);
             cfAlertDialog.setDialogParams(params);
             return cfAlertDialog;
@@ -669,7 +636,6 @@ public class CFAlertDialog extends AppCompatDialog {
         private int headerViewId = -1, footerViewId = -1;
         private Drawable contentImageDrawable, iconDrawable;
         private List<CFAlertDialogButton> buttons = new ArrayList<>();
-        private OnButtonClickedListener onButtonClickedListener;
         private OnDismissListener onDismissListener;
         private boolean cancelable = true;
         private String[] multiSelectItems;
@@ -680,28 +646,5 @@ public class CFAlertDialog extends AppCompatDialog {
         private OnClickListener onItemClickListener;
         private OnClickListener onSingleItemClickListener;
         private OnMultiChoiceClickListener onMultiChoiceClickListener;
-    }
-
-    public interface OnButtonClickedListener {
-
-        void onButtonClicked(CFAlertDialog cfAlertDialog, int buttonId);
-    }
-
-    private static final class ListenersHandler extends Handler {
-
-        private final WeakReference<CFAlertDialog> mDialog;
-
-        public ListenersHandler(CFAlertDialog dialog) {
-            mDialog = new WeakReference<>(dialog);
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case BUTTON_CLICKED_MESSAGE:
-                    ((OnButtonClickedListener) msg.obj).onButtonClicked(mDialog.get(), msg.getData().getInt(BUTTON_ID_KEY));
-                    break;
-            }
-        }
     }
 }

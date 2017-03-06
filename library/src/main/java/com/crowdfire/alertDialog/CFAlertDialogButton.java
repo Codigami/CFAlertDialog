@@ -1,6 +1,7 @@
 package com.crowdfire.alertDialog;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -10,12 +11,8 @@ import android.support.annotation.StringRes;
 
 public class CFAlertDialogButton {
 
-    public static final int POSITIVE_BUTTON_ID = 1001;
-    public static final int NEGATIVE_BUTTON_ID = 1002;
-    public static final int NEUTRAL_BUTTON_ID = 1003;
-
     private String buttonText;
-    private int buttonId;
+    private DialogInterface.OnClickListener onClickListener;
     private ColorStateList textColor;
     private int gravity;
     private Drawable backgroundDrawable;
@@ -41,7 +38,7 @@ public class CFAlertDialogButton {
             this.textColor = null;
         }
 
-        this.buttonId = builder.buttonId;
+        this.onClickListener = builder.onClickListener;
         this.gravity = builder.gravity;
     }
 
@@ -82,27 +79,28 @@ public class CFAlertDialogButton {
         return textColor;
     }
 
-    public int getButtonId() {
-        return buttonId;
+    public DialogInterface.OnClickListener getOnClickListener() {
+        return onClickListener;
     }
 
     public static class Builder {
 
         private String buttonText;
-        private int buttonId, backgroundDrawableId = -1, textColorStateListId = -1;
+        private int backgroundDrawableId = -1, textColorStateListId = -1;
+        private DialogInterface.OnClickListener onClickListener;
 
         private Drawable backgroundDrawable;
         private ColorStateList textColor = null;
 
         private int gravity = android.view.Gravity.FILL_HORIZONTAL;
 
-        public Builder(String buttonText, int buttonId) {
-            this.buttonId = buttonId;
+        public Builder(String buttonText, DialogInterface.OnClickListener onClickListener) {
+            this.onClickListener = onClickListener;
             this.buttonText = buttonText;
         }
 
-        public Builder(Context context, @StringRes int buttonTextId, int buttonId) {
-            this.buttonId = buttonId;
+        public Builder(Context context, @StringRes int buttonTextId, DialogInterface.OnClickListener onClickListener) {
+            this.onClickListener = onClickListener;
             this.buttonText = context.getString(buttonTextId);
         }
 
@@ -155,22 +153,22 @@ public class CFAlertDialogButton {
         }
     }
 
-    public static CFAlertDialogButton getPositiveButton(String buttonText) {
-        return new Builder(buttonText, POSITIVE_BUTTON_ID)
+    public static CFAlertDialogButton getPositiveButton(String buttonText, DialogInterface.OnClickListener onClickListener) {
+        return new Builder(buttonText, onClickListener)
                 .backgroundDrawable(R.drawable.cfdialog_positive_button_background_drawable)
                 .textColorStateList(R.color.cfdialog_button_white_text_color)
                 .build();
     }
 
-    public static CFAlertDialogButton getNegativeButton(String buttonText) {
-        return new Builder(buttonText, NEGATIVE_BUTTON_ID)
+    public static CFAlertDialogButton getNegativeButton(String buttonText, DialogInterface.OnClickListener onClickListener) {
+        return new Builder(buttonText, onClickListener)
                 .backgroundDrawable(R.drawable.cfdialog_negative_button_background_drawable)
                 .textColorStateList(R.color.cfdialog_button_white_text_color)
                 .build();
     }
 
-    public static CFAlertDialogButton getNeutralButton(String buttonText) {
-        return new Builder(buttonText, NEUTRAL_BUTTON_ID)
+    public static CFAlertDialogButton getNeutralButton(String buttonText, DialogInterface.OnClickListener onClickListener) {
+        return new Builder(buttonText, onClickListener)
                 .backgroundDrawable(R.drawable.cfdialog_neutral_button_background_drawable)
                 .textColorStateList(R.color.cfdialog_button_white_text_color)
                 .build();

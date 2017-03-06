@@ -10,18 +10,21 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
-import com.crowdfire.alertDialog.CFAlertDialogButton;
 import com.crowdfire.alertDialog.CFAlertDialog;
+import com.crowdfire.alertDialog.CFAlertDialogButton;
 
 public class MainActivity extends AppCompatActivity {
 
-    private AppCompatSpinner gravitySelectionSpinner, textGravitySpinner, buttonGravitySpinner;
+    private AppCompatSpinner textGravitySpinner, buttonGravitySpinner;
     private EditText titleEditText, messageEditText;
     private CheckBox positiveButtonCheckbox, negativeButtonCheckbox, neutralButtonCheckbox,
             defaultButtonCheckbox, addHeaderCheckBox, addFooterCheckBox;
-    private RadioButton itemsRadioButton, multiChoiceRadioButton, singleChoiceRadioButton, iconShowRadioButton, darkThemeRadioButton, imageContentShowRadioButton;
-    private FloatingActionButton fab;
+    private RadioButton itemsRadioButton, multiChoiceRadioButton,
+            singleChoiceRadioButton, iconShowRadioButton, darkThemeRadioButton,
+            imageContentShowRadioButton, bottomDialogGravityRadioButton;
+    private FloatingActionButton showDialogFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +32,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bindViews();
 
-        gravitySelectionSpinner.setSelection(1);
         textGravitySpinner.setSelection(0);
         buttonGravitySpinner.setSelection(2);
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        showDialogFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showCFDialog();
@@ -49,81 +51,110 @@ public class MainActivity extends AppCompatActivity {
         } else {
             builder = new CFAlertDialog.Builder(this, R.style.crowdfire_dialog_style_light);
         }
-        switch (gravitySelectionSpinner.getSelectedItemPosition()) {
-            case 0:
-                builder.dialogVerticalGravity(Gravity.TOP);
-                break;
-            case 1:
-                builder.dialogVerticalGravity(Gravity.CENTER);
-                break;
-            case 2:
-                builder.dialogVerticalGravity(Gravity.BOTTOM);
-                break;
+        if (bottomDialogGravityRadioButton.isChecked()) {
+            builder.setDialogVerticalGravity(Gravity.BOTTOM);
         }
-        builder.title(titleEditText.getText());
-        builder.message(messageEditText.getText());
+        builder.setTitle(titleEditText.getText());
+        builder.setMessage(messageEditText.getText());
         switch (textGravitySpinner.getSelectedItemPosition()) {
             case 0:
-                builder.textGravity(Gravity.LEFT);
+                builder.setTextGravity(Gravity.LEFT);
                 break;
             case 1:
-                builder.textGravity(Gravity.CENTER_HORIZONTAL);
+                builder.setTextGravity(Gravity.CENTER_HORIZONTAL);
                 break;
             case 2:
-                builder.textGravity(Gravity.RIGHT);
-                break;
-            case 3:
-                builder.textGravity(Gravity.FILL_HORIZONTAL);
+                builder.setTextGravity(Gravity.RIGHT);
                 break;
         }
 
         if (iconShowRadioButton.isChecked()) {
-            builder.iconDrawable(R.drawable.icon_drawable);
+            builder.setIcon(R.drawable.icon_drawable);
         }
 
         if (imageContentShowRadioButton.isChecked()) {
-            builder.contentImageDrawable(R.drawable.image_content_drawable);
+            builder.setContentImageDrawable(R.drawable.image_content_drawable);
         }
 
         if (positiveButtonCheckbox.isChecked()) {
-            CFAlertDialogButton button = CFAlertDialogButton.getPositiveButton("Positive");
+            CFAlertDialogButton button = CFAlertDialogButton.getPositiveButton("Positive", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(MainActivity.this, "Positive", Toast.LENGTH_SHORT).show();
+                }
+            });
             button.setGravity(getButtonGravity());
             builder.addButton(button);
         }
         if (negativeButtonCheckbox.isChecked()) {
-            CFAlertDialogButton button = CFAlertDialogButton.getNegativeButton("Negative");
+            CFAlertDialogButton button = CFAlertDialogButton.getNegativeButton("Negative", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(MainActivity.this, "Negative", Toast.LENGTH_SHORT).show();
+                }
+            });
             button.setGravity(getButtonGravity());
             builder.addButton(button);
         }
         if (neutralButtonCheckbox.isChecked()) {
-            CFAlertDialogButton button = CFAlertDialogButton.getNeutralButton("Neutral");
+            CFAlertDialogButton button = CFAlertDialogButton.getNeutralButton("Neutral", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(MainActivity.this, "Neutral", Toast.LENGTH_SHORT).show();
+                }
+            });
             button.setGravity(getButtonGravity());
             builder.addButton(button);
         }
         if (defaultButtonCheckbox.isChecked()) {
-            builder.addButton(new CFAlertDialogButton.Builder("Default", 104).gravity(getButtonGravity()).build());
+            builder.addButton(new CFAlertDialogButton.Builder("Default", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(MainActivity.this, "Default", Toast.LENGTH_SHORT).show();
+                }
+            }).gravity(getButtonGravity()).build());
         }
 
         if (addHeaderCheckBox.isChecked()) {
-            builder.headerView(R.layout.dialog_header_layout);
+            builder.setHeaderView(R.layout.dialog_header_layout);
         }
 
         if (addFooterCheckBox.isChecked()) {
-            builder.footerView(R.layout.dialog_footer_layout);
+            builder.setFooterView(R.layout.dialog_footer_layout);
         }
 
         if (itemsRadioButton.isChecked()) {
             builder.setItems(new String[]{"First", "Second", "Third"}, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-
+                    switch (which) {
+                        case 0:
+                            Toast.makeText(MainActivity.this, "First", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 1:
+                            Toast.makeText(MainActivity.this, "Second", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 2:
+                            Toast.makeText(MainActivity.this, "Third", Toast.LENGTH_SHORT).show();
+                            break;
+                    }
                 }
             });
         } else if (multiChoiceRadioButton.isChecked()) {
             builder.setMultiChoiceItems(new String[]{"First", "Second", "Third"}, new boolean[]{true, false, false}, new DialogInterface.OnMultiChoiceClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-
+                    switch (which) {
+                        case 0:
+                            Toast.makeText(MainActivity.this, "First " + (isChecked ? "Checked" : "Unchecked"), Toast.LENGTH_SHORT).show();
+                            break;
+                        case 1:
+                            Toast.makeText(MainActivity.this, "Second " + (isChecked ? "Checked" : "Unchecked"), Toast.LENGTH_SHORT).show();
+                            break;
+                        case 2:
+                            Toast.makeText(MainActivity.this, "Third " + (isChecked ? "Checked" : "Unchecked"), Toast.LENGTH_SHORT).show();
+                            break;
+                    }
                 }
             });
 
@@ -131,12 +162,20 @@ public class MainActivity extends AppCompatActivity {
             builder.setSingleChoiceItems(new String[]{"First", "Second", "Third"}, 1, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-
+                    switch (which) {
+                        case 0:
+                            Toast.makeText(MainActivity.this, "First", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 1:
+                            Toast.makeText(MainActivity.this, "Second", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 2:
+                            Toast.makeText(MainActivity.this, "Third", Toast.LENGTH_SHORT).show();
+                            break;
+                    }
                 }
             });
         }
-
-        builder.addButton(new CFAlertDialogButton.Builder("button", 123).build());
 
         builder.show();
     }
@@ -157,7 +196,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void bindViews() {
-        gravitySelectionSpinner = (AppCompatSpinner) findViewById(R.id.gravity_selection_spinner);
         titleEditText = (EditText) findViewById(R.id.title_edittext);
         messageEditText = (EditText) findViewById(R.id.message_edittext);
         textGravitySpinner = (AppCompatSpinner) findViewById(R.id.text_gravity_selction_spinner);
@@ -174,6 +212,7 @@ public class MainActivity extends AppCompatActivity {
         iconShowRadioButton = (RadioButton) findViewById(R.id.icon_show_radio_button);
         darkThemeRadioButton = (RadioButton) findViewById(R.id.dark_theme_radio_button);
         imageContentShowRadioButton = (RadioButton) findViewById(R.id.image_content_show_radio_button);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+        bottomDialogGravityRadioButton = (RadioButton) findViewById(R.id.bottom_dialog_gravity_radio_button);
+        showDialogFab = (FloatingActionButton) findViewById(R.id.fab);
     }
 }
