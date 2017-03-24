@@ -39,3 +39,8 @@ ehthumbs.db
 Thumbs.db
 
 /.idea
+/examples/examples.iml
+/library/library.iml
+examples/examples.iml
+library/library.iml
+build/generated/mockable-android-25.jar
