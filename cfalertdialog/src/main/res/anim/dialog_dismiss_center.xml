@@ -2,7 +2,7 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android">
 
     <alpha
-        android:duration="400"
+        android:duration="300"
         android:fromAlpha="1"
         android:interpolator="@anim/interpolator_acceleration_1_5"
         android:toAlpha="0"/>
