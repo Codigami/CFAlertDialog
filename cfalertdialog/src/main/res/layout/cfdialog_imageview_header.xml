@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+              style="@style/CFDialog.ContentImageView"
+    android:id="@+id/cfdialog_imageview_content">
+
+</ImageView>

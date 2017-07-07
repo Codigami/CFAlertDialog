@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="cfdialog_title_font_color">#013356</color>
+    <color name="cfdialog_desc_font_color">#013356</color>
+    <color name="cfdialog_button_drawable_stroke">#1a000000</color>
+
+    <color name="cfdialog_positive_button_color">#29c64d</color>
+    <color name="cfdialog_positive_button_pressed_color">#80e598</color>
+    <color name="cfdialog_negative_button_color">#FF4B4B</color>
+    <color name="cfdialog_negative_button_pressed_color">#ff9999</color>
+    <color name="cfdialog_neutral_button_color">#6768d9</color>
+    <color name="cfdialog_neutral_button_pressed_color">#999ae6</color>
+
+</resources>

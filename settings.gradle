@@ -1,1 +1,1 @@
-include ':library', ':examples'
+include ':app', ':cfalertdialog'

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="cfdialog_maxwidth">400dp</dimen>
+
+    <dimen name="cfdialog_outer_margin">20dp</dimen>
+    <dimen name="cfdialog_internal_spacing">10dp</dimen>
+    <dimen name="cfdialog_internal_spacing_half">5dp</dimen>
+    <dimen name="cfdialog_padding">20dp</dimen>
+    <dimen name="cfdialog_padding_half">10dp</dimen>
+    <dimen name="cfdialog_header_bottom_margin_half">10dp</dimen>
+    <dimen name="cfdialog_footer_top_margin_half">10dp</dimen>
+
+    <dimen name="cfdialog_imageview_top_margin">10dp</dimen>
+    <dimen name="cfdialog_icon_dimen">32dp</dimen>
+
+    <dimen name="cfdialog_title_font_size">20sp</dimen>
+    <dimen name="cfdialog_description_font_size">14sp</dimen>
+    <dimen name="cfdialog_button_text_font_size">14sp</dimen>
+
+    <dimen name="cfdialog_button_padding">10dp</dimen>
+
+</resources>

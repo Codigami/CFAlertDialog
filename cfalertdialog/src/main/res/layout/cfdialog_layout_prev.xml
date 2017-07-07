@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cfdialog_cardview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="?android:colorBackground"
+    android:clipChildren="true"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="4dp"
+    app:contentPaddingBottom="@dimen/cfdialog_footer_top_margin_half"
+    app:contentPaddingTop="@dimen/cfdialog_header_bottom_margin_half"
+    tools:layout_margin="@dimen/cfdialog_outer_margin">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical">
+
+            <!--header-->
+            <LinearLayout
+                android:id="@+id/crowdfire_dialog_header_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical"
+                android:visibility="gone"/>
+
+            <!--title/icon-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/icon_title_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/cfdialog_padding_half"
+                    android:layout_marginLeft="@dimen/cfdialog_padding"
+                    android:layout_marginRight="@dimen/cfdialog_padding"
+                    android:layout_marginTop="@dimen/cfdialog_padding_half"
+                    android:animateLayoutChanges="true"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/cfdialog_icon_imageview"
+                        style="@style/CFDialog.IconImage"/>
+
+                    <TextView
+                        android:id="@+id/tv_dialog_title"
+                        style="@style/CFDialog.Title"
+                        tools:text="This is your title"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--Message-->
+            <TextView
+                android:id="@+id/tv_dialog_content_desc"
+                style="@style/CFDialog.Message"
+                tools:text="This is your description"/>
+
+            <!-- selectable items-->
+            <LinearLayout
+                android:id="@+id/alert_selection_items_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <!--<include layout="@layout/cfdialog_selectable_item_layout"/>
+
+                <include layout="@layout/cfdialog_multi_select_item_layout"/>
+
+                <include layout="@layout/cfdialog_single_select_item_layout"/>-->
+
+            </LinearLayout>
+
+            <!--buttons-->
+            <LinearLayout
+                android:id="@+id/alert_buttons_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/cfdialog_padding_half"
+                android:layout_marginRight="@dimen/cfdialog_padding_half"
+                android:layout_marginBottom="@dimen/cfdialog_padding_half"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <!--<include layout="@layout/cfdialog_button"/>-->
+            </LinearLayout>
+
+            <!--footer-->
+            <LinearLayout
+                android:id="@+id/crowdfire_dialog_footer_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</android.support.v7.widget.CardView>
