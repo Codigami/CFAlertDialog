@@ -3,16 +3,19 @@ package com.crowdfire.cfalertdialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.StringRes;
 import android.support.annotation.StyleRes;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatDialog;
 import android.support.v7.widget.CardView;
 import android.text.TextUtils;
@@ -148,12 +151,15 @@ public class CFAlertDialog extends AppCompatDialog {
     private void populateDialog(final DialogParams params) {
 
         // Background
+
+        getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
         if (params.backgroundStyle == CFAlertBackgroundStyle.BLUR) {
             // TODO: Add blur background effect
-            getWindow().setBackgroundDrawableResource(params.backgroundColor);
+
         }
         else {
-            getWindow().setBackgroundDrawableResource(params.backgroundColor);
+            cfDialogBackground.setBackgroundColor(params.backgroundColor);
         }
 
         cfDialogBackground.setOnClickListener(new View.OnClickListener() {
@@ -607,13 +613,22 @@ public class CFAlertDialog extends AppCompatDialog {
 
         public Builder(Context context) {
             params = new DialogParams();
+            setDefaultParams();
             this.params.context = context;
         }
 
         public Builder(Context context, @StyleRes int theme) {
             params = new DialogParams();
+            setDefaultParams();
             this.params.context = context;
             this.params.theme = theme;
+        }
+
+        private void setDefaultParams() {
+
+            this.params.theme = R.style.CFDialog;
+            this.params.backgroundStyle = CFAlertBackgroundStyle.PLAIN;
+            this.params.backgroundColor = Color.TRANSPARENT;
         }
 
         public Builder setBackgroundStyle(CFAlertBackgroundStyle backgroundStyle) {
@@ -621,7 +636,12 @@ public class CFAlertDialog extends AppCompatDialog {
             return this;
         }
 
-        public Builder setBackgroundColor(@ColorRes int backgroundColor) {
+        public Builder setBackgroundResource(@ColorRes int backgroundResource) {
+            this.params.backgroundColor = ResourcesCompat.getColor(this.params.context.getResources(), backgroundResource, null);
+            return this;
+        }
+
+        public Builder setBackgroundColor(@ColorInt int backgroundColor) {
             this.params.backgroundColor = backgroundColor;
             return this;
         }
@@ -775,7 +795,7 @@ public class CFAlertDialog extends AppCompatDialog {
 
         private Context context;
         private CFAlertBackgroundStyle backgroundStyle = CFAlertBackgroundStyle.PLAIN;
-        private @ColorRes int backgroundColor;
+        private @ColorInt int backgroundColor = -1;
         private CharSequence message, title;
         private int theme = R.style.CFDialog,
                 dialogGravity = -1,

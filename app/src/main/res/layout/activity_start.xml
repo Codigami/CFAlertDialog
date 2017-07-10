@@ -264,6 +264,26 @@
                             android:checked="true"
                             android:text="Close on background tap" />
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Background Color"/>
+
+                        <View
+                            android:id="@+id/background_color_preview"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@android:color/white" />
+
+                    </LinearLayout>
                 </LinearLayout>
 
 

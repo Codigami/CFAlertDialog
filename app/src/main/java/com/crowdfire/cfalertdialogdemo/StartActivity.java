@@ -1,6 +1,7 @@
 package com.crowdfire.cfalertdialogdemo;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.crowdfire.cfalertdialog.CFAlertDialog;
+import com.crowdfire.cfalertdialogdemo.views.ColorSelectionView;
 
 import static com.crowdfire.cfalertdialog.CFAlertDialog.*;
 
@@ -29,8 +31,11 @@ public class StartActivity extends AppCompatActivity {
             singleChoiceRadioButton;
     private RadioButton iconShowRadioButton, imageContentShowRadioButton;
     private RadioButton topDialogGravityRadioButton, centerDialogGravityRadioButton, bottomDialogGravityRadioButton;
+    private View selectedBackgroundColorView;
     private FloatingActionButton showDialogFab;
     private CFAlertDialog alertDialog;
+    private CFAlertDialog colorSelectionDialog;
+    private ColorSelectionView colorSelectionView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +52,38 @@ public class StartActivity extends AppCompatActivity {
                 showCFDialog();
             }
         });
+
+        selectedBackgroundColorView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Intent selectColorsIntent = new Intent(StartActivity.this, ColorsActivity.class);
+                //startActivity(selectColorsIntent);
+                showColorSelectionAlert();
+            }
+        });
+    }
+
+    private void showColorSelectionAlert() {
+        if (colorSelectionDialog == null) {
+
+            colorSelectionView = new ColorSelectionView(this);
+            colorSelectionDialog = new CFAlertDialog.Builder(this)
+                    .addButton("Done", CFAlertActionStyle.POSITIVE, CFAlertActionAlignment.JUSTIFIED, new OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            // Update the color preview
+                            selectedBackgroundColorView.setBackgroundColor(colorSelectionView.selectedColor);
+
+                            // dismiss the dialog
+                            colorSelectionDialog.dismiss();
+                        }
+                    })
+                    .setDialogVerticalGravity(Gravity.BOTTOM)
+                    .setHeaderView(colorSelectionView)
+                    .create();
+        }
+        colorSelectionDialog.show();
     }
 
     private void showCFDialog() {
@@ -65,7 +102,7 @@ public class StartActivity extends AppCompatActivity {
         }
 
         // Background
-        builder.setBackgroundColor(R.color.sample_bg);
+        builder.setBackgroundColor(colorSelectionView.selectedColor);
 
         // Title and message
         builder.setTitle(titleEditText.getText());
@@ -198,10 +235,11 @@ public class StartActivity extends AppCompatActivity {
 
         }
 
-        // TODO:- Add this to the demo UI
+        // Cancel on background tap
         builder.setCancelable(closesOnBackgroundTapCheckBox.isChecked());
 
         alertDialog = builder.show();
+        //alertDialog.show();
     }
 
     private CFAlertActionAlignment getButtonGravity() {
@@ -238,6 +276,7 @@ public class StartActivity extends AppCompatActivity {
         topDialogGravityRadioButton = (RadioButton) findViewById(R.id.top_dialog_gravity_radio_button);
         centerDialogGravityRadioButton = (RadioButton) findViewById(R.id.center_dialog_gravity_radio_button);
         bottomDialogGravityRadioButton = (RadioButton) findViewById(R.id.bottom_dialog_gravity_radio_button);
+        selectedBackgroundColorView = findViewById(R.id.background_color_preview);
         showDialogFab = (FloatingActionButton) findViewById(R.id.fab);
     }
 }
