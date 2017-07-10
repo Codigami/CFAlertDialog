@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="#EFEFF4"
     tools:context="com.crowdfire.cfalertdialogdemo.StartActivity">
 
     <ScrollView
@@ -34,7 +35,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Gravity"
+                        android:text="Alert Type"
                         android:textSize="20sp"
                         android:textStyle="bold"/>
 
@@ -45,26 +46,26 @@
                         android:paddingTop="12dp">
 
                         <RadioButton
-                            android:id="@+id/top_dialog_gravity_radio_button"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Top"/>
-
-                        <RadioButton
                             android:id="@+id/center_dialog_gravity_radio_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:checked="true"
-                            android:text="Center"/>
+                            android:text="Alert"/>
 
                         <RadioButton
                             android:id="@+id/bottom_dialog_gravity_radio_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Bottom"/>
+                            android:text="Bottom Sheet"/>
+
+                        <RadioButton
+                            android:id="@+id/top_dialog_gravity_radio_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Notification"/>
                     </RadioGroup>
                 </LinearLayout>
 
@@ -85,7 +86,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Text"
+                        android:text="Text Settings"
                         android:textSize="20sp"
                         android:textStyle="bold"/>
 
@@ -95,22 +96,59 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:hint="Title"
-                        android:text="This is Title"/>
+                        android:text="Title of the message"/>
 
                     <EditText
                         android:id="@+id/message_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:hint="Message"
-                        android:text="Lorem ipsum dolor sit amet, eu enim est ut amet, purus conubia in, euismod nulla. Lacus sollicitudin amet vitae, sodales sed, lectus volutpat amet ut dolor, nunc sed"/>
+                        android:hint="Description"
+                        android:text="Add message body here. If the text exceeds a certain limit then the alert will automatically become scrollable."/>
 
-                    <android.support.v7.widget.AppCompatSpinner
-                        android:id="@+id/text_gravity_selction_spinner"
+                    <RadioGroup
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:entries="@array/cfdialog_text_gravity"/>
+                        android:orientation="horizontal"
+                        android:paddingTop="12dp">
+
+                        <RadioButton
+                            android:id="@+id/text_gravity_left"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:checked="true"
+                            android:text="Left"/>
+
+                        <RadioButton
+                            android:id="@+id/text_gravity_center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Center"/>
+
+                        <RadioButton
+                            android:id="@+id/text_gravity_right"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Right"/>
+                    </RadioGroup>
+
+                    </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Section-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:contentPadding="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -222,13 +260,48 @@
                             android:layout_columnWeight="1"
                             android:text="Neutral Button"/>
                     </GridLayout>
-
-                    <android.support.v7.widget.AppCompatSpinner
-                        android:id="@+id/button_gravity_selction_spinner"
+                    
+                    <GridLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:entries="@array/cfdialog_button_gravity"/>
+                        android:layout_height="wrap_content">
+
+                        <RadioGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/button_gravity_left"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:checked="true"
+                                android:text="Left" />
+
+                            <RadioButton
+                                android:id="@+id/button_gravity_center"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Center" />
+
+                            <RadioButton
+                                android:id="@+id/button_gravity_right"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Right" />
+
+                            <RadioButton
+                                android:id="@+id/button_gravity_justified"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Full width" />
+                        </RadioGroup>
+
+                    </GridLayout>
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>

@@ -24,11 +24,12 @@ import static com.crowdfire.cfalertdialog.CFAlertDialog.*;
 
 public class StartActivity extends AppCompatActivity {
 
-    private AppCompatSpinner textGravitySpinner, buttonGravitySpinner;
     private EditText titleEditText, messageEditText;
     private CheckBox positiveButtonCheckbox, negativeButtonCheckbox, neutralButtonCheckbox, addHeaderCheckBox, addFooterCheckBox, closesOnBackgroundTapCheckBox;
     private RadioButton itemsRadioButton, multiChoiceRadioButton,
             singleChoiceRadioButton;
+    private RadioButton textGravityLeft, textGravityCenter, textGravityRight;
+    private RadioButton buttonGravityLeft, buttonGravityRight, buttonGravityCenter, buttonGravityFull;
     private RadioButton iconShowRadioButton, imageContentShowRadioButton;
     private RadioButton topDialogGravityRadioButton, centerDialogGravityRadioButton, bottomDialogGravityRadioButton;
     private View selectedBackgroundColorView;
@@ -42,9 +43,6 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         bindViews();
-
-        textGravitySpinner.setSelection(0);
-        buttonGravitySpinner.setSelection(2);
 
         showDialogFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,21 +100,25 @@ public class StartActivity extends AppCompatActivity {
         }
 
         // Background
-        builder.setBackgroundColor(colorSelectionView.selectedColor);
+        if (colorSelectionView != null) {
+            builder.setBackgroundColor(colorSelectionView.selectedColor);
+        }
+        else {
+            builder.setBackgroundColor(0);
+        }
 
         // Title and message
         builder.setTitle(titleEditText.getText());
         builder.setMessage(messageEditText.getText());
-        switch (textGravitySpinner.getSelectedItemPosition()) {
-            case 0:
-                builder.setTextGravity(Gravity.START);
-                break;
-            case 1:
-                builder.setTextGravity(Gravity.CENTER_HORIZONTAL);
-                break;
-            case 2:
-                builder.setTextGravity(Gravity.END);
-                break;
+
+        if (textGravityLeft.isChecked()) {
+            builder.setTextGravity(Gravity.START);
+        }
+        else if (textGravityCenter.isChecked()) {
+            builder.setTextGravity(Gravity.CENTER_HORIZONTAL);
+        }
+        else if (textGravityRight.isChecked()) {
+            builder.setTextGravity(Gravity.END);
         }
 
         // Title icon
@@ -243,40 +245,56 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private CFAlertActionAlignment getButtonGravity() {
-        switch (buttonGravitySpinner.getSelectedItemPosition()) {
-            case 0:
-                return CFAlertActionAlignment.START;
-            case 1:
-                return CFAlertActionAlignment.CENTER;
-            case 2:
-                return CFAlertActionAlignment.END;
-            case 3:
-                return CFAlertActionAlignment.JUSTIFIED;
-            default:
-                return CFAlertActionAlignment.JUSTIFIED;
+
+        if (buttonGravityLeft.isChecked()) {
+            return CFAlertActionAlignment.START;
         }
+        if (buttonGravityCenter.isChecked()) {
+            return CFAlertActionAlignment.CENTER;
+        }
+        if (buttonGravityRight.isChecked()) {
+            return CFAlertActionAlignment.END;
+        }
+        if (buttonGravityFull.isChecked()) {
+            return CFAlertActionAlignment.JUSTIFIED;
+        }
+        return CFAlertActionAlignment.JUSTIFIED;
     }
 
     private void bindViews() {
         titleEditText = (EditText) findViewById(R.id.title_edittext);
         messageEditText = (EditText) findViewById(R.id.message_edittext);
-        textGravitySpinner = (AppCompatSpinner) findViewById(R.id.text_gravity_selction_spinner);
+
+        textGravityLeft = (RadioButton) findViewById(R.id.text_gravity_left);
+        textGravityCenter = (RadioButton) findViewById(R.id.text_gravity_center);
+        textGravityRight = (RadioButton) findViewById(R.id.text_gravity_right);
+
         positiveButtonCheckbox = (CheckBox) findViewById(R.id.positive_button_checkbox);
         negativeButtonCheckbox = (CheckBox) findViewById(R.id.negative_button_checkbox);
         neutralButtonCheckbox = (CheckBox) findViewById(R.id.neutral_button_checkbox);
+
         addHeaderCheckBox = (CheckBox) findViewById(R.id.add_header_checkbox);
         addFooterCheckBox = (CheckBox) findViewById(R.id.add_footer_checkbox);
-        closesOnBackgroundTapCheckBox = ((CheckBox) findViewById(R.id.closes_on_background_tap));
-        buttonGravitySpinner = (AppCompatSpinner) findViewById(R.id.button_gravity_selction_spinner);
+
+        buttonGravityLeft = (RadioButton) findViewById(R.id.button_gravity_left);
+        buttonGravityCenter = (RadioButton) findViewById(R.id.button_gravity_center);
+        buttonGravityRight = (RadioButton) findViewById(R.id.button_gravity_right);
+        buttonGravityFull = (RadioButton) findViewById(R.id.button_gravity_justified);
+
         itemsRadioButton = (RadioButton) findViewById(R.id.items_radio_button);
         multiChoiceRadioButton = (RadioButton) findViewById(R.id.multi_select_choice_items_radio_button);
         singleChoiceRadioButton = (RadioButton) findViewById(R.id.single_choice_items_radio_button);
+
         iconShowRadioButton = (RadioButton) findViewById(R.id.icon_show_radio_button);
         imageContentShowRadioButton = (RadioButton) findViewById(R.id.image_content_show_radio_button);
+
         topDialogGravityRadioButton = (RadioButton) findViewById(R.id.top_dialog_gravity_radio_button);
         centerDialogGravityRadioButton = (RadioButton) findViewById(R.id.center_dialog_gravity_radio_button);
         bottomDialogGravityRadioButton = (RadioButton) findViewById(R.id.bottom_dialog_gravity_radio_button);
+
+        closesOnBackgroundTapCheckBox = ((CheckBox) findViewById(R.id.closes_on_background_tap));
         selectedBackgroundColorView = findViewById(R.id.background_color_preview);
+
         showDialogFab = (FloatingActionButton) findViewById(R.id.fab);
     }
 }
