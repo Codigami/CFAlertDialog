@@ -221,9 +221,12 @@ public class CFAlertDialog extends AppCompatDialog {
     }
 
     private void adjustDialogWidth() {
-        int width = DeviceUtil.getScreenWidth(getContext()) - (int) (2 * getContext().getResources().getDimension(R.dimen.cfdialog_outer_margin));
+        int margin = (int)getContext().getResources().getDimension(R.dimen.cfdialog_outer_margin);
+        int width = DeviceUtil.getScreenWidth(getContext()) - (2 * margin);
         width = Math.min(width, (int) getContext().getResources().getDimension(R.dimen.cfdialog_maxwidth));
         RelativeLayout.LayoutParams cardViewLayoutParams = new RelativeLayout.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT);
+        cardViewLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+        cardViewLayoutParams.setMargins(margin, margin, margin, margin);
         dialogCardView.setLayoutParams(cardViewLayoutParams);
     }
 
