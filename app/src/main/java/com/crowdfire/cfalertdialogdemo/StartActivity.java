@@ -2,6 +2,7 @@ package com.crowdfire.cfalertdialogdemo;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -24,15 +25,17 @@ import static com.crowdfire.cfalertdialog.CFAlertDialog.*;
 
 public class StartActivity extends AppCompatActivity {
 
+    private static final int DEFAULT_BACKGROUND_COLOR = Color.parseColor("#AA000000");
+
     private EditText titleEditText, messageEditText;
     private CheckBox positiveButtonCheckbox, negativeButtonCheckbox, neutralButtonCheckbox, addHeaderCheckBox, addFooterCheckBox, closesOnBackgroundTapCheckBox;
     private RadioButton itemsRadioButton, multiChoiceRadioButton,
             singleChoiceRadioButton;
     private RadioButton textGravityLeft, textGravityCenter, textGravityRight;
     private RadioButton buttonGravityLeft, buttonGravityRight, buttonGravityCenter, buttonGravityFull;
-    private RadioButton iconShowRadioButton, imageContentShowRadioButton;
+    private CheckBox showTitleIcon;
     private RadioButton topDialogGravityRadioButton, centerDialogGravityRadioButton, bottomDialogGravityRadioButton;
-    private View selectedBackgroundColorView;
+    private View selectedBackgroundColorView, selectBackgroundColorContainer;
     private FloatingActionButton showDialogFab;
     private CFAlertDialog alertDialog;
     private CFAlertDialog colorSelectionDialog;
@@ -51,11 +54,9 @@ public class StartActivity extends AppCompatActivity {
             }
         });
 
-        selectedBackgroundColorView.setOnClickListener(new View.OnClickListener() {
+        selectBackgroundColorContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent selectColorsIntent = new Intent(StartActivity.this, ColorsActivity.class);
-                //startActivity(selectColorsIntent);
                 showColorSelectionAlert();
             }
         });
@@ -65,6 +66,7 @@ public class StartActivity extends AppCompatActivity {
         if (colorSelectionDialog == null) {
 
             colorSelectionView = new ColorSelectionView(this);
+            colorSelectionView.setSelectedColor(DEFAULT_BACKGROUND_COLOR);
             colorSelectionDialog = new CFAlertDialog.Builder(this)
                     .addButton("Done", CFAlertActionStyle.POSITIVE, CFAlertActionAlignment.JUSTIFIED, new OnClickListener() {
                         @Override
@@ -77,6 +79,7 @@ public class StartActivity extends AppCompatActivity {
                             colorSelectionDialog.dismiss();
                         }
                     })
+                    .setBackgroundColor(DEFAULT_BACKGROUND_COLOR)
                     .setDialogVerticalGravity(Gravity.BOTTOM)
                     .setHeaderView(colorSelectionView)
                     .create();
@@ -104,7 +107,7 @@ public class StartActivity extends AppCompatActivity {
             builder.setBackgroundColor(colorSelectionView.selectedColor);
         }
         else {
-            builder.setBackgroundColor(0);
+            builder.setBackgroundColor(DEFAULT_BACKGROUND_COLOR);
         }
 
         // Title and message
@@ -122,13 +125,8 @@ public class StartActivity extends AppCompatActivity {
         }
 
         // Title icon
-        if (iconShowRadioButton.isChecked()) {
+        if (showTitleIcon.isChecked()) {
             builder.setIcon(R.drawable.icon_drawable);
-        }
-
-        // Image header
-        if (imageContentShowRadioButton.isChecked()) {
-            builder.setContentImageDrawable(R.drawable.image_content_drawable);
         }
 
         // Buttons
@@ -285,8 +283,7 @@ public class StartActivity extends AppCompatActivity {
         multiChoiceRadioButton = (RadioButton) findViewById(R.id.multi_select_choice_items_radio_button);
         singleChoiceRadioButton = (RadioButton) findViewById(R.id.single_choice_items_radio_button);
 
-        iconShowRadioButton = (RadioButton) findViewById(R.id.icon_show_radio_button);
-        imageContentShowRadioButton = (RadioButton) findViewById(R.id.image_content_show_radio_button);
+        showTitleIcon = (CheckBox) findViewById(R.id.show_title_icon);
 
         topDialogGravityRadioButton = (RadioButton) findViewById(R.id.top_dialog_gravity_radio_button);
         centerDialogGravityRadioButton = (RadioButton) findViewById(R.id.center_dialog_gravity_radio_button);
@@ -294,6 +291,8 @@ public class StartActivity extends AppCompatActivity {
 
         closesOnBackgroundTapCheckBox = ((CheckBox) findViewById(R.id.closes_on_background_tap));
         selectedBackgroundColorView = findViewById(R.id.background_color_preview);
+        selectedBackgroundColorView.setBackgroundColor(DEFAULT_BACKGROUND_COLOR);
+        selectBackgroundColorContainer = findViewById(R.id.background_color_selection_container);
 
         showDialogFab = (FloatingActionButton) findViewById(R.id.fab);
     }

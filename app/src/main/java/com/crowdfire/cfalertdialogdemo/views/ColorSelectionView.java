@@ -96,4 +96,13 @@ public class ColorSelectionView extends LinearLayout implements SeekBar.OnSeekBa
 
         selectedColorPreview.setBackgroundColor(selectedColor);
     }
+
+    public void setSelectedColor(int selectedColor) {
+        this.selectedColor = selectedColor;
+
+        seekBarAlpha.setProgress(Color.alpha(selectedColor));
+        seekBarRed.setProgress(Color.red(selectedColor));
+        seekBarGreen.setProgress(Color.green(selectedColor));
+        seekBarBlue.setProgress(Color.blue(selectedColor));
+    }
 }
