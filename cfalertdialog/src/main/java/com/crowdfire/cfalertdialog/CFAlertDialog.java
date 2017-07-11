@@ -793,7 +793,7 @@ public class CFAlertDialog extends AppCompatDialog {
         private @ColorInt int backgroundColor = -1;
         private CharSequence message, title;
         private int theme = R.style.CFDialog,
-                dialogGravity = -1,
+                dialogGravity = Gravity.CENTER,
                 textGravity = Gravity.LEFT,
                 iconDrawableId = -1,
                 contentImageDrawableId = -1;
@@ -818,7 +818,7 @@ public class CFAlertDialog extends AppCompatDialog {
         private DialogInterface.OnClickListener onClickListener;
         private ColorStateList textColor;
         private CFAlertActionStyle style;
-        private CFAlertActionAlignment alignment = CFAlertActionAlignment.START;
+        private CFAlertActionAlignment alignment = CFAlertActionAlignment.JUSTIFIED;
         private Drawable backgroundDrawable;
         private int textColorListId = -1, backgroundDrawableId = -1;
 
