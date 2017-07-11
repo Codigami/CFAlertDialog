@@ -1,13 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/footer_bg"
+    android:padding="@dimen/layout_padding">
 
+    <!--Footer Note-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/colorBackground"
+        android:textAlignment="center"
+        android:textSize="10sp"
+        android:text="This is your custom footer view. Here we have added some cutom properties that you can change dynamically for more detailed control."/>
+
+    <!--Configurations container-->
+    <LinearLayout
+        android:id="@+id/configuration_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <!--Background-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Background"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@android:color/black"
+                android:text="Background Color" />
+
+            <LinearLayout
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:background="@drawable/black_border">
+
+                <View
+                    android:id="@+id/background_color_preview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!--Header-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Header View"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <com.crowdfire.cfalertdialog.views.CFPushButton
+            android:id="@+id/header_toggle_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark" />
+
+
+    </LinearLayout>
+
+    <com.crowdfire.cfalertdialog.views.CFPushButton
+        android:id="@+id/configuration_toggle_button"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="Configurations"/>
+
+    <!--Footer label-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingTop="@dimen/cfdialog_padding_half"
         android:paddingBottom="@dimen/cfdialog_padding"
