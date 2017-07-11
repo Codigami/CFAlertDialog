@@ -32,6 +32,8 @@ public class CFPushButton extends AppCompatButton implements View.OnTouchListene
     public long touchDownAnimationDuration = TOUCH_DOWN_ANIMATION_DURATION_DEFAULT;
     public long touchUpAnimationDuration = TOUCH_UP_ANIMATION_DURATION_DEFAULT;
 
+    private boolean shouldClick = false;
+
     private CFPushButtonListener pushButtonListener;
 
     // endregion
@@ -78,6 +80,8 @@ public class CFPushButton extends AppCompatButton implements View.OnTouchListene
                     pushButtonListener.pushButtonTouchDown(this);
                 }
 
+                shouldClick = true;
+
                 // True returned so that 'ACTION_UP' event is received.
                 return true;
 
@@ -90,18 +94,17 @@ public class CFPushButton extends AppCompatButton implements View.OnTouchListene
                 if (pushButtonListener != null) {
                     pushButtonListener.pushButtonTouchUp(this);
                 }
+
+                // Perform button click manually here, since we need touch handlers
+                if (shouldClick) {
+                    performClick();
+                }
                 break;
 
             case MotionEvent.ACTION_CANCEL:
-
-                // Action cancelled
-                handleButtonAction(false, true);
-
-                /*// Listener callback
-                if (pushButtonListener != null) {
-                    pushButtonListener.pushButtonTouchUp(this);
-                }*/
-
+            case MotionEvent.ACTION_MOVE:
+            case MotionEvent.ACTION_OUTSIDE:
+                shouldClick = false;
                 break;
         }
 
