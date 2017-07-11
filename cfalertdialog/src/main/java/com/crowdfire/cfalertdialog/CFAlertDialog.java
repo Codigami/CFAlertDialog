@@ -61,6 +61,7 @@ public class CFAlertDialog extends AppCompatDialog {
         PLAIN,
         BLUR;
     }
+    // endregion
 
     private DialogParams params;
 
