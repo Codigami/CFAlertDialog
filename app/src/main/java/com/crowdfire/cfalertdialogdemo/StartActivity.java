@@ -24,7 +24,7 @@ import static com.crowdfire.cfalertdialog.CFAlertDialog.OnClickListener;
  * Created by rahul on 06/07/17.
  */
 
-public class StartActivity extends AppCompatActivity implements SampleFooterView.FooterActionListener{
+public class StartActivity extends AppCompatActivity implements SampleFooterView.FooterActionListener {
 
     private static final int DEFAULT_BACKGROUND_COLOR = Color.parseColor("#AA000000");
 
@@ -41,6 +41,7 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
     private CFAlertDialog alertDialog;
     private CFAlertDialog colorSelectionDialog;
     private ColorSelectionView colorSelectionView;
+    private boolean headerVisibility;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,8 +107,7 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
         // Background
         if (colorSelectionView != null) {
             builder.setBackgroundColor(colorSelectionView.selectedColor);
-        }
-        else {
+        } else {
             builder.setBackgroundColor(DEFAULT_BACKGROUND_COLOR);
         }
 
@@ -117,11 +117,9 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
 
         if (textGravityLeft.isChecked()) {
             builder.setTextGravity(Gravity.START);
-        }
-        else if (textGravityCenter.isChecked()) {
+        } else if (textGravityCenter.isChecked()) {
             builder.setTextGravity(Gravity.CENTER_HORIZONTAL);
-        }
-        else if (textGravityRight.isChecked()) {
+        } else if (textGravityRight.isChecked()) {
             builder.setTextGravity(Gravity.END);
         }
 
@@ -168,6 +166,7 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
         // Add Header
         if (addHeaderCheckBox.isChecked()) {
             builder.setHeaderView(R.layout.dialog_header_layout);
+            headerVisibility = true;
         }
 
         // Add Footer
@@ -305,11 +304,20 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
 
     @Override
     public void onHeaderAdded() {
+        if (alertDialog != null) { alertDialog.setHeaderView(R.layout.dialog_header_layout); }
+        headerVisibility = true;
 
     }
 
     @Override
     public void onHeaderRemoved() {
-
+        if (alertDialog != null) { alertDialog.setHeaderView(null); }
+        headerVisibility = false;
     }
+
+    @Override
+    public boolean isHeaderVisible() {
+        return headerVisibility;
+    }
+
 }

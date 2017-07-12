@@ -18,6 +18,8 @@ import butterknife.OnClick;
 
 import static com.crowdfire.cfalertdialogdemo.views.SampleFooterView.ConfigurationState.COLLAPSED;
 import static com.crowdfire.cfalertdialogdemo.views.SampleFooterView.ConfigurationState.EXPANDED;
+import static com.crowdfire.cfalertdialogdemo.views.SampleFooterView.HeaderState.HIDDEN;
+import static com.crowdfire.cfalertdialogdemo.views.SampleFooterView.HeaderState.SHOWN;
 
 /**
  * Created by rahul on 11/07/17.
@@ -33,38 +35,7 @@ public class SampleFooterView extends LinearLayout {
     LinearLayout configurationContainer;
     @BindView(R.id.configuration_toggle_button)
     CFPushButton configurationToggleButton;
-
     FooterActionListener listener;
-
-    @OnClick({R.id.background_color_preview, R.id.header_toggle_button, R.id.configuration_toggle_button})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.background_color_preview:
-                changeBackgroundColor();
-                break;
-            case R.id.header_toggle_button:
-                toggleHeaderState();
-                break;
-            case R.id.configuration_toggle_button:
-                toggleState();
-                break;
-        }
-    }
-
-    private void toggleHeaderState() {
-
-    }
-
-    private void changeBackgroundColor() {
-        Random rnd = new Random();
-        int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-        ((GradientDrawable)backgroundColorPreview.getBackground()).setColor(color);
-        listener.onBackgroundColorChanged(color);
-    }
-
-    enum ConfigurationState {
-        COLLAPSED, EXPANDED
-    }
 
     public SampleFooterView(Context context) {
         this(context, null, 0);
@@ -84,6 +55,53 @@ public class SampleFooterView extends LinearLayout {
         init();
     }
 
+    @OnClick({R.id.background_color_preview, R.id.header_toggle_button, R.id.configuration_toggle_button})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.background_color_preview:
+                changeBackgroundColor();
+                break;
+            case R.id.header_toggle_button:
+                toggleHeaderState((HeaderState) headerToggleButton.getTag());
+                break;
+            case R.id.configuration_toggle_button:
+                toggleState();
+                break;
+        }
+    }
+
+    private void toggleHeaderState(HeaderState headerState) {
+        switch (headerState) {
+            case SHOWN:
+                hideHeader();
+                break;
+            case HIDDEN:
+                showHeader();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void showHeader() {
+        headerToggleButton.setTag(SHOWN);
+        headerToggleButton.setText("Remove Header");
+        listener.onHeaderAdded();
+    }
+
+    private void hideHeader() {
+        headerToggleButton.setTag(HIDDEN);
+        headerToggleButton.setText("Add Header");
+        listener.onHeaderRemoved();
+    }
+
+    private void changeBackgroundColor() {
+        Random rnd = new Random();
+        int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+        ((GradientDrawable) backgroundColorPreview.getBackground()).setColor(color);
+        listener.onBackgroundColorChanged(color);
+    }
+
     private void init() {
         inflate(getContext(), R.layout.dialog_footer_layout, this);
         bindViews();
@@ -92,6 +110,11 @@ public class SampleFooterView extends LinearLayout {
     private void bindViews() {
         ButterKnife.bind(this);
         collapseConfiguration();
+        if(listener.isHeaderVisible()){
+            showHeader();
+        }else{
+            hideHeader();
+        }
     }
 
     private void toggleState() {
@@ -119,6 +142,14 @@ public class SampleFooterView extends LinearLayout {
         configurationContainer.setVisibility(VISIBLE);
     }
 
+    enum ConfigurationState {
+        COLLAPSED, EXPANDED
+    }
+
+    public enum HeaderState {
+        SHOWN, HIDDEN
+    }
+
     public interface FooterActionListener {
 
         void onBackgroundColorChanged(int backgroundColor);
@@ -126,6 +157,8 @@ public class SampleFooterView extends LinearLayout {
         void onHeaderAdded();
 
         void onHeaderRemoved();
+
+        boolean isHeaderVisible();
 
     }
 
