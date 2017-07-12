@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:background="#EFEFF4"
+    android:animateLayoutChanges="true"
     tools:context="com.crowdfire.cfalertdialogdemo.StartActivity">
 
     <ScrollView

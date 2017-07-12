@@ -98,6 +98,11 @@ public class CFAlertDialog extends AppCompatDialog {
         adjustDialogWidth();
     }
 
+    public void setCFDialogBackgroundColor(int color){
+        cfDialogBackground.setBackgroundColor(color);
+    }
+
+
     @Override
     public void show() {
         super.show();

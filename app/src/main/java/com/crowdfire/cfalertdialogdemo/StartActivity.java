@@ -1,12 +1,10 @@
 package com.crowdfire.cfalertdialogdemo;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatSpinner;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.CheckBox;
@@ -16,14 +14,17 @@ import android.widget.Toast;
 
 import com.crowdfire.cfalertdialog.CFAlertDialog;
 import com.crowdfire.cfalertdialogdemo.views.ColorSelectionView;
+import com.crowdfire.cfalertdialogdemo.views.SampleFooterView;
 
-import static com.crowdfire.cfalertdialog.CFAlertDialog.*;
+import static com.crowdfire.cfalertdialog.CFAlertDialog.CFAlertActionAlignment;
+import static com.crowdfire.cfalertdialog.CFAlertDialog.CFAlertActionStyle;
+import static com.crowdfire.cfalertdialog.CFAlertDialog.OnClickListener;
 
 /**
  * Created by rahul on 06/07/17.
  */
 
-public class StartActivity extends AppCompatActivity {
+public class StartActivity extends AppCompatActivity implements SampleFooterView.FooterActionListener{
 
     private static final int DEFAULT_BACKGROUND_COLOR = Color.parseColor("#AA000000");
 
@@ -171,7 +172,7 @@ public class StartActivity extends AppCompatActivity {
 
         // Add Footer
         if (addFooterCheckBox.isChecked()) {
-            builder.setFooterView(R.layout.dialog_footer_layout);
+            builder.setFooterView(new SampleFooterView(this));
         }
 
         // Selection Items
@@ -295,5 +296,20 @@ public class StartActivity extends AppCompatActivity {
         selectBackgroundColorContainer = findViewById(R.id.background_color_selection_container);
 
         showDialogFab = (FloatingActionButton) findViewById(R.id.fab);
+    }
+
+    @Override
+    public void onBackgroundColorChanged(int backgroundColor) {
+        alertDialog.setCFDialogBackgroundColor(backgroundColor);
+    }
+
+    @Override
+    public void onHeaderAdded() {
+
+    }
+
+    @Override
+    public void onHeaderRemoved() {
+
     }
 }
