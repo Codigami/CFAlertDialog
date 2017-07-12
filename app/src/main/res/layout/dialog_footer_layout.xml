@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/footer_bg"
+              android:animateLayoutChanges="true"
     android:padding="@dimen/layout_padding">
 
     <!--Footer Note-->
@@ -45,21 +45,15 @@
                 android:textColor="@android:color/black"
                 android:text="Background Color" />
 
-            <LinearLayout
+            <com.crowdfire.cfalertdialog.views.CFPushButton
+                android:id="@+id/background_color_preview"
                 android:layout_width="60dp"
                 android:layout_height="40dp"
-                android:background="@drawable/black_border">
-
-                <View
-                    android:id="@+id/background_color_preview"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/white" />
+                android:background="@drawable/black_border"/>
             </LinearLayout>
-        </LinearLayout>
-
         <!--Header-->
         <TextView
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -70,16 +64,41 @@
         <com.crowdfire.cfalertdialog.views.CFPushButton
             android:id="@+id/header_toggle_button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="32dp"
+            android:textColor="@color/cfdialog_button_white_text_color"
+            android:layout_marginTop="16dp"
+            android:text="Add header"
             android:background="@color/colorPrimaryDark" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="10sp"
+            android:layout_marginTop="8dp"
+            android:text="You can do it sam efor footer view also."/>
 
+        <!--Text Input-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Text Input"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="2"
+            />
 
     </LinearLayout>
 
     <com.crowdfire.cfalertdialog.views.CFPushButton
         android:id="@+id/configuration_toggle_button"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/cfdialog_button_white_text_color"
         android:background="@color/colorPrimaryDark"
         android:text="Configurations"/>
 
