@@ -24,6 +24,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
@@ -96,6 +97,9 @@ public class CFAlertDialog extends AppCompatDialog {
 
         // Adjust the dialog width
         adjustDialogWidth();
+
+        // Set the size to adjust when keyboard shown
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
     }
 
     public void setCFDialogBackgroundColor(int color){
