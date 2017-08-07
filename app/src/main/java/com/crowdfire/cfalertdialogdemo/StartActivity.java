@@ -84,6 +84,14 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
                     .setBackgroundColor(DEFAULT_BACKGROUND_COLOR)
                     .setDialogVerticalGravity(Gravity.BOTTOM)
                     .setHeaderView(colorSelectionView)
+                    .onDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialogInterface) {
+
+                            // Update the color preview
+                            selectedBackgroundColorView.setBackgroundColor(colorSelectionView.selectedColor);
+                        }
+                    })
                     .create();
         }
         colorSelectionDialog.show();
