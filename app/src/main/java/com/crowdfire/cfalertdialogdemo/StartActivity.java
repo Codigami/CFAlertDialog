@@ -307,7 +307,7 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
 
     @Override
     public void onBackgroundColorChanged(int backgroundColor) {
-        alertDialog.setCFDialogBackgroundColor(backgroundColor);
+        alertDialog.setCFDialogBackgroundColor(backgroundColor, true);
     }
 
     @Override

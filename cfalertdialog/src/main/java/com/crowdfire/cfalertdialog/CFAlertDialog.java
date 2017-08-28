@@ -1,9 +1,12 @@
 package com.crowdfire.cfalertdialog;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -105,8 +108,26 @@ public class CFAlertDialog extends AppCompatDialog {
         setEnabled(false);
     }
 
-    public void setCFDialogBackgroundColor(int color){
-        cfDialogBackground.setBackgroundColor(color);
+    public void setCFDialogBackgroundColor(int color, boolean animated){
+
+        if (animated) {
+            int colorFrom = ((ColorDrawable)cfDialogBackground.getBackground()).getColor();
+            int colorTo = color;
+            ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+            colorAnimation.setDuration(300); // milliseconds
+            colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+                @Override
+                public void onAnimationUpdate(ValueAnimator animator) {
+                    cfDialogBackground.setBackgroundColor((int) animator.getAnimatedValue());
+                }
+
+            });
+            colorAnimation.start();
+        }
+        else {
+            cfDialogBackground.setBackgroundColor(color);
+        }
     }
 
 
@@ -120,7 +141,7 @@ public class CFAlertDialog extends AppCompatDialog {
 
     @Override
     public void dismiss() {
-        
+
         // Disable the view when being dismissed
         setEnabled(false);
 
