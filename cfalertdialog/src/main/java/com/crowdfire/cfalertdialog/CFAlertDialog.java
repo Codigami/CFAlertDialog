@@ -100,6 +100,9 @@ public class CFAlertDialog extends AppCompatDialog {
 
         // Set the size to adjust when keyboard shown
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+        // Disable the view initially
+        setEnabled(false);
     }
 
     public void setCFDialogBackgroundColor(int color){
@@ -117,6 +120,9 @@ public class CFAlertDialog extends AppCompatDialog {
 
     @Override
     public void dismiss() {
+        
+        // Disable the view when being dismissed
+        setEnabled(false);
 
         // Perform the dismiss animation and after that dismiss the dialog
         Animation dismissAnimation = getDismissAnimation(params.dialogGravity);
@@ -145,6 +151,10 @@ public class CFAlertDialog extends AppCompatDialog {
         dialogCardView.startAnimation(dismissAnimation);
     }
 
+    public void setEnabled(boolean enabled) {
+        setViewEnabled(cfDialogBackground, enabled);
+    }
+
     private void bindSubviews(View view) {
         cfDialogBackground = ((RelativeLayout) view.findViewById(R.id.cfdialog_background));
         dialogCardView = (CardView) view.findViewById(R.id.cfdialog_cardview);
@@ -161,7 +171,6 @@ public class CFAlertDialog extends AppCompatDialog {
     private void populateDialog(final DialogParams params) {
 
         // Background
-
         getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
         if (params.backgroundStyle == CFAlertBackgroundStyle.BLUR) {
@@ -175,7 +184,9 @@ public class CFAlertDialog extends AppCompatDialog {
         cfDialogBackground.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (params.cancelable) {
+
                     dismiss();
                 }
             }
@@ -248,7 +259,28 @@ public class CFAlertDialog extends AppCompatDialog {
 
     private void startPresentAnimation() {
         Animation presentAnimation = getPresentAnimation(params.dialogGravity);
+        presentAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                alertPresented();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
         dialogCardView.startAnimation(presentAnimation);
+    }
+
+    private void alertPresented() {
+
+        setEnabled(true);
     }
 
     private void setDialogParams(DialogParams params) {
@@ -400,6 +432,18 @@ public class CFAlertDialog extends AppCompatDialog {
             topPadding = 0;
         }
         dialogCardView.setContentPadding(0, topPadding, 0, bottomPadding);
+    }
+
+    private void setViewEnabled(ViewGroup layout, boolean enabled) {
+        layout.setEnabled(enabled);
+        for (int i = 0; i < layout.getChildCount(); i++) {
+            View child = layout.getChildAt(i);
+            if (child instanceof ViewGroup) {
+                setViewEnabled((ViewGroup) child, enabled);
+            } else {
+                child.setEnabled(enabled);
+            }
+        }
     }
 
     private void populateButtons(Context context, List<CFAlertActionButton> buttons) {
