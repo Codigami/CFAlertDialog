@@ -26,7 +26,7 @@ import static com.crowdfire.cfalertdialog.CFAlertDialog.OnClickListener;
 
 public class StartActivity extends AppCompatActivity implements SampleFooterView.FooterActionListener {
 
-    private static final int DEFAULT_BACKGROUND_COLOR = Color.parseColor("#AA000000");
+    private static final int DEFAULT_BACKGROUND_COLOR = Color.parseColor("#B3000000");
 
     private EditText titleEditText, messageEditText;
     private CheckBox positiveButtonCheckbox, negativeButtonCheckbox, neutralButtonCheckbox, addHeaderCheckBox, addFooterCheckBox, closesOnBackgroundTapCheckBox;
