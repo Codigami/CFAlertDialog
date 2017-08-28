@@ -48,6 +48,13 @@
                         android:paddingTop="12dp">
 
                         <RadioButton
+                            android:id="@+id/top_dialog_gravity_radio_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Notification"/>
+
+                        <RadioButton
                             android:id="@+id/center_dialog_gravity_radio_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -61,13 +68,6 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Bottom Sheet"/>
-
-                        <RadioButton
-                            android:id="@+id/top_dialog_gravity_radio_button"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Notification"/>
                     </RadioGroup>
                 </LinearLayout>
 
@@ -345,7 +345,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:columnCount="2">
+                        android:columnCount="1">
 
                         <CheckBox
                             android:id="@+id/add_header_checkbox"
