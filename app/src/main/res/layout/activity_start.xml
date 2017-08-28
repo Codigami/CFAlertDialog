@@ -183,7 +183,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:columnCount="3">
+                        android:columnCount="1">
+
+                        <CheckBox
+                            android:id="@+id/neutral_button_checkbox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:checked="true"
+                            android:text="Neutral"/>
 
                         <CheckBox
                             android:id="@+id/positive_button_checkbox"
@@ -198,14 +206,6 @@
                             android:layout_height="wrap_content"
                             android:layout_columnWeight="1"
                             android:text="Negative"/>
-
-                        <CheckBox
-                            android:id="@+id/neutral_button_checkbox"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_columnWeight="1"
-                            android:checked="true"
-                            android:text="Neutral"/>
                     </GridLayout>
 
                     <TextView
