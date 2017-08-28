@@ -104,6 +104,10 @@ public class CFPushButton extends AppCompatButton implements View.OnTouchListene
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_MOVE:
             case MotionEvent.ACTION_OUTSIDE:
+
+                // Reset the button state
+                handleButtonAction(false, true);
+                
                 shouldClick = false;
                 break;
         }
