@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-              android:animateLayoutChanges="true"
+    android:animateLayoutChanges="true"
     android:background="@color/footer_bg"
     android:padding="@dimen/layout_padding">
 
@@ -53,7 +53,8 @@
                 android:layout_width="60dp"
                 android:layout_height="32dp"
                 android:background="@drawable/black_border"/>
-            </LinearLayout>
+        </LinearLayout>
+
         <!--Header-->
         <TextView
             android:id="@+id/textView"
@@ -69,7 +70,7 @@
             android:id="@+id/header_toggle_button"
             android:layout_width="match_parent"
             android:layout_height="32dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="10dp"
             android:text="Add header"
             android:textStyle="bold"
             android:textSize="12sp"
@@ -99,6 +100,8 @@
             android:lines="2"
             android:textColor="@color/footer_text_color"
             android:textSize="16sp"
+            android:layout_marginTop="6dp"
+            android:paddingTop="0dp"
             android:text="You can add text fields like these to header as well as footer"
             />
 
@@ -108,7 +111,7 @@
         android:id="@+id/configuration_toggle_button"
         android:layout_width="match_parent"
         android:layout_height="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:textStyle="bold"
         android:textSize="12sp"
         android:textColor="@color/cfdialog_button_white_text_color"
