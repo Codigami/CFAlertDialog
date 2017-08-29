@@ -6,5 +6,10 @@
 
     <color name="sample_bg">#A0000000</color>
 
-    <color name="footer_bg">#AA555555</color>
+    <color name="button_border_color">#4D000000</color>
+
+    <color name="footer_bg">#F6F6F6</color>
+    <color name="footer_description_text_color">#B8B8B8</color>
+    <color name="footer_section_title_color">#013356</color>
+    <color name="footer_text_color">#4A4A4A</color>
 </resources>

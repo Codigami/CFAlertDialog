@@ -132,7 +132,7 @@ public class SampleFooterView extends LinearLayout {
 
     void collapseConfiguration() {
         configurationToggleButton.setTag(COLLAPSED);
-        configurationToggleButton.setText("Configuration");
+        configurationToggleButton.setText("Configurations");
         configurationContainer.setVisibility(GONE);
     }
 
