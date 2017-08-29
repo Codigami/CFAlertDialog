@@ -68,7 +68,7 @@
             android:textColor="@color/cfdialog_button_white_text_color"
             android:layout_marginTop="16dp"
             android:text="Add header"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@drawable/footer_button_drawable" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
         android:layout_height="32dp"
         android:layout_marginTop="16dp"
         android:textColor="@color/cfdialog_button_white_text_color"
-        android:background="@color/colorPrimaryDark"
+        android:background="@drawable/footer_button_drawable"
         android:text="Configurations"/>
 
     <!--Footer label-->
