@@ -4,7 +4,6 @@ import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -524,21 +523,17 @@ public class CFAlertDialog extends AppCompatDialog {
         buttonView.setPadding(padding, padding, padding, padding);
     }
 
-    private void setButtonColors(TextView button, CFAlertActionButton actionButton) {
-        if (actionButton.backgroundDrawable != null) {
-            setButtonBackgroundColor(button, actionButton.backgroundDrawable);
-        } else if (actionButton.backgroundDrawableId != -1) {
+    private void setButtonColors(CFPushButton button, CFAlertActionButton actionButton) {
+        if (actionButton.backgroundDrawableId != -1) {
             setButtonBackgroundColor(button, ContextCompat.getDrawable(getContext(), actionButton.backgroundDrawableId));
         }
 
-        if (actionButton.textColor != null) {
-            button.setTextColor(actionButton.textColor);
-        } else if (actionButton.textColorListId != -1) {
-            button.setTextColor(ContextCompat.getColorStateList(getContext(), actionButton.textColorListId));
+        if (actionButton.textColor != -1) {
+            button.setTextColor(ContextCompat.getColor(getContext(), actionButton.textColor));
         }
     }
 
-    private void setButtonBackgroundColor(TextView button, Drawable backgroundDrawable) {
+    private void setButtonBackgroundColor(CFPushButton button, Drawable backgroundDrawable) {
         if (Build.VERSION.SDK_INT > 16) {
             button.setBackground(backgroundDrawable);
         } else {
@@ -781,8 +776,8 @@ public class CFAlertDialog extends AppCompatDialog {
             return this;
         }
 
-        public Builder addButton(String buttonText, CFAlertActionStyle style, CFAlertActionAlignment alignment, OnClickListener onClickListener) {
-            CFAlertActionButton button = new CFAlertActionButton(buttonText, style, alignment, onClickListener);
+        public Builder addButton(String buttonText, @ColorInt int textColor, CFAlertActionStyle style, CFAlertActionAlignment alignment, OnClickListener onClickListener) {
+            CFAlertActionButton button = new CFAlertActionButton(buttonText, textColor, style, alignment, onClickListener);
             this.params.buttons.add(button);
             return this;
         }
@@ -891,18 +886,23 @@ public class CFAlertDialog extends AppCompatDialog {
     private static class CFAlertActionButton {
         private String buttonText;
         private DialogInterface.OnClickListener onClickListener;
-        private ColorStateList textColor;
+        private int textColor = -1;
         private CFAlertActionStyle style;
         private CFAlertActionAlignment alignment = CFAlertActionAlignment.JUSTIFIED;
-        private Drawable backgroundDrawable;
-        private int textColorListId = -1, backgroundDrawableId = -1;
+        private int backgroundDrawableId = -1;
 
-        public CFAlertActionButton(String buttonText, CFAlertActionStyle style, CFAlertActionAlignment alignment, OnClickListener onClickListener) {
+        public CFAlertActionButton(String buttonText, @ColorInt int textColor, CFAlertActionStyle style, CFAlertActionAlignment alignment, OnClickListener onClickListener) {
             this.buttonText = buttonText;
-            this.onClickListener = onClickListener;
+            this.textColor = textColor;
             this.style = style;
-            this.alignment = alignment;
             this.backgroundDrawableId = getBackgroundDrawable(style);
+            this.alignment = alignment;
+            this.onClickListener = onClickListener;
+
+            // default textColor
+            if (textColor == -1) {
+                this.textColor = getTextColor(style);
+            }
         }
 
         private @DrawableRes int getBackgroundDrawable(CFAlertActionStyle style) {
@@ -919,6 +919,22 @@ public class CFAlertDialog extends AppCompatDialog {
                     break;
             }
             return backgroundDrawable;
+        }
+
+        private @ColorRes int getTextColor(CFAlertActionStyle style) {
+            @ColorRes int textColor = -1;
+            switch (style) {
+                case NEGATIVE:
+                    textColor = R.color.cfdialog_button_white_text_color;
+                    break;
+                case POSITIVE:
+                    textColor = R.color.cfdialog_button_white_text_color;
+                    break;
+                case DEFAULT:
+                    textColor = R.color.cfdialog_button_black_text_color;
+                    break;
+            }
+            return textColor;
         }
     }
 }
