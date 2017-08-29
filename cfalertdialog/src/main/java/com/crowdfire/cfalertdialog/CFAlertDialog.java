@@ -524,10 +524,16 @@ public class CFAlertDialog extends AppCompatDialog {
     }
 
     private void setButtonColors(CFPushButton button, CFAlertActionButton actionButton) {
-        if (actionButton.backgroundDrawableId != -1) {
+
+        //Button background color
+        if (actionButton.backgroundColor != -1) {
+            button.setBackgroundColor(actionButton.backgroundColor);
+        }
+        else if (actionButton.backgroundDrawableId != -1) {
             setButtonBackgroundColor(button, ContextCompat.getDrawable(getContext(), actionButton.backgroundDrawableId));
         }
 
+        // Button text colors
         if (actionButton.textColor != -1) {
             button.setTextColor(ContextCompat.getColor(getContext(), actionButton.textColor));
         }
@@ -776,8 +782,8 @@ public class CFAlertDialog extends AppCompatDialog {
             return this;
         }
 
-        public Builder addButton(String buttonText, @ColorInt int textColor, CFAlertActionStyle style, CFAlertActionAlignment alignment, OnClickListener onClickListener) {
-            CFAlertActionButton button = new CFAlertActionButton(buttonText, textColor, style, alignment, onClickListener);
+        public Builder addButton(String buttonText, @ColorInt int textColor, @ColorInt int backgroundColor, CFAlertActionStyle style, CFAlertActionAlignment alignment, OnClickListener onClickListener) {
+            CFAlertActionButton button = new CFAlertActionButton(buttonText, textColor, backgroundColor, style, alignment, onClickListener);
             this.params.buttons.add(button);
             return this;
         }
@@ -889,11 +895,13 @@ public class CFAlertDialog extends AppCompatDialog {
         private int textColor = -1;
         private CFAlertActionStyle style;
         private CFAlertActionAlignment alignment = CFAlertActionAlignment.JUSTIFIED;
+        private int backgroundColor = -1;
         private int backgroundDrawableId = -1;
 
-        public CFAlertActionButton(String buttonText, @ColorInt int textColor, CFAlertActionStyle style, CFAlertActionAlignment alignment, OnClickListener onClickListener) {
+        public CFAlertActionButton(String buttonText, @ColorInt int textColor, @ColorInt int backgroundColor, CFAlertActionStyle style, CFAlertActionAlignment alignment, OnClickListener onClickListener) {
             this.buttonText = buttonText;
             this.textColor = textColor;
+            this.backgroundColor = backgroundColor;
             this.style = style;
             this.backgroundDrawableId = getBackgroundDrawable(style);
             this.alignment = alignment;

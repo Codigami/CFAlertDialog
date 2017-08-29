@@ -73,7 +73,7 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
             colorSelectionView = new ColorSelectionView(this);
             colorSelectionView.setSelectedColor(DEFAULT_BACKGROUND_COLOR);
             colorSelectionDialog = new CFAlertDialog.Builder(this)
-                    .addButton("Done", -1, CFAlertActionStyle.POSITIVE, CFAlertActionAlignment.JUSTIFIED, new OnClickListener() {
+                    .addButton("Done", -1, -1, CFAlertActionStyle.POSITIVE, CFAlertActionAlignment.JUSTIFIED, new OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
@@ -143,7 +143,7 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
         if (positiveButtonCheckbox.isChecked()) {
 
             // Add a sample positive button
-            builder.addButton("Positive", -1, CFAlertActionStyle.POSITIVE, getButtonGravity(), new DialogInterface.OnClickListener() {
+            builder.addButton("Positive", -1, -1, CFAlertActionStyle.POSITIVE, getButtonGravity(), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Toast.makeText(StartActivity.this, "Positive", Toast.LENGTH_SHORT).show();
@@ -154,7 +154,7 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
         if (negativeButtonCheckbox.isChecked()) {
 
             // Add a sample negative button
-            builder.addButton("Negative", -1, CFAlertActionStyle.NEGATIVE, getButtonGravity(), new DialogInterface.OnClickListener() {
+            builder.addButton("Negative", -1, -1, CFAlertActionStyle.NEGATIVE, getButtonGravity(), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Toast.makeText(StartActivity.this, "Negative", Toast.LENGTH_SHORT).show();
@@ -165,7 +165,7 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
         if (neutralButtonCheckbox.isChecked()) {
 
             // Add a sample neutral button
-            builder.addButton("Neutral", -1, CFAlertActionStyle.DEFAULT, getButtonGravity(), new DialogInterface.OnClickListener() {
+            builder.addButton("Neutral", -1, -1, CFAlertActionStyle.DEFAULT, getButtonGravity(), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Toast.makeText(StartActivity.this, "Neutral", Toast.LENGTH_SHORT).show();
