@@ -18,9 +18,7 @@
         android:layout_margin="@dimen/cfdialog_outer_margin"
         android:clipChildren="true"
         app:cardCornerRadius="4dp"
-        app:cardElevation="4dp"
-        app:contentPaddingBottom="@dimen/cfdialog_footer_top_margin_half"
-        app:contentPaddingTop="@dimen/cfdialog_header_bottom_margin_half">
+        app:cardElevation="4dp">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -41,11 +39,13 @@
                     android:animateLayoutChanges="true"
                     android:orientation="vertical" />
 
+                <!-- Alert Content -->
                 <LinearLayout android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginLeft="@dimen/cfdialog_padding_half"
-                    android:layout_marginRight="@dimen/cfdialog_padding_half" >
+                    android:layout_margin="@dimen/cfdialog_padding"
+                    android:showDividers="middle"
+                    android:divider="@drawable/cfdialog_content_spacing">
 
                     <!--Title and icon-->
                     <LinearLayout
@@ -62,12 +62,13 @@
 
                             <ImageView
                                 android:id="@+id/cfdialog_icon_imageview"
-                                style="@style/CFDialog.IconImage" />
+                                style="@style/CFDialog.IconImage"
+                                android:visibility="gone"/>
 
                             <TextView
                                 android:id="@+id/tv_dialog_title"
                                 style="@style/CFDialog.Title"
-                                tools:text="This is your title" />
+                                tools:text="This is your title"/>
                         </LinearLayout>
 
                     </LinearLayout>
@@ -82,8 +83,7 @@
                     <!--Selection items-->
                     <LinearLayout
                         android:id="@+id/alert_selection_items_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        style="@style/CFDialog.SelectionContainer"
                         android:animateLayoutChanges="true"
                         android:orientation="vertical"
                         android:visibility="gone"
@@ -100,12 +100,12 @@
                     <!--buttons-->
                     <LinearLayout
                         android:id="@+id/alert_buttons_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/cfdialog_padding_half"
+                        style="@style/CFDialog.ButtonsContainer"
                         android:animateLayoutChanges="true"
                         android:orientation="vertical"
                         android:visibility="gone"
+                        android:showDividers="middle"
+                        android:divider="@drawable/cfdialog_buttons_spacing"
                         tools:visibility="visible">
 
                     </LinearLayout>

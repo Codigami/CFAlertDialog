@@ -367,7 +367,6 @@ public class CFAlertDialog extends AppCompatDialog {
         } else {
             cfDialogHeaderLinearLayout.setVisibility(View.GONE);
         }
-        fixDialogPadding();
     }
 
     public void setHeaderView(@LayoutRes int headerResId) {
@@ -430,28 +429,12 @@ public class CFAlertDialog extends AppCompatDialog {
         } else {
             cfDialogFooterLinearLayout.setVisibility(View.GONE);
         }
-        fixDialogPadding();
     }
 
     public void setFooterView(@LayoutRes int footerResId) {
         LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(footerResId, null);
         setFooterView(view);
-    }
-
-    private void fixDialogPadding() {
-        int topPadding, bottomPadding;
-        if (cfDialogFooterLinearLayout.getChildCount() == 0) {
-            bottomPadding = (int) getContext().getResources().getDimension(R.dimen.cfdialog_footer_top_margin_half);
-        } else {
-            bottomPadding = 0;
-        }
-        if (cfDialogHeaderLinearLayout.getChildCount() == 0) {
-            topPadding = (int) getContext().getResources().getDimension(R.dimen.cfdialog_header_bottom_margin_half);
-        } else {
-            topPadding = 0;
-        }
-        dialogCardView.setContentPadding(0, topPadding, 0, bottomPadding);
     }
 
     private void setViewEnabled(ViewGroup layout, boolean enabled) {
@@ -470,6 +453,7 @@ public class CFAlertDialog extends AppCompatDialog {
         buttonContainerLinearLayout.removeAllViews();
         if (buttons.size() > 0) {
             for (int i = 0; i < buttons.size(); i++) {
+
                 View buttonView = createButton(context, buttons.get(i));
                 buttonContainerLinearLayout.addView(buttonView);
             }
@@ -515,9 +499,6 @@ public class CFAlertDialog extends AppCompatDialog {
                 buttonParams.gravity = Gravity.END;
                 break;
         }
-        int margin = ((int) buttonView.getResources().getDimension(R.dimen.cfdialog_internal_spacing_half));
-        buttonParams.setMargins(margin, margin, margin, margin);
-        buttonView.setLayoutParams(buttonParams);
 
         int padding = ((int) buttonView.getResources().getDimension(R.dimen.cfdialog_button_padding));
         buttonView.setPadding(padding, padding, padding, padding);

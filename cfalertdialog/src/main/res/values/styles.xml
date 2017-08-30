@@ -30,8 +30,21 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">left</item>
-        <item name="android:layout_marginTop">@dimen/cfdialog_internal_spacing</item>
-        <item name="android:layout_marginBottom">@dimen/cfdialog_internal_spacing</item>
+    </style>
+
+    <style name="CFDialog.SelectionContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="CFDialog.ButtonsContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="CFDialog.ButtonsSpacing">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/cfdialog_internal_spacing</item>
     </style>
 
     <style name="CFDialog.ContentImageView">
