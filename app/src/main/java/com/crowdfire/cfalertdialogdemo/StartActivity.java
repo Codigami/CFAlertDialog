@@ -102,7 +102,7 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
 
     private void showCFDialog() {
 
-        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this, R.style.CFDialog);
+        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this);
 
         // Vertical position of the dialog
         if (topDialogGravityRadioButton.isChecked()) {
