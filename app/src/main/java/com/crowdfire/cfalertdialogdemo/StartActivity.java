@@ -250,6 +250,12 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
         builder.setCancelable(closesOnBackgroundTapCheckBox.isChecked());
 
         alertDialog = builder.show();
+        alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                onDialogDismiss();
+            }
+        });
         //alertDialog.show();
     }
 
@@ -323,6 +329,10 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
     @Override
     public void onHeaderRemoved() {
         if (alertDialog != null) { alertDialog.setHeaderView(null); }
+        headerVisibility = false;
+    }
+
+    private void onDialogDismiss() {
         headerVisibility = false;
     }
 
