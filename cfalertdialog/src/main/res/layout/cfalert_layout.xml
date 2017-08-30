@@ -112,7 +112,6 @@
 
                 </LinearLayout>
 
-
                 <!-- Footer view container -->
                 <LinearLayout
                     android:id="@+id/alert_footer_container"
@@ -120,7 +119,6 @@
                     android:layout_height="wrap_content"
                     android:animateLayoutChanges="true"
                     android:orientation="vertical" />
-
             </LinearLayout>
 
         </ScrollView>

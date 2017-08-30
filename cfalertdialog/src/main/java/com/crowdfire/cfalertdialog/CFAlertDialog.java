@@ -364,6 +364,9 @@ public class CFAlertDialog extends AppCompatDialog {
         if (headerView != null) {
             cfDialogHeaderLinearLayout.addView(headerView);
             cfDialogHeaderLinearLayout.setVisibility(View.VISIBLE);
+
+            // Allows the footerview to overlap the alert content if needed
+            disableClipOnParents(headerView);
         } else {
             cfDialogHeaderLinearLayout.setVisibility(View.GONE);
         }
@@ -419,13 +422,16 @@ public class CFAlertDialog extends AppCompatDialog {
     }
 
     /**
-     * @param footerView pass null to remove header
+     * @param footerView pass null to remove footer
      */
     public void setFooterView(View footerView) {
         cfDialogFooterLinearLayout.removeAllViews();
         if (footerView != null) {
             cfDialogFooterLinearLayout.addView(footerView);
             cfDialogFooterLinearLayout.setVisibility(View.VISIBLE);
+
+            // Allows the footerview to overlap the alert content if needed
+            disableClipOnParents(footerView);
         } else {
             cfDialogFooterLinearLayout.setVisibility(View.GONE);
         }
@@ -446,6 +452,20 @@ public class CFAlertDialog extends AppCompatDialog {
             } else {
                 child.setEnabled(enabled);
             }
+        }
+    }
+
+    public void disableClipOnParents(View v) {
+        if (v.getParent() == null) {
+            return;
+        }
+
+        if (v instanceof ViewGroup) {
+            ((ViewGroup) v).setClipChildren(false);
+        }
+
+        if (v.getParent() instanceof View) {
+            disableClipOnParents((View) v.getParent());
         }
     }
 

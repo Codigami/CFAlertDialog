@@ -3,4 +3,8 @@
 
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="layout_padding">20dp</dimen>
+
+    <dimen name="footer_or_label_size">34dp</dimen>
+    <dimen name="footer_or_label_size_half">17dp</dimen>
+    <dimen name="footer_or_label_top_margin">-17dp</dimen>
 </resources>
