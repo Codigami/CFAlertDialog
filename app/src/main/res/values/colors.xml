@@ -12,4 +12,9 @@
     <color name="footer_description_text_color">#B8B8B8</color>
     <color name="footer_section_title_color">#013356</color>
     <color name="footer_text_color">#4A4A4A</color>
+    <color name="grey_900">#212121</color>
+    <color name="grey_800">#424242</color>
+    <color name="close_button_text_color">#555555</color>
+    <color name="grey_button_bg_color">#dddddd</color>
+    <color name="red_button_bg_color">#ff4b4b</color>
 </resources>
