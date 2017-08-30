@@ -3,6 +3,8 @@ package com.crowdfire.cfalertdialogdemo.views;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -86,12 +88,14 @@ public class SampleFooterView extends LinearLayout {
     private void showHeader() {
         headerToggleButton.setTag(SHOWN);
         headerToggleButton.setText("Remove Header");
+        ViewCompat.setBackground(headerToggleButton, ContextCompat.getDrawable(getContext(), R.drawable.remove_header_button_background));
         listener.onHeaderAdded();
     }
 
     private void hideHeader() {
         headerToggleButton.setTag(HIDDEN);
         headerToggleButton.setText("Add Header");
+        ViewCompat.setBackground(headerToggleButton, ContextCompat.getDrawable(getContext(), R.drawable.footer_button_drawable));
         listener.onHeaderRemoved();
     }
 
@@ -110,9 +114,9 @@ public class SampleFooterView extends LinearLayout {
     private void bindViews() {
         ButterKnife.bind(this);
         collapseConfiguration();
-        if(listener.isHeaderVisible()){
+        if (listener.isHeaderVisible()) {
             showHeader();
-        }else{
+        } else {
             hideHeader();
         }
     }
@@ -133,12 +137,16 @@ public class SampleFooterView extends LinearLayout {
     void collapseConfiguration() {
         configurationToggleButton.setTag(COLLAPSED);
         configurationToggleButton.setText("Configurations");
+        configurationToggleButton.setTextColor(Color.WHITE);
+        ViewCompat.setBackground(configurationToggleButton, ContextCompat.getDrawable(getContext(), R.drawable.footer_button_drawable));
         configurationContainer.setVisibility(GONE);
     }
 
     void expandConfiguration() {
         configurationToggleButton.setTag(EXPANDED);
         configurationToggleButton.setText("Close");
+        configurationToggleButton.setTextColor(Color.BLACK);
+        ViewCompat.setBackground(configurationToggleButton, ContextCompat.getDrawable(getContext(), R.drawable.footer_button_disabled_drawable));
         configurationContainer.setVisibility(VISIBLE);
     }
 
