@@ -16,7 +16,7 @@
 
     <style name="CFDialog.Title">
         <item name="android:textSize">@dimen/cfdialog_title_font_size</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/cfdialog_title_font_color</item>
         <item name="android:fontFamily" tools:targetApi="16">sans-serif-medium</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -25,15 +25,13 @@
 
     <style name="CFDialog.Message">
         <item name="android:textSize">@dimen/cfdialog_description_font_size</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/cfdialog_desc_font_color</item>
         <item name="android:fontFamily" tools:targetApi="16">sans-serif-medium</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">left</item>
-        <item name="android:layout_marginLeft">@dimen/cfdialog_padding</item>
-        <item name="android:layout_marginTop">@dimen/cfdialog_padding_half</item>
-        <item name="android:layout_marginRight">@dimen/cfdialog_padding</item>
-        <item name="android:layout_marginBottom">@dimen/cfdialog_padding_half</item>
+        <item name="android:layout_marginTop">@dimen/cfdialog_internal_spacing</item>
+        <item name="android:layout_marginBottom">@dimen/cfdialog_internal_spacing</item>
     </style>
 
     <style name="CFDialog.ContentImageView">

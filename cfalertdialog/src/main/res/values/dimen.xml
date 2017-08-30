@@ -6,8 +6,8 @@
     <dimen name="cfdialog_outer_margin">20dp</dimen>
     <dimen name="cfdialog_internal_spacing">10dp</dimen>
     <dimen name="cfdialog_internal_spacing_half">5dp</dimen>
-    <dimen name="cfdialog_padding">20dp</dimen>
-    <dimen name="cfdialog_padding_half">10dp</dimen>
+    <dimen name="cfdialog_padding">16dp</dimen>
+    <dimen name="cfdialog_padding_half">8dp</dimen>
     <dimen name="cfdialog_header_bottom_margin_half">10dp</dimen>
     <dimen name="cfdialog_footer_top_margin_half">10dp</dimen>
 

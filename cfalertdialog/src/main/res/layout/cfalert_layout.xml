@@ -41,74 +41,77 @@
                     android:animateLayoutChanges="true"
                     android:orientation="vertical" />
 
-                <!--Title and icon-->
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <LinearLayout android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_marginLeft="@dimen/cfdialog_padding_half"
+                    android:layout_marginRight="@dimen/cfdialog_padding_half" >
 
+                    <!--Title and icon-->
                     <LinearLayout
-                        android:id="@+id/icon_title_container"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/cfdialog_padding_half"
-                        android:layout_marginLeft="@dimen/cfdialog_padding"
-                        android:layout_marginRight="@dimen/cfdialog_padding"
-                        android:layout_marginTop="@dimen/cfdialog_padding_half"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/icon_title_container"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:animateLayoutChanges="true"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/cfdialog_icon_imageview"
+                                style="@style/CFDialog.IconImage" />
+
+                            <TextView
+                                android:id="@+id/tv_dialog_title"
+                                style="@style/CFDialog.Title"
+                                tools:text="This is your title" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!--Message-->
+                    <TextView
+                        android:id="@+id/tv_dialog_content_desc"
+                        style="@style/CFDialog.Message"
+                        tools:text="This is your description"
+                        android:animateLayoutChanges="true" />
+
+                    <!--Selection items-->
+                    <LinearLayout
+                        android:id="@+id/alert_selection_items_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:animateLayoutChanges="true"
-                        android:orientation="horizontal">
+                        android:orientation="vertical"
+                        android:visibility="gone"
+                        tools:visibility="visible">
 
-                        <ImageView
-                            android:id="@+id/cfdialog_icon_imageview"
-                            style="@style/CFDialog.IconImage" />
+                        <include layout="@layout/cfdialog_selectable_item_layout" />
 
-                        <TextView
-                            android:id="@+id/tv_dialog_title"
-                            style="@style/CFDialog.Title"
-                            tools:text="This is your title" />
+                        <include layout="@layout/cfdialog_multi_select_item_layout" />
+
+                        <include layout="@layout/cfdialog_single_select_item_layout" />
+
+                    </LinearLayout>
+
+                    <!--buttons-->
+                    <LinearLayout
+                        android:id="@+id/alert_buttons_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/cfdialog_padding_half"
+                        android:animateLayoutChanges="true"
+                        android:orientation="vertical"
+                        android:visibility="gone"
+                        tools:visibility="visible">
+
                     </LinearLayout>
 
                 </LinearLayout>
 
-                <!--Message-->
-                <TextView
-                    android:id="@+id/tv_dialog_content_desc"
-                    style="@style/CFDialog.Message"
-                    tools:text="This is your description"
-                    android:animateLayoutChanges="true" />
-
-                <!--Selection items-->
-                <LinearLayout
-                    android:id="@+id/alert_selection_items_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:animateLayoutChanges="true"
-                    android:orientation="vertical"
-                    android:visibility="gone"
-                    tools:visibility="visible">
-
-                    <include layout="@layout/cfdialog_selectable_item_layout" />
-
-                    <include layout="@layout/cfdialog_multi_select_item_layout" />
-
-                    <include layout="@layout/cfdialog_single_select_item_layout" />
-
-                </LinearLayout>
-
-                <!--buttons-->
-                <LinearLayout
-                    android:id="@+id/alert_buttons_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/cfdialog_padding_half"
-                    android:layout_marginRight="@dimen/cfdialog_padding_half"
-                    android:layout_marginBottom="@dimen/cfdialog_padding_half"
-                    android:animateLayoutChanges="true"
-                    android:orientation="vertical"
-                    android:visibility="gone"
-                    tools:visibility="visible">
-
-                </LinearLayout>
 
                 <!-- Footer view container -->
                 <LinearLayout
