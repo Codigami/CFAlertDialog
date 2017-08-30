@@ -145,7 +145,7 @@ public class SampleFooterView extends LinearLayout {
     void expandConfiguration() {
         configurationToggleButton.setTag(EXPANDED);
         configurationToggleButton.setText("Close");
-        configurationToggleButton.setTextColor(Color.BLACK);
+        configurationToggleButton.setTextColor(ContextCompat.getColor(getContext(), R.color.grey_800));
         ViewCompat.setBackground(configurationToggleButton, ContextCompat.getDrawable(getContext(), R.drawable.footer_button_disabled_drawable));
         configurationContainer.setVisibility(VISIBLE);
     }
