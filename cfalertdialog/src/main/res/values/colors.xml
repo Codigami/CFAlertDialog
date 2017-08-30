@@ -3,7 +3,7 @@
 
     <color name="cfdialog_title_font_color">#013356</color>
     <color name="cfdialog_desc_font_color">#013356</color>
-    <color name="cfdialog_button_drawable_stroke">#1a000000</color>
+    <color name="cfdialog_button_drawable_stroke">#0d000000</color>
 
     <color name="cfdialog_positive_button_color">#29c64d</color>
     <color name="cfdialog_positive_button_pressed_color">#80e598</color>
