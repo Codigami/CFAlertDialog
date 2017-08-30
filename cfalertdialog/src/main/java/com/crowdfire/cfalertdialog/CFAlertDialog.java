@@ -179,6 +179,8 @@ public class CFAlertDialog extends AppCompatDialog {
         cfDialogBackground = ((RelativeLayout) view.findViewById(R.id.cfdialog_background));
         dialogCardView = (CardView) view.findViewById(R.id.cfdialog_cardview);
         cfDialogHeaderLinearLayout = (LinearLayout) view.findViewById(R.id.alert_header_container);
+        cfDialogHeaderLinearLayout.requestLayout();
+        cfDialogHeaderLinearLayout.setVisibility(View.GONE);
         dialogTitleTextView = (TextView) view.findViewById(R.id.tv_dialog_title);
         iconTitleContainer = (LinearLayout) view.findViewById(R.id.icon_title_container);
         cfDialogIconImageView = (ImageView) view.findViewById(R.id.cfdialog_icon_imageview);
@@ -362,10 +364,12 @@ public class CFAlertDialog extends AppCompatDialog {
     public void setHeaderView(View headerView) {
         cfDialogHeaderLinearLayout.removeAllViews();
         if (headerView != null) {
-            cfDialogHeaderLinearLayout.addView(headerView);
             cfDialogHeaderLinearLayout.setVisibility(View.VISIBLE);
+            cfDialogHeaderLinearLayout.addView(headerView,
+                                               ViewGroup.LayoutParams.MATCH_PARENT,
+                                               ViewGroup.LayoutParams.WRAP_CONTENT);
 
-            // Allows the footerview to overlap the alert content if needed
+            // Allows the header view to overlap the alert content if needed
             disableClipOnParents(headerView);
         } else {
             cfDialogHeaderLinearLayout.setVisibility(View.GONE);
@@ -427,10 +431,12 @@ public class CFAlertDialog extends AppCompatDialog {
     public void setFooterView(View footerView) {
         cfDialogFooterLinearLayout.removeAllViews();
         if (footerView != null) {
-            cfDialogFooterLinearLayout.addView(footerView);
+            cfDialogFooterLinearLayout.addView(footerView,
+                                               ViewGroup.LayoutParams.MATCH_PARENT,
+                                               ViewGroup.LayoutParams.WRAP_CONTENT);
             cfDialogFooterLinearLayout.setVisibility(View.VISIBLE);
 
-            // Allows the footerview to overlap the alert content if needed
+            // Allows the footer view to overlap the alert content if needed
             disableClipOnParents(footerView);
         } else {
             cfDialogFooterLinearLayout.setVisibility(View.GONE);
@@ -473,7 +479,6 @@ public class CFAlertDialog extends AppCompatDialog {
         buttonContainerLinearLayout.removeAllViews();
         if (buttons.size() > 0) {
             for (int i = 0; i < buttons.size(); i++) {
-
                 View buttonView = createButton(context, buttons.get(i));
                 buttonContainerLinearLayout.addView(buttonView);
             }
@@ -519,6 +524,9 @@ public class CFAlertDialog extends AppCompatDialog {
                 buttonParams.gravity = Gravity.END;
                 break;
         }
+        int margin = ((int) buttonView.getResources().getDimension(R.dimen.cfdialog_internal_spacing_half));
+        buttonParams.setMargins(margin, margin, margin, margin);
+        buttonView.setLayoutParams(buttonParams);
 
         int padding = ((int) buttonView.getResources().getDimension(R.dimen.cfdialog_button_padding));
         buttonView.setPadding(padding, padding, padding, padding);
