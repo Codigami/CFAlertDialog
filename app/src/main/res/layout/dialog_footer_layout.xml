@@ -105,11 +105,11 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:lines="2"
-                android:textColor="@color/footer_text_color"
-                android:textSize="16sp"
                 android:layout_marginTop="6dp"
                 android:paddingTop="0dp"
+                android:inputType="textMultiLine"
+                android:textColor="@color/footer_text_color"
+                android:textSize="16sp"
                 android:text="You can add text fields like these to header as well as footer" />
 
         </LinearLayout>
