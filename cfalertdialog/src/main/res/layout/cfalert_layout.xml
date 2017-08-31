@@ -12,13 +12,10 @@
 
     <android.support.v7.widget.CardView
         android:id="@+id/cfdialog_cardview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/CFDialog.Card"
         android:animateLayoutChanges="true"
-        android:layout_margin="@dimen/cfdialog_outer_margin"
-        android:clipChildren="true"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="4dp">
+        app:cardCornerRadius="@dimen/cfdialog_card_corner_radius"
+        app:cardElevation="@dimen/cfdialog_card_elevation">
 
         <ScrollView
             android:layout_width="match_parent"

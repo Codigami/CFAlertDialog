@@ -9,6 +9,13 @@
         <item name="android:backgroundDimAmount">0.0</item>
     </style>
 
+    <style name="CFDialog.Card">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/cfdialog_outer_margin</item>
+        <item name="android:clipChildren">true</item>
+    </style>
+
     <style name="CFDialog.Animation">
         <item name="android:windowEnterAnimation">@anim/alert_present</item>
         <item name="android:windowExitAnimation">@anim/alert_dismiss</item>

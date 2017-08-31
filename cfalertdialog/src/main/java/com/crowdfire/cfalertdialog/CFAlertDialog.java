@@ -97,9 +97,6 @@ public class CFAlertDialog extends AppCompatDialog {
         bindSubviews(view);
         populateDialog(params);
 
-        // Adjust the dialog width
-        adjustDialogWidth();
-
         // Set the size to adjust when keyboard shown
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
@@ -128,7 +125,6 @@ public class CFAlertDialog extends AppCompatDialog {
             cfDialogBackground.setBackgroundColor(color);
         }
     }
-
 
     @Override
     public void show() {
@@ -169,10 +165,6 @@ public class CFAlertDialog extends AppCompatDialog {
             }
         });
         dialogCardView.startAnimation(dismissAnimation);
-    }
-
-    public void setEnabled(boolean enabled) {
-        setViewEnabled(cfDialogBackground, enabled);
     }
 
     private void bindSubviews(View view) {
@@ -267,16 +259,17 @@ public class CFAlertDialog extends AppCompatDialog {
         } else {
             selectableItemsContainer.removeAllViews();
         }
+
+        // Card
+        setupDialogCardLayout();
     }
 
-    private void adjustDialogWidth() {
-        int margin = (int)getContext().getResources().getDimension(R.dimen.cfdialog_outer_margin);
-        int width = DeviceUtil.getScreenWidth(getContext()) - (2 * margin);
-        width = Math.min(width, (int) getContext().getResources().getDimension(R.dimen.cfdialog_maxwidth));
-        RelativeLayout.LayoutParams cardViewLayoutParams = new RelativeLayout.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT);
-        cardViewLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
-        cardViewLayoutParams.setMargins(margin, margin, margin, margin);
-        dialogCardView.setLayoutParams(cardViewLayoutParams);
+    private void setupDialogCardLayout() {
+
+        // Adjust the dialog width
+        dialogCardView.setLayoutParams(getLayoutParams(params.dialogGravity));
+
+        dialogCardView.setRadius(getCornerRadius(params.dialogGravity));
     }
 
     private void startPresentAnimation() {
@@ -303,6 +296,12 @@ public class CFAlertDialog extends AppCompatDialog {
     private void alertPresented() {
 
         setEnabled(true);
+    }
+
+    // region - Setters
+
+    public void setEnabled(boolean enabled) {
+        setViewEnabled(cfDialogBackground, enabled);
     }
 
     private void setDialogParams(DialogParams params) {
@@ -461,7 +460,7 @@ public class CFAlertDialog extends AppCompatDialog {
         }
     }
 
-    public void disableClipOnParents(View v) {
+    private void disableClipOnParents(View v) {
         if (v.getParent() == null) {
             return;
         }
@@ -649,6 +648,8 @@ public class CFAlertDialog extends AppCompatDialog {
         dialogCardView.setCardElevation(elevation);
     }
 
+    // endregion
+
     @Override
     public void onDetachedFromWindow() {
         super.onDetachedFromWindow();
@@ -683,6 +684,47 @@ public class CFAlertDialog extends AppCompatDialog {
             default:
                 return AnimationUtils.loadAnimation(params.context, R.anim.dialog_dismiss_center);
         }
+    }
+
+    // endregion
+
+    // region - Layout helper methods
+
+    private RelativeLayout.LayoutParams getLayoutParams(int gravity) {
+        int margin = (int)getContext().getResources().getDimension(R.dimen.cfdialog_outer_margin);
+
+        int horizontalMargin = margin;
+        int topMargin = margin;
+        int bottomMargin = margin;
+
+        // Special layout properties to be added here.
+        switch (gravity) {
+            case Gravity.TOP:
+                horizontalMargin = 0;
+                topMargin = 0;
+                break;
+        }
+
+        int width = DeviceUtil.getScreenWidth(getContext()) - (2 * horizontalMargin);
+        width = Math.min(width, (int) getContext().getResources().getDimension(R.dimen.cfdialog_maxwidth));
+        RelativeLayout.LayoutParams cardViewLayoutParams = new RelativeLayout.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT);
+        cardViewLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+        cardViewLayoutParams.setMargins(horizontalMargin, topMargin, horizontalMargin, bottomMargin);
+
+        return cardViewLayoutParams;
+    }
+
+    private float getCornerRadius(int gravity){
+        float cornerRadius = getContext().getResources().getDimension(R.dimen.cfdialog_card_corner_radius);
+
+        // Special layout properties to be added here.
+        switch (gravity) {
+            case Gravity.TOP:
+                cornerRadius = 0;
+                break;
+        }
+
+        return cornerRadius;
     }
 
     // endregion
