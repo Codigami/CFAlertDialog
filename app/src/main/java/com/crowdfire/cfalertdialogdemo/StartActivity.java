@@ -116,11 +116,11 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
         }
 
         // Background
+        int alertBGColor = DEFAULT_BACKGROUND_COLOR;
         if (colorSelectionView != null) {
-            builder.setBackgroundColor(colorSelectionView.selectedColor);
-        } else {
-            builder.setBackgroundColor(DEFAULT_BACKGROUND_COLOR);
+            alertBGColor = colorSelectionView.selectedColor;
         }
+        builder.setBackgroundColor(alertBGColor);
 
         // Title and message
         builder.setTitle(titleEditText.getText());
@@ -182,7 +182,9 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
 
         // Add Footer
         if (addFooterCheckBox.isChecked()) {
-            builder.setFooterView(new SampleFooterView(this));
+            SampleFooterView footerView = new SampleFooterView(this);
+            footerView.setSelecteBackgroundColor(alertBGColor);
+            builder.setFooterView(footerView);
         }
 
         // Selection Items

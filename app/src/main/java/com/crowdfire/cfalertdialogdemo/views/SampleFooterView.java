@@ -57,6 +57,10 @@ public class SampleFooterView extends LinearLayout {
         init();
     }
 
+    public void setSelecteBackgroundColor(int color) {
+        ((GradientDrawable) backgroundColorPreview.getBackground()).setColor(color);
+    }
+
     @OnClick({R.id.background_color_preview, R.id.header_toggle_button, R.id.configuration_toggle_button})
     public void onViewClicked(View view) {
         switch (view.getId()) {
