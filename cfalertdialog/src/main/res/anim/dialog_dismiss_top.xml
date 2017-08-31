@@ -7,10 +7,5 @@
         android:fromXDelta="0"
         android:fromYDelta="0"
         android:toXDelta="0"
-        android:toYDelta="-100%"/>
-    <alpha
-        android:duration="100"
-        android:startOffset="100"
-        android:fromAlpha="1"
-        android:toAlpha="0"/>
+        android:toYDelta="-150%"/>
 </set>
