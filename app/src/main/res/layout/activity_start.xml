@@ -376,6 +376,13 @@
                         android:layout_height="wrap_content">
 
                         <RadioButton
+                            android:id="@+id/no_items_radio_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="None"/>
+
+                        <RadioButton
                             android:id="@+id/items_radio_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -393,12 +400,6 @@
                             android:layout_height="wrap_content"
                             android:text="Multi choice items"/>
 
-                        <RadioButton
-                            android:id="@+id/no_items_radio_button"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:checked="true"
-                            android:text="None"/>
                     </RadioGroup>
 
                 </LinearLayout>
