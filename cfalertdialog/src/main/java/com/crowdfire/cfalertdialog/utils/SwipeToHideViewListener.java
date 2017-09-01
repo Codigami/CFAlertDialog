@@ -3,6 +3,7 @@ package com.crowdfire.cfalertdialog.utils;
 import android.animation.Animator;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewPropertyAnimator;
 
 /**
  * Created by rahul on 31/08/17.
@@ -13,6 +14,7 @@ public class SwipeToHideViewListener implements View.OnTouchListener {
     private boolean isTouching;
     private float swipeStartX;
     private float swipeStartY;
+    private float viewStartX;
     private float deltaX = 0;
     private float deltaY = 0;
     private boolean isSwipingHorizontal = false;
@@ -22,7 +24,7 @@ public class SwipeToHideViewListener implements View.OnTouchListener {
     private boolean shouldDismissView;
     private SwipeToHideCompletionListener listener;
 
-    private static final int SWIPE_TO_DISMISS_THRESHOLD = 200;
+    private static final int SWIPE_TO_DISMISS_THRESHOLD = 150;
     private static final int SWIPE_TO_DISMISS_ANIMATION_DURATION = 100;
 
     public SwipeToHideViewListener(View animatingView, boolean shouldDismissView, SwipeToHideCompletionListener listener) {
@@ -79,6 +81,8 @@ public class SwipeToHideViewListener implements View.OnTouchListener {
         // Keep the initial swipe action position
         swipeStartX = event.getRawX();
         swipeStartY = event.getRawY();
+
+        viewStartX = animatingView.getX();
     }
 
     private void moveSwipe(MotionEvent event) {
@@ -94,7 +98,7 @@ public class SwipeToHideViewListener implements View.OnTouchListener {
         }
         // Check Horizontal swipe
         if (Math.abs(deltaX) > 0) {
-            animateCardViewHorizontally(deltaX, 0, null);
+            animateViewHorizontally(deltaX, 0, false, null);
             isSwipingHorizontal = true;
         }
     }
@@ -105,7 +109,7 @@ public class SwipeToHideViewListener implements View.OnTouchListener {
 
             // Check whether view should animate left or right
             float endPos = (deltaX > 0) ? animatingView.getWidth() : -animatingView.getWidth();
-            animateCardViewHorizontally(endPos, SWIPE_TO_DISMISS_ANIMATION_DURATION, new AnimatorCompletionListener() {
+            animateViewHorizontally(endPos, SWIPE_TO_DISMISS_ANIMATION_DURATION, true, new AnimatorCompletionListener() {
                 @Override
                 void animationCompleted() {
                     if (listener != null) listener.viewDismissed();
@@ -113,17 +117,24 @@ public class SwipeToHideViewListener implements View.OnTouchListener {
             });
         }
         else {
-            animateCardViewHorizontally(0, SWIPE_TO_DISMISS_ANIMATION_DURATION, null);
+            animateViewHorizontally(0, SWIPE_TO_DISMISS_ANIMATION_DURATION, false, null);
         }
     }
 
-    private void animateCardViewHorizontally(float dX, int duration, AnimatorCompletionListener listener) {
+    private void animateViewHorizontally(float dX, int duration, boolean shouldHide, AnimatorCompletionListener listener) {
 
-        animatingView.animate()
-                .x(dX)
+        float animatingDistance = viewStartX + dX;
+
+        ViewPropertyAnimator animator = animatingView.animate()
+                .x(animatingDistance)
                 .setDuration(duration)
-                .setListener(listener)
-                .start();
+                .setListener(listener);
+
+        if (shouldHide) {
+            animator.alpha(0);
+        }
+
+        animator.start();
     }
 
     private abstract class AnimatorCompletionListener implements Animator.AnimatorListener {
