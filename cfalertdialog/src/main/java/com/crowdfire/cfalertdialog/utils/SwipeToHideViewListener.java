@@ -12,8 +12,11 @@ public class SwipeToHideViewListener implements View.OnTouchListener {
 
     private boolean isTouching;
     private float swipeStartX;
+    private float swipeStartY;
     private float deltaX = 0;
-    private boolean isSwipingRight = false;
+    private float deltaY = 0;
+    private boolean isSwipingHorizontal = false;
+    private boolean isSwipingVertical = false;
 
     private View animatingView;
     private boolean shouldDismissView;
@@ -63,27 +66,36 @@ public class SwipeToHideViewListener implements View.OnTouchListener {
             case MotionEvent.ACTION_OUTSIDE:
 
                 isTouching = false;
-                isSwipingRight = false;
+                isSwipingHorizontal = false;
                 endSwipe();
                 break;
         }
 
-        return isSwipingRight;
+        return isSwipingHorizontal;
     }
 
     private void startSwipe(MotionEvent event) {
 
         // Keep the initial swipe action position
-        swipeStartX = event.getX();
+        swipeStartX = event.getRawX();
+        swipeStartY = event.getRawY();
     }
 
     private void moveSwipe(MotionEvent event) {
 
         // Check if the motion is horizontal
         deltaX = event.getRawX() - swipeStartX;
+        deltaY = event.getRawY() - swipeStartY;
+
+        // Check Vertical Swipe
+        if (Math.abs(deltaY) > 0 && Math.abs(deltaY) > Math.abs(deltaX)) {
+            isSwipingVertical = true;
+            return;
+        }
+        // Check Horizontal swipe
         if (Math.abs(deltaX) > 0) {
             animateCardViewHorizontally(deltaX, 0, null);
-            isSwipingRight = true;
+            isSwipingHorizontal = true;
         }
     }
 
