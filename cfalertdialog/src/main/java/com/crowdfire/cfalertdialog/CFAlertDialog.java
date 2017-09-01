@@ -673,9 +673,6 @@ public class CFAlertDialog extends AppCompatDialog {
                     }
                 });
                 radioGroup.addView(radioButton);
-                ((LinearLayout.LayoutParams) radioButton.getLayoutParams()).leftMargin =
-                        ((LinearLayout.LayoutParams) radioButton.getLayoutParams()).rightMargin =
-                                (int) getContext().getResources().getDimension(R.dimen.cfdialog_padding);
             }
         } else {
             selectableItemsContainer.setVisibility(View.GONE);

@@ -86,8 +86,6 @@
     <style name="CFDialog.SelectableItemTextview">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginLeft">@dimen/cfdialog_padding</item>
-        <item name="android:layout_marginRight">@dimen/cfdialog_padding</item>
         <item name="android:layout_marginTop">@dimen/cfdialog_padding_half</item>
         <item name="android:layout_marginBottom">@dimen/cfdialog_padding_half</item>
         <item name="android:layout_centerVertical">true</item>
@@ -103,7 +101,6 @@
         <item name="android:layout_centerVertical">true</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:paddingLeft">@dimen/cfdialog_padding</item>
         <item name="android:clickable">true</item>
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
@@ -114,7 +111,6 @@
         <item name="android:layout_centerVertical">true</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:paddingLeft">@dimen/cfdialog_padding</item>
         <item name="android:paddingTop">@dimen/cfdialog_padding_half</item>
         <item name="android:paddingBottom">@dimen/cfdialog_padding_half</item>
         <item name="android:buttonTint" tools:targetApi="21">?android:attr/colorAccent</item>
