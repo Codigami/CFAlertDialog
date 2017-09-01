@@ -36,9 +36,11 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.crowdfire.cfalertdialog.utils.DeviceUtil;
+import com.crowdfire.cfalertdialog.utils.SwipeToHideViewListener;
 import com.crowdfire.cfalertdialog.views.CFPushButton;
 
 import java.util.ArrayList;
@@ -50,19 +52,19 @@ public class CFAlertDialog extends AppCompatDialog {
     public enum CFAlertActionStyle{
         DEFAULT,
         NEGATIVE,
-        POSITIVE;
+        POSITIVE
     }
 
     public enum CFAlertActionAlignment {
         START,
         END,
         CENTER,
-        JUSTIFIED;
+        JUSTIFIED
     }
 
     public enum CFAlertBackgroundStyle {
         PLAIN,
-        BLUR;
+        BLUR
     }
     // endregion
 
@@ -74,6 +76,7 @@ public class CFAlertDialog extends AppCompatDialog {
     private CardView dialogCardView;
     private TextView dialogTitleTextView, dialogMessageTextView;
     private ImageView cfDialogIconImageView;
+    private ScrollView cfDialogScrollView;
 
     private CFAlertDialog(Context context) {
         super(context, R.style.CFDialog);
@@ -140,36 +143,15 @@ public class CFAlertDialog extends AppCompatDialog {
         // Disable the view when being dismissed
         setEnabled(false);
 
-        // Perform the dismiss animation and after that dismiss the dialog
-        Animation dismissAnimation = getDismissAnimation(params.dialogGravity);
-        dismissAnimation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
+        // perform the dismiss animation
+        startDismissAnimation();
 
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                Handler handler = new Handler();
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        CFAlertDialog.super.dismiss();
-                    }
-                });
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-        dialogCardView.startAnimation(dismissAnimation);
     }
 
     private void bindSubviews(View view) {
         cfDialogBackground = ((RelativeLayout) view.findViewById(R.id.cfdialog_background));
         dialogCardView = (CardView) view.findViewById(R.id.cfdialog_cardview);
+        cfDialogScrollView = (ScrollView) view.findViewById(R.id.cfdialog_scrollview);
         cfDialogHeaderLinearLayout = (LinearLayout) view.findViewById(R.id.alert_header_container);
         cfDialogHeaderLinearLayout.requestLayout();
         cfDialogHeaderLinearLayout.setVisibility(View.GONE);
@@ -270,6 +252,33 @@ public class CFAlertDialog extends AppCompatDialog {
         dialogCardView.setLayoutParams(getLayoutParams(params.dialogGravity));
 
         dialogCardView.setRadius(getCornerRadius(params.dialogGravity));
+
+        // Additional card behaviour for specific alert types
+        switch (params.dialogGravity) {
+
+            case Gravity.TOP:
+
+                // Swipe to dismiss feature for notification type alerts
+                SwipeToHideViewListener cardSwipeListener = new SwipeToHideViewListener(dialogCardView, params.cancelable, new SwipeToHideViewListener.SwipeToHideCompletionListener() {
+                    @Override
+                    public void viewDismissed() {
+                        CFAlertDialog.super.dismiss();
+                    }
+                });
+                cfDialogScrollView.setOnTouchListener(cardSwipeListener);
+
+                break;
+
+            case Gravity.CENTER:
+
+                // Behaviour specific to Alerts
+                break;
+
+            case Gravity.BOTTOM:
+
+                // Behaviour specific to Bottom sheets
+                break;
+        }
     }
 
     private void startPresentAnimation() {
@@ -291,6 +300,35 @@ public class CFAlertDialog extends AppCompatDialog {
             }
         });
         dialogCardView.startAnimation(presentAnimation);
+    }
+
+    private void startDismissAnimation() {
+        // Perform the dismiss animation and after that dismiss the dialog
+        Animation dismissAnimation = getDismissAnimation(params.dialogGravity);
+        dismissAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                Handler handler = new Handler();
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        CFAlertDialog.super.dismiss();
+                    }
+                });
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        dialogCardView.startAnimation(dismissAnimation);
+
     }
 
     private void alertPresented() {

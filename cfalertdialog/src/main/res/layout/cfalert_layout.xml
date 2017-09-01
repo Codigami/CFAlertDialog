@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    android:id="@+id/cfdialog_background"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:gravity="center"
+    android:id="@+id/cfdialog_background"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:animateLayoutChanges="true"
     android:clickable="true"
-    android:layout_height="match_parent">
+    android:gravity="center">
 
     <android.support.v7.widget.CardView
         android:id="@+id/cfdialog_cardview"
@@ -18,6 +18,7 @@
         app:cardElevation="@dimen/cfdialog_card_elevation">
 
         <ScrollView
+            android:id="@+id/cfdialog_scrollview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:animateLayoutChanges="true">
@@ -39,10 +40,10 @@
                 <!-- Alert Content -->
                 <LinearLayout android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_margin="@dimen/cfdialog_padding"
-                    android:showDividers="middle"
-                    android:divider="@drawable/cfdialog_content_spacing">
+                    android:divider="@drawable/cfdialog_content_spacing"
+                    android:orientation="vertical"
+                    android:showDividers="middle">
 
                     <!--Title and icon-->
                     <LinearLayout
@@ -74,8 +75,8 @@
                     <TextView
                         android:id="@+id/tv_dialog_content_desc"
                         style="@style/CFDialog.Message"
-                        tools:text="This is your description"
-                        android:animateLayoutChanges="true" />
+                        android:animateLayoutChanges="true"
+                        tools:text="This is your description" />
 
                     <!--Selection items-->
                     <LinearLayout
@@ -99,10 +100,10 @@
                         android:id="@+id/alert_buttons_container"
                         style="@style/CFDialog.ButtonsContainer"
                         android:animateLayoutChanges="true"
-                        android:orientation="vertical"
-                        android:visibility="gone"
-                        android:showDividers="middle"
                         android:divider="@drawable/cfdialog_buttons_spacing"
+                        android:orientation="vertical"
+                        android:showDividers="middle"
+                        android:visibility="gone"
                         tools:visibility="visible">
 
                     </LinearLayout>
