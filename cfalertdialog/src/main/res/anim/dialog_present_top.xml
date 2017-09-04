@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <set xmlns:android="http://schemas.android.com/apk/res/android"
-     android:interpolator="@anim/interpolator_overshoot_1">
+     android:interpolator="@anim/interpolator_deceleration_1_5">
     <translate
         android:duration="400"
         android:fromXDelta="0"
