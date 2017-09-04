@@ -1,1 +1,1 @@
-include ':app', ':cfalertdialog'
+include ':cfalertdialogdemo', ':cfalertdialog'
