@@ -3,7 +3,7 @@
 
     <dimen name="cfdialog_maxwidth">400dp</dimen>
 
-    <dimen name="cfdialog_outer_margin">20dp</dimen>
+    <dimen name="cfdialog_outer_margin">10dp</dimen>
     <dimen name="cfdialog_internal_spacing">10dp</dimen>
     <dimen name="cfdialog_internal_spacing_half">5dp</dimen>
     <dimen name="cfdialog_padding">20dp</dimen>
