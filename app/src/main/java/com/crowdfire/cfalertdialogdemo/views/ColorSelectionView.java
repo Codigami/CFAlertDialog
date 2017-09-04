@@ -2,6 +2,8 @@ package com.crowdfire.cfalertdialogdemo.views;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -94,7 +96,14 @@ public class ColorSelectionView extends LinearLayout implements SeekBar.OnSeekBa
 
         selectedColor = Color.argb(alpha, redValue, greenValue, blueValue);
 
-        selectedColorPreview.setBackgroundColor(selectedColor);
+        GradientDrawable previewBackground = (GradientDrawable) selectedColorPreview.getBackground();
+        previewBackground.setColor(selectedColor);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            selectedColorPreview.setBackground(previewBackground);
+        }
+        else {
+            selectedColorPreview.setBackgroundDrawable(previewBackground);
+        }
     }
 
     public void setSelectedColor(int selectedColor) {

@@ -2,6 +2,8 @@ package com.crowdfire.cfalertdialogdemo;
 
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -78,7 +80,7 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
                         public void onClick(DialogInterface dialog, int which) {
 
                             // Update the color preview
-                            selectedBackgroundColorView.setBackgroundColor(colorSelectionView.selectedColor);
+                            setSelectedBackgroundColor(colorSelectionView.selectedColor);
 
                             // dismiss the dialog
                             colorSelectionDialog.dismiss();
@@ -92,7 +94,7 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
                         public void onDismiss(DialogInterface dialogInterface) {
 
                             // Update the color preview
-                            selectedBackgroundColorView.setBackgroundColor(colorSelectionView.selectedColor);
+                            setSelectedBackgroundColor(colorSelectionView.selectedColor);
                         }
                     })
                     .create();
@@ -310,10 +312,21 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
 
         closesOnBackgroundTapCheckBox = ((CheckBox) findViewById(R.id.closes_on_background_tap));
         selectedBackgroundColorView = findViewById(R.id.background_color_preview);
-        selectedBackgroundColorView.setBackgroundColor(DEFAULT_BACKGROUND_COLOR);
+        setSelectedBackgroundColor(DEFAULT_BACKGROUND_COLOR);
         selectBackgroundColorContainer = findViewById(R.id.background_color_selection_container);
 
         showDialogFab = (FloatingActionButton) findViewById(R.id.fab);
+    }
+
+    private void setSelectedBackgroundColor(int color) {
+        GradientDrawable previewBackground = (GradientDrawable) selectedBackgroundColorView.getBackground();
+        previewBackground.setColor(color);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            selectedBackgroundColorView.setBackground(previewBackground);
+        }
+        else {
+            selectedBackgroundColorView.setBackgroundDrawable(previewBackground);
+        }
     }
 
     @Override

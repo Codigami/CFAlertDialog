@@ -7,17 +7,11 @@
     android:padding="20dp"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <View
+        android:id="@+id/selected_color_preview"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@drawable/black_border">
-
-        <View
-            android:id="@+id/selected_color_preview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/white" />
-    </LinearLayout>
+        android:background="@drawable/black_border" />
 
     <SeekBar
         android:id="@+id/seekbar_red"
