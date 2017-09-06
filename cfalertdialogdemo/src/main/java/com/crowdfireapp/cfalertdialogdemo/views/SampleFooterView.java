@@ -1,4 +1,4 @@
-package com.crowdfire.cfalertdialogdemo.views;
+package com.crowdfireapp.cfalertdialogdemo.views;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -9,8 +9,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.crowdfire.cfalertdialog.views.CFPushButton;
-import com.crowdfire.cfalertdialogdemo.R;
+import com.crowdfireapp.cfalertdialog.views.CFPushButton;
+import com.crowdfireapp.cfalertdialogdemo.R;
 
 import java.util.Random;
 
@@ -18,10 +18,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.crowdfire.cfalertdialogdemo.views.SampleFooterView.ConfigurationState.COLLAPSED;
-import static com.crowdfire.cfalertdialogdemo.views.SampleFooterView.ConfigurationState.EXPANDED;
-import static com.crowdfire.cfalertdialogdemo.views.SampleFooterView.HeaderState.HIDDEN;
-import static com.crowdfire.cfalertdialogdemo.views.SampleFooterView.HeaderState.SHOWN;
+import static com.crowdfireapp.cfalertdialogdemo.views.SampleFooterView.ConfigurationState.COLLAPSED;
+import static com.crowdfireapp.cfalertdialogdemo.views.SampleFooterView.ConfigurationState.EXPANDED;
+import static com.crowdfireapp.cfalertdialogdemo.views.SampleFooterView.HeaderState.HIDDEN;
+import static com.crowdfireapp.cfalertdialogdemo.views.SampleFooterView.HeaderState.SHOWN;
 
 /**
  * Created by rahul on 11/07/17.

@@ -1,4 +1,4 @@
-package com.crowdfire.cfalertdialogdemo.views;
+package com.crowdfireapp.cfalertdialogdemo.views;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 
-import com.crowdfire.cfalertdialogdemo.R;
+import com.crowdfireapp.cfalertdialogdemo.R;
 
 /**
  * Created by rahul on 10/07/17.

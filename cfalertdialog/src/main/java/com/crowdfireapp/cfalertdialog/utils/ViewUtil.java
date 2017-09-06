@@ -1,4 +1,4 @@
-package com.crowdfire.cfalertdialog.utils;
+package com.crowdfireapp.cfalertdialog.utils;
 
 import android.view.MotionEvent;
 import android.view.View;

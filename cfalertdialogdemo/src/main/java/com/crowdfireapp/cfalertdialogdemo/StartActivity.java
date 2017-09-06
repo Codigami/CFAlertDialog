@@ -1,4 +1,4 @@
-package com.crowdfire.cfalertdialogdemo;
+package com.crowdfireapp.cfalertdialogdemo;
 
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -15,13 +15,13 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.crowdfire.cfalertdialog.CFAlertDialog;
-import com.crowdfire.cfalertdialogdemo.views.ColorSelectionView;
-import com.crowdfire.cfalertdialogdemo.views.SampleFooterView;
+import com.crowdfireapp.cfalertdialog.CFAlertDialog;
+import com.crowdfireapp.cfalertdialogdemo.views.ColorSelectionView;
+import com.crowdfireapp.cfalertdialogdemo.views.SampleFooterView;
 
-import static com.crowdfire.cfalertdialog.CFAlertDialog.CFAlertActionAlignment;
-import static com.crowdfire.cfalertdialog.CFAlertDialog.CFAlertActionStyle;
-import static com.crowdfire.cfalertdialog.CFAlertDialog.OnClickListener;
+import static com.crowdfireapp.cfalertdialog.CFAlertDialog.CFAlertActionAlignment;
+import static com.crowdfireapp.cfalertdialog.CFAlertDialog.CFAlertActionStyle;
+import static com.crowdfireapp.cfalertdialog.CFAlertDialog.OnClickListener;
 
 /**
  * Created by rahul on 06/07/17.

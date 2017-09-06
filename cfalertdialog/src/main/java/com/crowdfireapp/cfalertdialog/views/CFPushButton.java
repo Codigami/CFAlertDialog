@@ -1,15 +1,11 @@
-package com.crowdfire.cfalertdialog.views;
+package com.crowdfireapp.cfalertdialog.views;
 
 import android.content.Context;
 import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 import android.view.Gravity;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
 
-import com.crowdfire.cfalertdialog.utils.ViewUtil;
+import com.crowdfireapp.cfalertdialog.utils.ViewUtil;
 
 /**
  * Created by rahul on 29/06/17.

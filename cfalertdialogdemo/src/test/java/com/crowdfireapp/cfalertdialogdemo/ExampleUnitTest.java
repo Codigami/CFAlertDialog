@@ -1,4 +1,4 @@
-package com.crowdfire.cfalertdialog;
+package com.crowdfireapp.cfalertdialogdemo;
 
 import org.junit.Test;
 
