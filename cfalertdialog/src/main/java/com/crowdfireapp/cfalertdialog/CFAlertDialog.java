@@ -85,6 +85,8 @@ public class CFAlertDialog extends AppCompatDialog {
     private ImageView cfDialogIconImageView;
     private ScrollView cfDialogScrollView;
 
+    private static final int DEFAULT_BACKGROUND_COLOR = Color.parseColor("#B3000000");
+
     private CFAlertDialog(Context context) {
         super(context, R.style.CFDialog);
     }
@@ -386,7 +388,7 @@ public class CFAlertDialog extends AppCompatDialog {
     }
 
     /**
-     * @param dialogStyle 
+     * @param dialogStyle
      */
     public void setDialogStyle(CFAlertStyle dialogStyle) {
         switch (dialogStyle) {
@@ -800,7 +802,7 @@ public class CFAlertDialog extends AppCompatDialog {
 
             this.params.theme = R.style.CFDialog;
             this.params.backgroundStyle = CFAlertBackgroundStyle.PLAIN;
-            this.params.backgroundColor = Color.TRANSPARENT;
+            this.params.backgroundColor = DEFAULT_BACKGROUND_COLOR;
         }
 
         public Builder setBackgroundStyle(CFAlertBackgroundStyle backgroundStyle) {
@@ -964,7 +966,7 @@ public class CFAlertDialog extends AppCompatDialog {
 
         private Context context;
         private CFAlertBackgroundStyle backgroundStyle = CFAlertBackgroundStyle.PLAIN;
-        private @ColorInt int backgroundColor = -1;
+        private @ColorInt int backgroundColor = DEFAULT_BACKGROUND_COLOR;
         private CharSequence message, title;
         private int theme = R.style.CFDialog,
                 textGravity = Gravity.LEFT,

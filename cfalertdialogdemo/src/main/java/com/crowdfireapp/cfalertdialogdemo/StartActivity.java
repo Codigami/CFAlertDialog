@@ -86,7 +86,6 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
                             colorSelectionDialog.dismiss();
                         }
                     })
-                    .setBackgroundColor(DEFAULT_BACKGROUND_COLOR)
                     .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
                     .setHeaderView(colorSelectionView)
                     .onDismissListener(new DialogInterface.OnDismissListener() {
@@ -118,11 +117,12 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
         }
 
         // Background
-        int alertBGColor = DEFAULT_BACKGROUND_COLOR;
+        int alertBGColor = -1;
         if (colorSelectionView != null) {
             alertBGColor = colorSelectionView.selectedColor;
+            builder.setBackgroundColor(alertBGColor);
         }
-        builder.setBackgroundColor(alertBGColor);
+
 
         // Title and message
         builder.setTitle(titleEditText.getText());
