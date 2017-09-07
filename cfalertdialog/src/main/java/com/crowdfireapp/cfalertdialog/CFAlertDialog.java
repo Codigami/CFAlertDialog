@@ -49,6 +49,13 @@ import java.util.List;
 public class CFAlertDialog extends AppCompatDialog {
 
     // region ENUMS
+
+    public enum CFAlertStyle {
+        NOTIFICATION,
+        ALERT,
+        BOTTOM_SHEET
+    }
+
     public enum CFAlertActionStyle{
         DEFAULT,
         NEGATIVE,
@@ -208,7 +215,7 @@ public class CFAlertDialog extends AppCompatDialog {
         populateButtons(params.context, params.buttons);
 
         // Dialog position
-        setDialogGravity(params.dialogGravity);
+        setDialogStyle(params.dialogStyle);
 
         // Text gravity
         setTextGravity(params.textGravity);
@@ -249,14 +256,14 @@ public class CFAlertDialog extends AppCompatDialog {
     private void setupDialogCardLayout() {
 
         // Adjust the dialog width
-        dialogCardView.setLayoutParams(getLayoutParams(params.dialogGravity));
+        dialogCardView.setLayoutParams(getLayoutParams(params.dialogStyle));
 
-        dialogCardView.setRadius(getCornerRadius(params.dialogGravity));
+        dialogCardView.setRadius(getCornerRadius(params.dialogStyle));
 
         // Additional card behaviour for specific alert types
-        switch (params.dialogGravity) {
+        switch (params.dialogStyle) {
 
-            case Gravity.TOP:
+            case NOTIFICATION:
 
                 // Swipe to dismiss feature for notification type alerts
                 SwipeToHideViewListener cardSwipeListener = new SwipeToHideViewListener(dialogCardView, params.cancelable, new SwipeToHideViewListener.SwipeToHideCompletionListener() {
@@ -269,12 +276,12 @@ public class CFAlertDialog extends AppCompatDialog {
 
                 break;
 
-            case Gravity.CENTER:
+            case ALERT:
 
                 // Behaviour specific to Alerts
                 break;
 
-            case Gravity.BOTTOM:
+            case BOTTOM_SHEET:
 
                 // Behaviour specific to Bottom sheets
                 break;
@@ -282,7 +289,7 @@ public class CFAlertDialog extends AppCompatDialog {
     }
 
     private void startPresentAnimation() {
-        Animation presentAnimation = getPresentAnimation(params.dialogGravity);
+        Animation presentAnimation = getPresentAnimation(params.dialogStyle);
         presentAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -304,7 +311,7 @@ public class CFAlertDialog extends AppCompatDialog {
 
     private void startDismissAnimation() {
         // Perform the dismiss animation and after that dismiss the dialog
-        Animation dismissAnimation = getDismissAnimation(params.dialogGravity);
+        Animation dismissAnimation = getDismissAnimation(params.dialogStyle);
         dismissAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -379,11 +386,19 @@ public class CFAlertDialog extends AppCompatDialog {
     }
 
     /**
-     * @param dialogGravity @see android.view.Gravity
+     * @param dialogStyle 
      */
-    public void setDialogGravity(int dialogGravity) {
-        if (dialogGravity != -1) {
-            cfDialogBackground.setGravity(dialogGravity);
+    public void setDialogStyle(CFAlertStyle dialogStyle) {
+        switch (dialogStyle) {
+            case NOTIFICATION:
+                cfDialogBackground.setGravity(Gravity.TOP);
+                break;
+            case ALERT:
+                cfDialogBackground.setGravity(Gravity.CENTER_VERTICAL);
+                break;
+            case BOTTOM_SHEET:
+                cfDialogBackground.setGravity(Gravity.BOTTOM);
+                break;
         }
     }
 
@@ -695,26 +710,26 @@ public class CFAlertDialog extends AppCompatDialog {
 
     // region Animation helper methods
 
-    private Animation getPresentAnimation(int gravity) {
-        switch (gravity) {
-            case Gravity.TOP:
+    private Animation getPresentAnimation(CFAlertStyle style) {
+        switch (style) {
+            case NOTIFICATION:
                 return AnimationUtils.loadAnimation(params.context, R.anim.dialog_present_top);
-            case Gravity.CENTER:
+            case ALERT:
                 return AnimationUtils.loadAnimation(params.context, R.anim.dialog_present_center);
-            case Gravity.BOTTOM:
+            case BOTTOM_SHEET:
                 return AnimationUtils.loadAnimation(params.context, R.anim.dialog_present_bottom);
             default:
                 return AnimationUtils.loadAnimation(params.context, R.anim.dialog_present_center);
         }
     }
 
-    private Animation getDismissAnimation(int gravity) {
-        switch (gravity) {
-            case Gravity.TOP:
+    private Animation getDismissAnimation(CFAlertStyle style) {
+        switch (style) {
+            case NOTIFICATION:
                 return AnimationUtils.loadAnimation(params.context, R.anim.dialog_dismiss_top);
-            case Gravity.CENTER:
+            case ALERT:
                 return AnimationUtils.loadAnimation(params.context, R.anim.dialog_dismiss_center);
-            case Gravity.BOTTOM:
+            case BOTTOM_SHEET:
                 return AnimationUtils.loadAnimation(params.context, R.anim.dialog_dismiss_bottom);
             default:
                 return AnimationUtils.loadAnimation(params.context, R.anim.dialog_dismiss_center);
@@ -725,7 +740,7 @@ public class CFAlertDialog extends AppCompatDialog {
 
     // region - Layout helper methods
 
-    private RelativeLayout.LayoutParams getLayoutParams(int gravity) {
+    private RelativeLayout.LayoutParams getLayoutParams(CFAlertStyle style) {
         int margin = (int)getContext().getResources().getDimension(R.dimen.cfdialog_outer_margin);
 
         int horizontalMargin = margin;
@@ -733,8 +748,8 @@ public class CFAlertDialog extends AppCompatDialog {
         int bottomMargin = margin;
 
         // Special layout properties to be added here.
-        switch (gravity) {
-            case Gravity.TOP:
+        switch (style) {
+            case NOTIFICATION:
                 horizontalMargin = 0;
                 topMargin = 0;
                 break;
@@ -749,12 +764,12 @@ public class CFAlertDialog extends AppCompatDialog {
         return cardViewLayoutParams;
     }
 
-    private float getCornerRadius(int gravity){
+    private float getCornerRadius(CFAlertStyle style){
         float cornerRadius = getContext().getResources().getDimension(R.dimen.cfdialog_card_corner_radius);
 
         // Special layout properties to be added here.
-        switch (gravity) {
-            case Gravity.TOP:
+        switch (style) {
+            case NOTIFICATION:
                 cornerRadius = 0;
                 break;
         }
@@ -852,11 +867,8 @@ public class CFAlertDialog extends AppCompatDialog {
             return this;
         }
 
-        /**
-         * @param dialogGravity @see android.view.Gravity
-         */
-        public Builder setDialogVerticalGravity(int dialogGravity) {
-            this.params.dialogGravity = dialogGravity;
+        public Builder setDialogStyle(CFAlertStyle style) {
+            this.params.dialogStyle = style;
             return this;
         }
 
@@ -955,10 +967,10 @@ public class CFAlertDialog extends AppCompatDialog {
         private @ColorInt int backgroundColor = -1;
         private CharSequence message, title;
         private int theme = R.style.CFDialog,
-                dialogGravity = Gravity.CENTER,
                 textGravity = Gravity.LEFT,
                 iconDrawableId = -1,
                 contentImageDrawableId = -1;
+        private CFAlertStyle dialogStyle = CFAlertStyle.ALERT;
         private View headerView, footerView;
         private int headerViewId = -1, footerViewId = -1;
         private Drawable contentImageDrawable, iconDrawable;

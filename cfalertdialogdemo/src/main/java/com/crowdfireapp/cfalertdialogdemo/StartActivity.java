@@ -87,7 +87,7 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
                         }
                     })
                     .setBackgroundColor(DEFAULT_BACKGROUND_COLOR)
-                    .setDialogVerticalGravity(Gravity.BOTTOM)
+                    .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
                     .setHeaderView(colorSelectionView)
                     .onDismissListener(new DialogInterface.OnDismissListener() {
                         @Override
@@ -108,13 +108,13 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
 
         // Vertical position of the dialog
         if (topDialogGravityRadioButton.isChecked()) {
-            builder.setDialogVerticalGravity(Gravity.TOP);
+            builder.setDialogStyle(CFAlertDialog.CFAlertStyle.NOTIFICATION);
         }
         if (centerDialogGravityRadioButton.isChecked()) {
-            builder.setDialogVerticalGravity(Gravity.CENTER_VERTICAL);
+            builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT);
         }
         if (bottomDialogGravityRadioButton.isChecked()) {
-            builder.setDialogVerticalGravity(Gravity.BOTTOM);
+            builder.setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET);
         }
 
         // Background
