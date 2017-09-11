@@ -68,11 +68,6 @@ public class CFAlertDialog extends AppCompatDialog {
         CENTER,
         JUSTIFIED
     }
-
-    public enum CFAlertBackgroundStyle {
-        PLAIN,
-        BLUR
-    }
     // endregion
 
     private DialogParams params;
@@ -178,13 +173,7 @@ public class CFAlertDialog extends AppCompatDialog {
         // Background
         getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
-        if (params.backgroundStyle == CFAlertBackgroundStyle.BLUR) {
-            // TODO: Add blur background effect
-
-        }
-        else {
-            cfDialogBackground.setBackgroundColor(params.backgroundColor);
-        }
+        cfDialogBackground.setBackgroundColor(params.backgroundColor);
 
         cfDialogBackground.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -787,27 +776,13 @@ public class CFAlertDialog extends AppCompatDialog {
 
         public Builder(Context context) {
             params = new DialogParams();
-            setDefaultParams();
             this.params.context = context;
         }
 
         public Builder(Context context, @StyleRes int theme) {
             params = new DialogParams();
-            setDefaultParams();
             this.params.context = context;
             this.params.theme = theme;
-        }
-
-        private void setDefaultParams() {
-
-            this.params.theme = R.style.CFDialog;
-            this.params.backgroundStyle = CFAlertBackgroundStyle.PLAIN;
-            this.params.backgroundColor = DEFAULT_BACKGROUND_COLOR;
-        }
-
-        public Builder setBackgroundStyle(CFAlertBackgroundStyle backgroundStyle) {
-            this.params.backgroundStyle = backgroundStyle;
-            return this;
         }
 
         public Builder setBackgroundResource(@ColorRes int backgroundResource) {
@@ -965,7 +940,6 @@ public class CFAlertDialog extends AppCompatDialog {
     private static class DialogParams {
 
         private Context context;
-        private CFAlertBackgroundStyle backgroundStyle = CFAlertBackgroundStyle.PLAIN;
         private @ColorInt int backgroundColor = DEFAULT_BACKGROUND_COLOR;
         private CharSequence message, title;
         private int theme = R.style.CFDialog,
