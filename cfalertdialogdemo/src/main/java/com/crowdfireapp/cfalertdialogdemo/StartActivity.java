@@ -261,7 +261,6 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
                 onDialogDismiss();
             }
         });
-        //alertDialog.show();
     }
 
     private CFAlertActionAlignment getButtonGravity() {
