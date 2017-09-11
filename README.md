@@ -56,11 +56,20 @@ The above shown alert types can easily be implemented using the code snippet giv
 
 ## Customisations :
 
+##### Alert Type
+The alert type will determine the position and animation style for the dialog. You may set this by calling the `setAlertStyle` method with any of the following values.
+```java
+CFAlertStyle.NOTIFICATION,
+CFAlertStyle.ALERT,
+CFAlertStyle.BOTTOM_SHEET
+``` 
+The default type is `ALERT`.
+
 ##### Title and Message
-You can set a custom title and message text in the alert (pass `null` if you don’t need them).
+You can set a custom title and message text in the alert, using the `setTitle` method on the builder (pass `null` if you don’t need them).
 
 ##### Title Color and Message Color
-You can set a custom title and message text color in the alert.
+You can set a custom title and message text color in the alert, using the `setTextColor` on the builder.
 
 ##### Text Alignment
 You can customise alignment of the title and message. Use the  `setTextGravity` method on the builder with any of the following values: 
@@ -70,15 +79,6 @@ Gravity.START,
 Gravity.CENTER_HORIZONTAL,
 Gravity.END
 ```
-
-##### Alert Type
-The alert type will determine the position and animation style for the dialog. You may set this by calling the `setAlertStyle` method with any of the following values.
-```java
-CFAlertStyle.NOTIFICATION,
-CFAlertStyle.ALERT,
-CFAlertStyle.BOTTOM_SHEET
-``` 
-The default type is `ALERT`.
 
 ##### Background color
 You can change the background (overlay) color of the alert using the method `setBackgroundColor` on the builder with the color of your choice.
