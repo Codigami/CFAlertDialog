@@ -567,9 +567,6 @@ public class CFAlertDialog extends AppCompatDialog {
                 buttonParams.gravity = Gravity.END;
                 break;
         }
-        int margin = ((int) buttonView.getResources().getDimension(R.dimen.cfdialog_internal_spacing_half));
-        buttonParams.setMargins(0, margin, 0, margin);
-        buttonView.setLayoutParams(buttonParams);
 
         int padding = ((int) buttonView.getResources().getDimension(R.dimen.cfdialog_button_padding));
         buttonView.setPadding(padding, padding, padding, padding);
