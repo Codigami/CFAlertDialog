@@ -6,6 +6,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
@@ -321,12 +322,7 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
     private void setSelectedBackgroundColor(int color) {
         GradientDrawable previewBackground = (GradientDrawable) selectedBackgroundColorView.getBackground();
         previewBackground.setColor(color);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            selectedBackgroundColorView.setBackground(previewBackground);
-        }
-        else {
-            selectedBackgroundColorView.setBackgroundDrawable(previewBackground);
-        }
+        ViewCompat.setBackground(selectedBackgroundColorView, previewBackground);
     }
 
     @Override

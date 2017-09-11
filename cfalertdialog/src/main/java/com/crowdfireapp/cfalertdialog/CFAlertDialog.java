@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.ColorInt;
@@ -18,6 +17,7 @@ import android.support.annotation.StringRes;
 import android.support.annotation.StyleRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatDialog;
 import android.support.v7.widget.CardView;
 import android.text.TextUtils;
@@ -582,20 +582,12 @@ public class CFAlertDialog extends AppCompatDialog {
             button.setBackgroundColor(actionButton.backgroundColor);
         }
         else if (actionButton.backgroundDrawableId != -1) {
-            setButtonBackgroundColor(button, ContextCompat.getDrawable(getContext(), actionButton.backgroundDrawableId));
+            ViewCompat.setBackground(button, ContextCompat.getDrawable(getContext(), actionButton.backgroundDrawableId));
         }
 
         // Button text colors
         if (actionButton.textColor != -1) {
             button.setTextColor(ContextCompat.getColor(getContext(), actionButton.textColor));
-        }
-    }
-
-    private void setButtonBackgroundColor(CFPushButton button, Drawable backgroundDrawable) {
-        if (Build.VERSION.SDK_INT > 16) {
-            button.setBackground(backgroundDrawable);
-        } else {
-            button.setBackgroundDrawable(backgroundDrawable);
         }
     }
 
