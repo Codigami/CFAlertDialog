@@ -25,7 +25,7 @@ compile 'com.crowdfireapp.cfalertdialog:cfalertdialog:1.0.0'
 </p>
 
 The above shown alert types can easily be implemented using the code snippet given below by some small tweaks
-```java
+```android
         // Create Alert using Builder
         CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this);
         
@@ -101,7 +101,7 @@ This determines whether the Alert dialog is dismissed when user taps on the back
 
 ##### Dismiss Callback
 You may set a callback when dialog is dismissed with the native `setOnDismissListener` on the alert object.
-```java
+```android
 CFAlertDialog alertDialog = builder.show();
 alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
     @Override
@@ -114,7 +114,7 @@ alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
 
 ### Action Buttons
 You may add as many action buttons with the required styles. Use the `addButton` method on the builder.
-```java
+```android
 builder.addButton("UPGRADE", Color.parseColor("#FFFFFF"), Color.parseColor("#429ef4"), CFAlertActionStyle.POSITIVE, CFAlertActionAlignment.CENTER, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -128,7 +128,7 @@ You can set the title of action button to be added.
 
 ##### Action Style
 Configure the style of the action button that is to be added to alert view. Set `style` property of the above method with one of the following Action style  
-```swift
+```android
  CFAlertActionStyle.DEFAULT,
  CFAlertActionStyle.POSITIVE,
  CFAlertActionStyle.NEGATIVE
@@ -136,7 +136,7 @@ Configure the style of the action button that is to be added to alert view. Set 
 
 ##### Actions Alignment
 Configure the alignment of the action button added to the alert view. Set `alignment` property of  CFAction constructor with one of the following action types
-```swift
+```android
  CFAlertActionAlignment.START,   
  CFAlertActionAlignment.END,
  CFAlertActionAlignment.CENTER,
