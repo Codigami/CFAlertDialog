@@ -18,7 +18,6 @@ public class SwipeToHideViewListener implements View.OnTouchListener {
     private float deltaX = 0;
     private float deltaY = 0;
     private boolean isSwipingHorizontal = false;
-    private boolean isSwipingVertical = false;
 
     private View animatingView;
     private boolean shouldDismissView;
@@ -93,7 +92,8 @@ public class SwipeToHideViewListener implements View.OnTouchListener {
 
         // Check Vertical Swipe
         if (Math.abs(deltaY) > 0 && Math.abs(deltaY) > Math.abs(deltaX)) {
-            isSwipingVertical = true;
+
+            // Is swiping vertically
             return;
         }
         // Check Horizontal swipe
@@ -111,7 +111,7 @@ public class SwipeToHideViewListener implements View.OnTouchListener {
             float endPos = (deltaX > 0) ? animatingView.getWidth() : -animatingView.getWidth();
             animateViewHorizontally(endPos, SWIPE_TO_DISMISS_ANIMATION_DURATION, true, new AnimatorCompletionListener() {
                 @Override
-                void animationCompleted() {
+                void onAnimationCompleted() {
                     if (listener != null) listener.viewDismissed();
                 }
             });
@@ -145,7 +145,7 @@ public class SwipeToHideViewListener implements View.OnTouchListener {
 
         @Override
         public void onAnimationEnd(Animator animator) {
-            animationCompleted();
+            onAnimationCompleted();
         }
 
         @Override
@@ -158,7 +158,7 @@ public class SwipeToHideViewListener implements View.OnTouchListener {
 
         }
 
-        abstract void animationCompleted();
+        abstract void onAnimationCompleted();
     }
 
     public interface SwipeToHideCompletionListener {
