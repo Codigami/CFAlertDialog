@@ -199,6 +199,12 @@ public class CFAlertDialog extends AppCompatDialog {
         // Message
         setMessage(params.message);
 
+        // Text color
+        if (params.textColor != -1) {
+            setTitleColor(params.textColor);
+            setMessageColor(params.textColor);
+        }
+
         // Cancel
         setCancelable(params.cancelable);
 
@@ -363,6 +369,10 @@ public class CFAlertDialog extends AppCompatDialog {
         setTitle(getContext().getString(titleId));
     }
 
+    public void setTitleColor (@ColorInt int color) {
+        dialogTitleTextView.setTextColor(color);
+    }
+
     public void setMessage(CharSequence message) {
         if (TextUtils.isEmpty(message)) {
             dialogMessageTextView.setVisibility(View.GONE);
@@ -374,6 +384,10 @@ public class CFAlertDialog extends AppCompatDialog {
 
     public void setMessage(int messageId) {
         setMessage(getContext().getString(messageId));
+    }
+
+    public void setMessageColor(@ColorInt int color) {
+        dialogMessageTextView.setTextColor(color);
     }
 
     /**
@@ -804,6 +818,11 @@ public class CFAlertDialog extends AppCompatDialog {
             return this;
         }
 
+        public Builder setTextColor(@ColorInt int color) {
+            this.params.textColor = color;
+            return this;
+        }
+
         public Builder setContentImageDrawable(@DrawableRes int contentImageDrawableId) {
             this.params.contentImageDrawableId = contentImageDrawableId;
             this.params.contentImageDrawable = null;
@@ -931,6 +950,7 @@ public class CFAlertDialog extends AppCompatDialog {
         private Context context;
         private @ColorInt int backgroundColor = DEFAULT_BACKGROUND_COLOR;
         private CharSequence message, title;
+        private @ColorInt int textColor = -1;
         private int theme = R.style.CFDialog,
                 textGravity = Gravity.LEFT,
                 iconDrawableId = -1,
