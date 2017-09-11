@@ -15,7 +15,7 @@
 ### Install using gradle
 
 ```gradle 
-compile 'com.squareup.retrofit2:retrofit:2.3.0'
+compile 'com.crowdfireapp.cfalertdialog:cfalertdialog:1.0.0'
 ```
 
 
@@ -26,22 +26,32 @@ compile 'com.squareup.retrofit2:retrofit:2.3.0'
 
 The above shown alert types can easily be implemented using the code snippet given below by some small tweaks
 ```java
-// Create Alert using Builder
-CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this);
-builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT);
-builder.setTitle("You've hit the limit");
-builder.setMessage("Looks like you've hit your usage limit. Upgrade to our paid plan to continue without any limits.");
-builder.settex
+        // Create Alert using Builder
+        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this);
+        
+        // Dialog style
+        builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT);
+        
+        // Title
+        builder.setTitle("You've hit the limit");
+        
+        // Message
+        builder.setMessage("Looks like you've hit your usage limit. Upgrade to our paid plan to continue without any limits.");
+        
+        // Add UPGRADE button
+        builder.addButton("UPGRADE", -1, -1, CFAlertActionStyle.POSITIVE, CFAlertActionAlignment.END, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(StartActivity.this, "Upgrade tapped", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+        
+        // Add header
+        builder.setHeaderView(R.layout.dialog_header_layout);
 
-builder.addButton("UPGRADE", -1, -1, CFAlertActionStyle.POSITIVE, CFAlertActionAlignment.JUSTIFIED, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(context, "Upgrade tapped", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-                }
-            });
-            
-builder.show();
+        // Show the alert
+        builder.show();
 ```
 
 ## Customisations :
