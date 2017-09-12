@@ -74,7 +74,6 @@
     <style name="CFDialog.IconImage">
         <item name="android:layout_width">@dimen/cfdialog_icon_dimen</item>
         <item name="android:layout_height">@dimen/cfdialog_icon_dimen</item>
-        <item name="android:layout_marginRight">10dp</item>
         <item name="android:scaleType">centerInside</item>
     </style>
 
