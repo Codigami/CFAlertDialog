@@ -1,4 +1,19 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.jfrog.bintray'
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.4'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
+    }
+}
 
 android {
     compileSdkVersion 25
@@ -29,4 +44,47 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:cardview-v7:25.3.1'
     testCompile 'junit:junit:4.12'
+}
+
+ext {
+    bintrayRepo = 'cfalertdialog'
+    bintrayName = 'cfalertdialog'
+
+    publishedGroupId = 'com.crowdfireapp.cfalertdialog'
+    libraryName = 'cfalertdialog'
+    artifact = 'cfalertdialog'
+
+    libraryDescription = 'A customisable alert dialog for Android'
+
+    siteUrl = 'https://github.com/Codigami/CFAlertDialog'
+    gitUrl = 'https://github.com/Codigami/CFAlertDialog.git'
+
+    libraryVersion = '0.9.0'
+
+    developerId = properties.getProperty("bintray.developer.id")
+    developerName = properties.getProperty("bintray.developer.name")
+    developerEmail = properties.getProperty("bintray.developer.email")
+    userOrg = 'crowdfireapp'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+    pkg {
+        repo = 'cfalertdialog'
+        name = 'cfalertdialog'
+        userOrg = 'crowdfireapp'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/Codigami/CFAlertDialog.git'
+        version{
+            name = '0.9.0'
+            desc = 'Development release v0.9'
+            released  = new Date()
+            vcsTag = '0.9.0-beta'
+        }
+    }
 }
