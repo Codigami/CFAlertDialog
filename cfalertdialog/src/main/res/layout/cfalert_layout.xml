@@ -38,7 +38,9 @@
                     android:orientation="vertical" />
 
                 <!-- Alert Content -->
-                <LinearLayout android:layout_width="match_parent"
+                <LinearLayout
+                    android:id="@+id/alert_body_container"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/cfdialog_padding"
                     android:divider="@drawable/cfdialog_content_spacing_vertical"

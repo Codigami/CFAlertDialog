@@ -73,7 +73,7 @@ public class CFAlertDialog extends AppCompatDialog {
     private DialogParams params;
 
     private RelativeLayout cfDialogBackground;
-    private LinearLayout cfDialogHeaderLinearLayout, buttonContainerLinearLayout,
+    private LinearLayout cfDialogHeaderLinearLayout, cfDialogBodyContainer, buttonContainerLinearLayout,
             cfDialogFooterLinearLayout, iconTitleContainer, selectableItemsContainer;
     private CardView dialogCardView;
     private TextView dialogTitleTextView, dialogMessageTextView;
@@ -156,6 +156,7 @@ public class CFAlertDialog extends AppCompatDialog {
         cfDialogBackground = ((RelativeLayout) view.findViewById(R.id.cfdialog_background));
         dialogCardView = (CardView) view.findViewById(R.id.cfdialog_cardview);
         cfDialogScrollView = (ScrollView) view.findViewById(R.id.cfdialog_scrollview);
+        cfDialogBodyContainer = (LinearLayout) view.findViewById(R.id.alert_body_container);
         cfDialogHeaderLinearLayout = (LinearLayout) view.findViewById(R.id.alert_header_container);
         cfDialogHeaderLinearLayout.requestLayout();
         cfDialogHeaderLinearLayout.setVisibility(View.GONE);
@@ -217,6 +218,22 @@ public class CFAlertDialog extends AppCompatDialog {
         // Text gravity
         setTextGravity(params.textGravity);
 
+        // Selection items
+        if (params.items != null && params.items.length > 0) {
+            setItems(params.items, params.onItemClickListener);
+        } else if (params.multiSelectItems != null && params.multiSelectItems.length > 0) {
+            setMultiSelectItems(params.multiSelectItems, params.multiSelectedItems, params.onMultiChoiceClickListener);
+        } else if (params.singleSelectItems != null && params.singleSelectItems.length > 0) {
+            setSingleSelectItems(params.singleSelectItems, params.singleSelectedItem, params.onSingleItemClickListener);
+        } else {
+            selectableItemsContainer.removeAllViews();
+        }
+
+        // Hide Body container if there is no content in the body
+        if (params.isDialogBodyEmpty()) {
+            cfDialogBodyContainer.setVisibility(View.GONE);
+        }
+
         // Image/Header
         if (params.contentImageDrawableId != -1) {
             setContentImageDrawable(params.contentImageDrawableId);
@@ -233,17 +250,6 @@ public class CFAlertDialog extends AppCompatDialog {
             setFooterView(params.footerView);
         } else if (params.footerViewId != -1) {
             setFooterView(params.footerViewId);
-        }
-
-        // Selection items
-        if (params.items != null && params.items.length > 0) {
-            setItems(params.items, params.onItemClickListener);
-        } else if (params.multiSelectItems != null && params.multiSelectItems.length > 0) {
-            setMultiSelectItems(params.multiSelectItems, params.multiSelectedItems, params.onMultiChoiceClickListener);
-        } else if (params.singleSelectItems != null && params.singleSelectItems.length > 0) {
-            setSingleSelectItems(params.singleSelectItems, params.singleSelectedItem, params.onSingleItemClickListener);
-        } else {
-            selectableItemsContainer.removeAllViews();
         }
 
         // Card
@@ -970,6 +976,18 @@ public class CFAlertDialog extends AppCompatDialog {
         private OnClickListener onItemClickListener;
         private OnClickListener onSingleItemClickListener;
         private OnMultiChoiceClickListener onMultiChoiceClickListener;
+
+        public boolean isDialogBodyEmpty() {
+            if (!TextUtils.isEmpty(title)) return false;
+            if (!TextUtils.isEmpty(message)) return false;
+            if (buttons != null && buttons.size() > 0) return false;
+            if (items != null && items.length > 0) return false;
+            if (singleSelectItems != null && singleSelectItems.length != 0) return false;
+            if (multiSelectItems != null && multiSelectItems.length != 0) return false;
+
+            // The dialog body is empty if it doesn't contain any of the above items
+            return true;
+        }
     }
 
     private static class CFAlertActionButton {
