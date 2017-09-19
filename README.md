@@ -27,31 +27,17 @@ compile 'com.crowdfireapp.cfalertdialog:cfalertdialog:1.0.0'
 The above shown alert types can easily be implemented using the code snippet given below by some small tweaks
 ```android
         // Create Alert using Builder
-        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this);
+                CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this)
+                        .setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT)
+                        .setTitle("You've hit the limit")
+                        .setMessage("Looks like you've hit your usage limit. Upgrade to our paid plan to continue without any limits.")
+                        .addButton("UPGRADE", -1, -1, CFAlertActionStyle.POSITIVE, CFAlertActionAlignment.END, (dialog, which) -> {
+                            Toast.makeText(BaseActivity.this, "Upgrade tapped", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        })
         
-        // Dialog style
-        builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT);
-        
-        // Title
-        builder.setTitle("You've hit the limit");
-        
-        // Message
-        builder.setMessage("Looks like you've hit your usage limit. Upgrade to our paid plan to continue without any limits.");
-        
-        // Add UPGRADE button
-        builder.addButton("UPGRADE", -1, -1, CFAlertActionStyle.POSITIVE, CFAlertActionAlignment.END, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(StartActivity.this, "Upgrade tapped", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-            }
-        });
-        
-        // Add header
-        builder.setHeaderView(R.layout.dialog_header_layout);
-
-        // Show the alert
-        builder.show();
+                // Show the alert
+                builder.show();
 ```
 
 ## Customisations :
@@ -94,10 +80,22 @@ This determines whether the Alert dialog is dismissed when user taps on the back
     <img src="https://github.com/Codigami/CFAlertViewController/blob/develop/Images/Alert%20With%20Header.png" style="width: 100%" />
 </p>
 
+```java
+builder.setHeaderView(R.layout.dialog_header_layout);
+OR
+builder.setHeaderView(headerView);
+```
+
 2) Some examples where you can make the use of footer in alert
 <p>
     <img src="https://github.com/Codigami/CFAlertViewController/blob/develop/Images/Alert%20With%20Footer.png" style="width: 100%" />
 </p>
+
+```java
+builder.setFooterView(R.layout.dialog_footer_layout);
+OR
+builder.setFooterView(footerView);
+```
 
 ##### Dismiss Callback
 You may set a callback when dialog is dismissed with the native `setOnDismissListener` on the alert object.
