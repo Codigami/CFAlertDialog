@@ -776,18 +776,21 @@ public class CFAlertDialog extends AppCompatDialog {
         int horizontalMargin = margin;
         int topMargin = margin;
         int bottomMargin = margin;
-
-        int width = DeviceUtil.getScreenWidth(getContext()) - (2 * horizontalMargin);
-        width = Math.min(width, (int) getContext().getResources().getDimension(R.dimen.cfdialog_maxwidth));
-        cardContainerLayoutParams.width = width;
+        int maxWidth = (int) getContext().getResources().getDimension(R.dimen.cfdialog_maxwidth);
+        int screenWidth = DeviceUtil.getScreenWidth(getContext());
 
         // Special layout properties to be added here.
         switch (params.dialogStyle) {
             case NOTIFICATION:
                 horizontalMargin = 0;
                 topMargin = 0;
+                maxWidth = screenWidth;
                 break;
         }
+
+        int width = screenWidth - (2 * horizontalMargin);
+        width = Math.min(width, maxWidth);
+        cardContainerLayoutParams.width = width;
 
         cardContainerLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
         cardContainerLayoutParams.setMargins(horizontalMargin, topMargin, horizontalMargin, bottomMargin);
