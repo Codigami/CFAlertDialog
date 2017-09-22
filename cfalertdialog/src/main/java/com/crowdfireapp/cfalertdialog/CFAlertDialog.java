@@ -348,6 +348,12 @@ public class CFAlertDialog extends AppCompatDialog {
         }
     }
 
+    public void setCornerRadius(float radius) {
+        this.params.dialogCornerRadius = radius;
+
+        dialogCardView.setRadius(getCornerRadius());
+    }
+
     @Override
     public void setTitle(CharSequence title) {
         if (TextUtils.isEmpty(title)) {
@@ -833,6 +839,9 @@ public class CFAlertDialog extends AppCompatDialog {
                 break;
         }
 
+        // Use the corner radius from params if provided.
+        if (params.dialogCornerRadius != 1) cornerRadius = params.dialogCornerRadius;
+
         return cornerRadius;
     }
 
@@ -870,6 +879,11 @@ public class CFAlertDialog extends AppCompatDialog {
 
         public Builder setDialogBackgroundColor(@ColorInt int backgroundColor) {
             this.params.dialogBackgroundColor = backgroundColor;
+            return this;
+        }
+
+        public Builder setCornerRadius(float cornerRadius) {
+            this.params.dialogCornerRadius = cornerRadius;
             return this;
         }
 
@@ -1025,6 +1039,7 @@ public class CFAlertDialog extends AppCompatDialog {
         private Context context;
         private @ColorInt int backgroundColor = DEFAULT_BACKGROUND_COLOR;
         private @ColorInt int dialogBackgroundColor = DEFAULT_DIALOG_BACKGROUND_COLOR;
+        private float dialogCornerRadius = -1;
         private CharSequence message, title;
         private @ColorInt int textColor = -1;
         private int theme = R.style.CFDialog,

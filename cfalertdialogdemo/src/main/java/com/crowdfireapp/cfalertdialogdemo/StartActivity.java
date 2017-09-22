@@ -123,7 +123,6 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
             builder.setBackgroundColor(alertBGColor);
         }
 
-
         // Title and message
         builder.setTitle(titleEditText.getText());
         builder.setMessage(messageEditText.getText());
