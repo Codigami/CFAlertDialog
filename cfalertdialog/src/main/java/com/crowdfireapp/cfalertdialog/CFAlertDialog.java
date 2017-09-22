@@ -840,7 +840,7 @@ public class CFAlertDialog extends AppCompatDialog {
         }
 
         // Use the corner radius from params if provided.
-        if (params.dialogCornerRadius != 1) cornerRadius = params.dialogCornerRadius;
+        if (params.dialogCornerRadius != -1) cornerRadius = params.dialogCornerRadius;
 
         return cornerRadius;
     }
