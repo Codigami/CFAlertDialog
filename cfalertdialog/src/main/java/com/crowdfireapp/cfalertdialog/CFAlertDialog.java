@@ -152,14 +152,15 @@ public class CFAlertDialog extends AppCompatDialog {
 
         dialogCardView = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.cfalert_card_layout, null);
 
-        dialogCardView.setBackgroundColor(params.dialogBackgroundColor);
+        bindCardSubviews();
+
+        cfDialogScrollView.setBackgroundColor(params.dialogBackgroundColor);
 
         // Adjust the dialog width
         adjustDialogLayoutParams();
 
         cfDialogContainer.addView(dialogCardView);
 
-        bindCardSubviews();
         populateCardView();
         setupCardBehaviour();
     }

@@ -5,6 +5,7 @@
     android:id="@+id/cfdialog_cardview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipChildren="true"
     android:animateLayoutChanges="true">
 
     <ScrollView
