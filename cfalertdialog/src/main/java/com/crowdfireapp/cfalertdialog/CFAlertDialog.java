@@ -581,8 +581,6 @@ public class CFAlertDialog extends AppCompatDialog {
 
         int padding = ((int) buttonView.getResources().getDimension(R.dimen.cfdialog_button_padding));
         buttonView.setPadding(padding, padding, padding, padding);
-
-        buttonView.setLayoutParams(buttonParams);
     }
 
     private void setButtonColors(CFPushButton button, CFAlertActionButton actionButton) {
@@ -1127,7 +1125,7 @@ public class CFAlertDialog extends AppCompatDialog {
                     textColor = R.color.cfdialog_button_white_text_color;
                     break;
                 case DEFAULT:
-                    textColor = R.color.cfdialog_default_button_text_color;
+                    textColor = R.color.cfdialog_button_black_text_color;
                     break;
             }
             return textColor;
