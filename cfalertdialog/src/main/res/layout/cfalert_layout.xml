@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cfdialog_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,121 +8,10 @@
     android:clickable="true"
     android:gravity="center">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cfdialog_cardview"
-        style="@style/CFDialog.Card"
-        android:animateLayoutChanges="true"
-        app:cardCornerRadius="@dimen/cfdialog_card_corner_radius"
-        app:cardElevation="@dimen/cfdialog_card_elevation">
+    <RelativeLayout
+        android:id="@+id/cfdialog_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"/>
 
-        <ScrollView
-            android:id="@+id/cfdialog_scrollview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:animateLayoutChanges="true">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:animateLayoutChanges="true"
-                android:orientation="vertical">
-
-                <!-- Header view container -->
-                <LinearLayout
-                    android:id="@+id/alert_header_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:animateLayoutChanges="true"
-                    android:orientation="vertical" />
-
-                <!-- Alert Content -->
-                <LinearLayout
-                    android:id="@+id/alert_body_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/cfdialog_padding"
-                    android:divider="@drawable/cfdialog_content_spacing_vertical"
-                    android:orientation="vertical"
-                    android:showDividers="middle">
-
-                    <!--Title and icon-->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:id="@+id/icon_title_container"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:animateLayoutChanges="true"
-                            android:divider="@drawable/cfdialog_content_spacing_horizontal"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:showDividers="middle">
-
-                            <ImageView
-                                android:id="@+id/cfdialog_icon_imageview"
-                                style="@style/CFDialog.IconImage"
-                                android:visibility="visible"/>
-
-                            <TextView
-                                android:id="@+id/tv_dialog_title"
-                                style="@style/CFDialog.Title"
-                                tools:text="This is your title"/>
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <!--Message-->
-                    <TextView
-                        android:id="@+id/tv_dialog_content_desc"
-                        style="@style/CFDialog.Message"
-                        android:animateLayoutChanges="true"
-                        tools:text="This is your description" />
-
-                    <!--Selection items-->
-                    <LinearLayout
-                        android:id="@+id/alert_selection_items_container"
-                        style="@style/CFDialog.SelectionContainer"
-                        android:animateLayoutChanges="true"
-                        android:orientation="vertical"
-                        android:visibility="gone"
-                        tools:visibility="visible">
-
-                        <include layout="@layout/cfdialog_selectable_item_layout" />
-
-                        <include layout="@layout/cfdialog_multi_select_item_layout" />
-
-                        <include layout="@layout/cfdialog_single_select_item_layout" />
-
-                    </LinearLayout>
-
-                    <!--buttons-->
-                    <LinearLayout
-                        android:id="@+id/alert_buttons_container"
-                        style="@style/CFDialog.ButtonsContainer"
-                        android:animateLayoutChanges="true"
-                        android:divider="@drawable/cfdialog_buttons_spacing"
-                        android:orientation="vertical"
-                        android:showDividers="middle"
-                        android:visibility="gone"
-                        tools:visibility="visible">
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <!-- Footer view container -->
-                <LinearLayout
-                    android:id="@+id/alert_footer_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:animateLayoutChanges="true"
-                    android:orientation="vertical" />
-            </LinearLayout>
-
-        </ScrollView>
-
-    </android.support.v7.widget.CardView>
 </RelativeLayout>

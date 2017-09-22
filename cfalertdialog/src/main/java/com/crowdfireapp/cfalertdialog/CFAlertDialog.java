@@ -48,7 +48,7 @@ import java.util.List;
 
 public class CFAlertDialog extends AppCompatDialog {
 
-    // region ENUMS
+    // region Enums
 
     public enum CFAlertStyle {
         NOTIFICATION,
@@ -70,9 +70,10 @@ public class CFAlertDialog extends AppCompatDialog {
     }
     // endregion
 
+    // region Properties
     private DialogParams params;
 
-    private RelativeLayout cfDialogBackground;
+    private RelativeLayout cfDialogBackground, cfDialogContainer;
     private LinearLayout cfDialogHeaderLinearLayout, cfDialogBodyContainer, buttonContainerLinearLayout,
             cfDialogFooterLinearLayout, iconTitleContainer, selectableItemsContainer;
     private CardView dialogCardView;
@@ -82,6 +83,9 @@ public class CFAlertDialog extends AppCompatDialog {
 
     private static final int DEFAULT_BACKGROUND_COLOR = Color.parseColor("#B3000000");
 
+    // endregion
+
+    // region Setup methods
     private CFAlertDialog(Context context) {
         super(context, R.style.CFDialog);
     }
@@ -101,75 +105,27 @@ public class CFAlertDialog extends AppCompatDialog {
         setContentView(view);
 
         // Setup the dialog
-        bindSubviews(view);
-        populateDialog(params);
+        setupSubviews(view);
 
         // Set the size to adjust when keyboard shown
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE|WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         // Disable the view initially
         setEnabled(false);
     }
 
-    public void setCFDialogBackgroundColor(int color, boolean animated){
+    private void setupSubviews(View view) {
 
-        if (animated) {
-            int colorFrom = ((ColorDrawable)cfDialogBackground.getBackground()).getColor();
-            int colorTo = color;
-            ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
-            colorAnimation.setDuration(300); // milliseconds
-            colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-
-                @Override
-                public void onAnimationUpdate(ValueAnimator animator) {
-                    cfDialogBackground.setBackgroundColor((int) animator.getAnimatedValue());
-                }
-
-            });
-            colorAnimation.start();
-        }
-        else {
-            cfDialogBackground.setBackgroundColor(color);
-        }
-    }
-
-    @Override
-    public void show() {
-        super.show();
-
-        // Perform the present animation
-        startPresentAnimation();
-    }
-
-    @Override
-    public void dismiss() {
-
-        // Disable the view when being dismissed
-        setEnabled(false);
-
-        // perform the dismiss animation
-        startDismissAnimation();
-
-    }
-
-    private void bindSubviews(View view) {
         cfDialogBackground = ((RelativeLayout) view.findViewById(R.id.cfdialog_background));
-        dialogCardView = (CardView) view.findViewById(R.id.cfdialog_cardview);
-        cfDialogScrollView = (ScrollView) view.findViewById(R.id.cfdialog_scrollview);
-        cfDialogBodyContainer = (LinearLayout) view.findViewById(R.id.alert_body_container);
-        cfDialogHeaderLinearLayout = (LinearLayout) view.findViewById(R.id.alert_header_container);
-        cfDialogHeaderLinearLayout.requestLayout();
-        cfDialogHeaderLinearLayout.setVisibility(View.GONE);
-        dialogTitleTextView = (TextView) view.findViewById(R.id.tv_dialog_title);
-        iconTitleContainer = (LinearLayout) view.findViewById(R.id.icon_title_container);
-        cfDialogIconImageView = (ImageView) view.findViewById(R.id.cfdialog_icon_imageview);
-        dialogMessageTextView = (TextView) view.findViewById(R.id.tv_dialog_content_desc);
-        buttonContainerLinearLayout = (LinearLayout) view.findViewById(R.id.alert_buttons_container);
-        cfDialogFooterLinearLayout = (LinearLayout) view.findViewById(R.id.alert_footer_container);
-        selectableItemsContainer = (LinearLayout) view.findViewById(R.id.alert_selection_items_container);
+        setupBackground();
+
+        cfDialogContainer = (RelativeLayout) view.findViewById(R.id.cfdialog_container);
+
+        // Card setup
+        createCardView();
     }
 
-    private void populateDialog(final DialogParams params) {
+    private void setupBackground() {
 
         // Background
         getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -187,6 +143,40 @@ public class CFAlertDialog extends AppCompatDialog {
             }
         });
 
+        // Dialog position
+        adjustBackgroundGravity();
+    }
+
+    private void createCardView() {
+
+        dialogCardView = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.cfalert_card_layout, null);
+
+        // Adjust the dialog width
+        adjustDialogLayoutParams();
+
+        cfDialogContainer.addView(dialogCardView);
+
+        bindCardSubviews();
+        populateCardView();
+        setupCardBehaviour();
+    }
+
+    private void bindCardSubviews() {
+        cfDialogScrollView = (ScrollView) dialogCardView.findViewById(R.id.cfdialog_scrollview);
+        cfDialogBodyContainer = (LinearLayout) dialogCardView.findViewById(R.id.alert_body_container);
+        cfDialogHeaderLinearLayout = (LinearLayout) dialogCardView.findViewById(R.id.alert_header_container);
+        cfDialogHeaderLinearLayout.requestLayout();
+        cfDialogHeaderLinearLayout.setVisibility(View.GONE);
+        dialogTitleTextView = (TextView) dialogCardView.findViewById(R.id.tv_dialog_title);
+        iconTitleContainer = (LinearLayout) dialogCardView.findViewById(R.id.icon_title_container);
+        cfDialogIconImageView = (ImageView) dialogCardView.findViewById(R.id.cfdialog_icon_imageview);
+        dialogMessageTextView = (TextView) dialogCardView.findViewById(R.id.tv_dialog_content_desc);
+        buttonContainerLinearLayout = (LinearLayout) dialogCardView.findViewById(R.id.alert_buttons_container);
+        cfDialogFooterLinearLayout = (LinearLayout) dialogCardView.findViewById(R.id.alert_footer_container);
+        selectableItemsContainer = (LinearLayout) dialogCardView.findViewById(R.id.alert_selection_items_container);
+    }
+
+    private void populateCardView() {
         // Icon
         if (params.iconDrawableId != -1) {
             setIcon(params.iconDrawableId);
@@ -211,9 +201,6 @@ public class CFAlertDialog extends AppCompatDialog {
 
         // Buttons
         populateButtons(params.context, params.buttons);
-
-        // Dialog position
-        setDialogStyle(params.dialogStyle);
 
         // Text gravity
         setTextGravity(params.textGravity);
@@ -251,23 +238,14 @@ public class CFAlertDialog extends AppCompatDialog {
         } else if (params.footerViewId != -1) {
             setFooterView(params.footerViewId);
         }
-
-        // Card
-        setupDialogCardLayout();
     }
 
-    private void setupDialogCardLayout() {
+    private void setupCardBehaviour() {
 
-        // Adjust the dialog width
-        dialogCardView.setLayoutParams(getLayoutParams(params.dialogStyle));
-
-        dialogCardView.setRadius(getCornerRadius(params.dialogStyle));
-
-        // Additional card behaviour for specific alert types
+        // Style specific behaviour
         switch (params.dialogStyle) {
 
             case NOTIFICATION:
-
                 // Swipe to dismiss feature for notification type alerts
                 SwipeToHideViewListener cardSwipeListener = new SwipeToHideViewListener(dialogCardView, params.cancelable, new SwipeToHideViewListener.SwipeToHideCompletionListener() {
                     @Override
@@ -276,68 +254,35 @@ public class CFAlertDialog extends AppCompatDialog {
                     }
                 });
                 cfDialogScrollView.setOnTouchListener(cardSwipeListener);
-
                 break;
 
             case ALERT:
-
                 // Behaviour specific to Alerts
                 break;
 
             case BOTTOM_SHEET:
-
                 // Behaviour specific to Bottom sheets
                 break;
         }
     }
+    // endregion
 
-    private void startPresentAnimation() {
-        Animation presentAnimation = getPresentAnimation(params.dialogStyle);
-        presentAnimation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
+    @Override
+    public void show() {
+        super.show();
 
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                alertPresented();
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-        dialogCardView.startAnimation(presentAnimation);
+        // Perform the present animation
+        startPresentAnimation();
     }
 
-    private void startDismissAnimation() {
-        // Perform the dismiss animation and after that dismiss the dialog
-        Animation dismissAnimation = getDismissAnimation(params.dialogStyle);
-        dismissAnimation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
+    @Override
+    public void dismiss() {
 
-            }
+        // Disable the view when being dismissed
+        setEnabled(false);
 
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                Handler handler = new Handler();
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        CFAlertDialog.super.dismiss();
-                    }
-                });
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-        dialogCardView.startAnimation(dismissAnimation);
+        // perform the dismiss animation
+        startDismissAnimation();
 
     }
 
@@ -348,12 +293,34 @@ public class CFAlertDialog extends AppCompatDialog {
 
     // region - Setters
 
+    private void setDialogParams(DialogParams params) {
+        this.params = params;
+    }
+
     public void setEnabled(boolean enabled) {
         setViewEnabled(cfDialogBackground, enabled);
     }
 
-    private void setDialogParams(DialogParams params) {
-        this.params = params;
+    public void setBackgroundColor(int color, boolean animated){
+
+        if (animated) {
+            int colorFrom = ((ColorDrawable)cfDialogBackground.getBackground()).getColor();
+            int colorTo = color;
+            ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+            colorAnimation.setDuration(300); // milliseconds
+            colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+                @Override
+                public void onAnimationUpdate(ValueAnimator animator) {
+                    cfDialogBackground.setBackgroundColor((int) animator.getAnimatedValue());
+                }
+
+            });
+            colorAnimation.start();
+        }
+        else {
+            cfDialogBackground.setBackgroundColor(color);
+        }
     }
 
     @Override
@@ -400,17 +367,10 @@ public class CFAlertDialog extends AppCompatDialog {
      * @param dialogStyle
      */
     public void setDialogStyle(CFAlertStyle dialogStyle) {
-        switch (dialogStyle) {
-            case NOTIFICATION:
-                cfDialogBackground.setGravity(Gravity.TOP);
-                break;
-            case ALERT:
-                cfDialogBackground.setGravity(Gravity.CENTER_VERTICAL);
-                break;
-            case BOTTOM_SHEET:
-                cfDialogBackground.setGravity(Gravity.BOTTOM);
-                break;
-        }
+        params.dialogStyle = dialogStyle;
+
+        adjustBackgroundGravity();
+        adjustDialogLayoutParams();
     }
 
     /**
@@ -710,6 +670,56 @@ public class CFAlertDialog extends AppCompatDialog {
 
     // region Animation helper methods
 
+    private void startPresentAnimation() {
+        Animation presentAnimation = getPresentAnimation(params.dialogStyle);
+        presentAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                alertPresented();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        dialogCardView.startAnimation(presentAnimation);
+    }
+
+    private void startDismissAnimation() {
+        // Perform the dismiss animation and after that dismiss the dialog
+        Animation dismissAnimation = getDismissAnimation(params.dialogStyle);
+        dismissAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                Handler handler = new Handler();
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        CFAlertDialog.super.dismiss();
+                    }
+                });
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        dialogCardView.startAnimation(dismissAnimation);
+
+    }
+
     private Animation getPresentAnimation(CFAlertStyle style) {
         switch (style) {
             case NOTIFICATION:
@@ -738,37 +748,58 @@ public class CFAlertDialog extends AppCompatDialog {
 
     // endregion
 
-    // region - Layout helper methods
+    // region Layout helper methods
 
-    private RelativeLayout.LayoutParams getLayoutParams(CFAlertStyle style) {
+    private void adjustBackgroundGravity() {
+        switch (params.dialogStyle) {
+            case NOTIFICATION:
+                cfDialogBackground.setGravity(Gravity.TOP);
+                break;
+            case ALERT:
+                cfDialogBackground.setGravity(Gravity.CENTER_VERTICAL);
+                break;
+            case BOTTOM_SHEET:
+                cfDialogBackground.setGravity(Gravity.BOTTOM);
+                break;
+        }
+    }
+
+    private void adjustDialogLayoutParams() {
+
+        // Corner radius
+        dialogCardView.setRadius(getCornerRadius());
+
+        // Layout params
+        RelativeLayout.LayoutParams cardContainerLayoutParams = (RelativeLayout.LayoutParams) cfDialogContainer.getLayoutParams();
         int margin = (int)getContext().getResources().getDimension(R.dimen.cfdialog_outer_margin);
 
         int horizontalMargin = margin;
         int topMargin = margin;
         int bottomMargin = margin;
 
+        int width = DeviceUtil.getScreenWidth(getContext()) - (2 * horizontalMargin);
+        width = Math.min(width, (int) getContext().getResources().getDimension(R.dimen.cfdialog_maxwidth));
+        cardContainerLayoutParams.width = width;
+
         // Special layout properties to be added here.
-        switch (style) {
+        switch (params.dialogStyle) {
             case NOTIFICATION:
                 horizontalMargin = 0;
                 topMargin = 0;
                 break;
         }
 
-        int width = DeviceUtil.getScreenWidth(getContext()) - (2 * horizontalMargin);
-        width = Math.min(width, (int) getContext().getResources().getDimension(R.dimen.cfdialog_maxwidth));
-        RelativeLayout.LayoutParams cardViewLayoutParams = new RelativeLayout.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT);
-        cardViewLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
-        cardViewLayoutParams.setMargins(horizontalMargin, topMargin, horizontalMargin, bottomMargin);
+        cardContainerLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+        cardContainerLayoutParams.setMargins(horizontalMargin, topMargin, horizontalMargin, bottomMargin);
 
-        return cardViewLayoutParams;
+        cfDialogContainer.setLayoutParams(cardContainerLayoutParams);
     }
 
-    private float getCornerRadius(CFAlertStyle style){
+    private float getCornerRadius(){
         float cornerRadius = getContext().getResources().getDimension(R.dimen.cfdialog_card_corner_radius);
 
         // Special layout properties to be added here.
-        switch (style) {
+        switch (params.dialogStyle) {
             case NOTIFICATION:
                 cornerRadius = 0;
                 break;

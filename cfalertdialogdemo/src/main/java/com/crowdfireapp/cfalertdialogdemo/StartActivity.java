@@ -3,7 +3,6 @@ package com.crowdfireapp.cfalertdialogdemo;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewCompat;
@@ -326,7 +325,7 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
 
     @Override
     public void onBackgroundColorChanged(int backgroundColor) {
-        alertDialog.setCFDialogBackgroundColor(backgroundColor, true);
+        alertDialog.setBackgroundColor(backgroundColor, true);
     }
 
     @Override
