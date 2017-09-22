@@ -7,6 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/footer_or_label_size_half"
         android:background="@color/footer_bg"
         android:animateLayoutChanges="true"
         android:orientation="vertical"
@@ -133,7 +134,7 @@
     <TextView
         android:layout_width="@dimen/footer_or_label_size"
         android:layout_height="@dimen/footer_or_label_size"
-        android:layout_marginTop="@dimen/footer_or_label_top_margin"
+        android:layout_marginTop="0dp"
         android:textSize="14sp"
         android:textColor="@color/footer_or_text_color"
         android:layout_centerHorizontal="true"

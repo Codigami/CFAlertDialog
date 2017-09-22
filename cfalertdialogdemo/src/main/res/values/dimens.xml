@@ -6,5 +6,4 @@
 
     <dimen name="footer_or_label_size">34dp</dimen>
     <dimen name="footer_or_label_size_half">17dp</dimen>
-    <dimen name="footer_or_label_top_margin">-17dp</dimen>
 </resources>
