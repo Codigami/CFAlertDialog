@@ -19,6 +19,7 @@ import com.crowdfireapp.cfalertdialog.CFAlertDialog;
 import com.crowdfireapp.cfalertdialogdemo.views.ColorSelectionView;
 import com.crowdfireapp.cfalertdialogdemo.views.SampleFooterView;
 
+import static android.content.DialogInterface.BUTTON_NEUTRAL;
 import static com.crowdfireapp.cfalertdialog.CFAlertDialog.CFAlertActionAlignment;
 import static com.crowdfireapp.cfalertdialog.CFAlertDialog.CFAlertActionStyle;
 import static com.crowdfireapp.cfalertdialog.CFAlertDialog.OnClickListener;
@@ -56,6 +57,7 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
             @Override
             public void onClick(View view) {
                 showCFDialog();
+                //showSampleDialog();
             }
         });
 
@@ -259,6 +261,21 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
                 onDialogDismiss();
             }
         });
+    }
+
+    private void showSampleDialog() {
+        new CFAlertDialog.Builder(this)
+                .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
+                .setTitle("You've hit the limit")
+                .setMessage("Looks like you've hit your usage limit. Upgrade to our paid plan to continue without any limits.")
+                .addButton("UPGRADE", -1, -1, CFAlertActionStyle.POSITIVE, CFAlertActionAlignment.END, new OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(StartActivity.this, "Upgrade tapped", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                })
+                .show();
     }
 
     private CFAlertActionAlignment getButtonGravity() {
