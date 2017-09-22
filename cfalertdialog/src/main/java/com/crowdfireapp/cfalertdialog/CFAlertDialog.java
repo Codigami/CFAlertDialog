@@ -82,6 +82,7 @@ public class CFAlertDialog extends AppCompatDialog {
     private ScrollView cfDialogScrollView;
 
     private static final int DEFAULT_BACKGROUND_COLOR = Color.parseColor("#B3000000");
+    private static final int DEFAULT_DIALOG_BACKGROUND_COLOR = Color.parseColor("#FFFFFF");
 
     // endregion
 
@@ -150,6 +151,8 @@ public class CFAlertDialog extends AppCompatDialog {
     private void createCardView() {
 
         dialogCardView = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.cfalert_card_layout, null);
+
+        dialogCardView.setBackgroundColor(params.dialogBackgroundColor);
 
         // Adjust the dialog width
         adjustDialogLayoutParams();
@@ -320,6 +323,27 @@ public class CFAlertDialog extends AppCompatDialog {
         }
         else {
             cfDialogBackground.setBackgroundColor(color);
+        }
+    }
+
+    public void setDialogBackgroundColor(int color, boolean animated) {
+        if (animated) {
+            int colorFrom = ((ColorDrawable)dialogCardView.getBackground()).getColor();
+            int colorTo = color;
+            ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+            colorAnimation.setDuration(300); // milliseconds
+            colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+                @Override
+                public void onAnimationUpdate(ValueAnimator animator) {
+                    dialogCardView.setBackgroundColor((int) animator.getAnimatedValue());
+                }
+
+            });
+            colorAnimation.start();
+        }
+        else {
+            dialogCardView.setBackgroundColor(color);
         }
     }
 
@@ -838,6 +862,16 @@ public class CFAlertDialog extends AppCompatDialog {
             return this;
         }
 
+        public Builder setDialogBackgroundResource(@ColorRes int backgroundResource) {
+            this.params.dialogBackgroundColor = ResourcesCompat.getColor(this.params.context.getResources(), backgroundResource, null);
+            return this;
+        }
+
+        public Builder setDialogBackgroundColor(@ColorInt int backgroundColor) {
+            this.params.dialogBackgroundColor = backgroundColor;
+            return this;
+        }
+
         public Builder setMessage(CharSequence message) {
             this.params.message = message;
             return this;
@@ -989,6 +1023,7 @@ public class CFAlertDialog extends AppCompatDialog {
 
         private Context context;
         private @ColorInt int backgroundColor = DEFAULT_BACKGROUND_COLOR;
+        private @ColorInt int dialogBackgroundColor = DEFAULT_DIALOG_BACKGROUND_COLOR;
         private CharSequence message, title;
         private @ColorInt int textColor = -1;
         private int theme = R.style.CFDialog,
