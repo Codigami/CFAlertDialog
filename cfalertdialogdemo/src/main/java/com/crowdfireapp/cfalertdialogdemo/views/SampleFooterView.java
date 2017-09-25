@@ -105,7 +105,7 @@ public class SampleFooterView extends LinearLayout {
 
     private void changeBackgroundColor() {
         Random rnd = new Random();
-        int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+        int color = Color.argb(rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
         ((GradientDrawable) backgroundColorPreview.getBackground()).setColor(color);
         listener.onBackgroundColorChanged(color);
     }
