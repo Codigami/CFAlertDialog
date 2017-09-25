@@ -3,13 +3,16 @@
 
     <dimen name="cfdialog_maxwidth">400dp</dimen>
 
-    <dimen name="cfdialog_outer_margin">20dp</dimen>
+    <dimen name="cfdialog_outer_margin">10dp</dimen>
     <dimen name="cfdialog_internal_spacing">10dp</dimen>
     <dimen name="cfdialog_internal_spacing_half">5dp</dimen>
     <dimen name="cfdialog_padding">20dp</dimen>
     <dimen name="cfdialog_padding_half">10dp</dimen>
     <dimen name="cfdialog_header_bottom_margin_half">10dp</dimen>
     <dimen name="cfdialog_footer_top_margin_half">10dp</dimen>
+    
+    <dimen name="cfdialog_card_corner_radius">4dp</dimen>
+    <dimen name="cfdialog_card_elevation">4dp</dimen>
 
     <dimen name="cfdialog_imageview_top_margin">10dp</dimen>
     <dimen name="cfdialog_icon_dimen">32dp</dimen>

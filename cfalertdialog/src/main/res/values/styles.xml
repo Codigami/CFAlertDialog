@@ -3,30 +3,26 @@
 
     <style name="CFDialog" parent="Theme.AppCompat.Light.Dialog">
         <item name="windowNoTitle">true</item>
-        <item name="android:windowAnimationStyle">@style/CFDialog.AnimationCenter</item>
+        <item name="android:windowAnimationStyle">@style/CFDialog.Animation</item>
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:windowIsFloating">false</item>
         <item name="android:backgroundDimAmount">0.0</item>
     </style>
 
-    <style name="CFDialog.AnimationTop">
-        <item name="android:windowEnterAnimation">@anim/dialog_present_top</item>
-        <item name="android:windowExitAnimation">@anim/dialog_dismiss_top</item>
+    <style name="CFDialog.Card" parent="CardView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:clipChildren">true</item>
     </style>
 
-    <style name="CFDialog.AnimationCenter">
-        <item name="android:windowEnterAnimation">@anim/dialog_present_center</item>
-        <item name="android:windowExitAnimation">@anim/dialog_dismiss_center</item>
-    </style>
-
-    <style name="CFDialog.AnimationBottom">
-        <item name="android:windowEnterAnimation">@anim/dialog_present_bottom</item>
-        <item name="android:windowExitAnimation">@anim/dialog_dismiss_bottom</item>
+    <style name="CFDialog.Animation">
+        <item name="android:windowEnterAnimation">@anim/alert_present</item>
+        <item name="android:windowExitAnimation">@anim/alert_dismiss</item>
     </style>
 
     <style name="CFDialog.Title">
         <item name="android:textSize">@dimen/cfdialog_title_font_size</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/cfdialog_title_font_color</item>
         <item name="android:fontFamily" tools:targetApi="16">sans-serif-medium</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -35,15 +31,21 @@
 
     <style name="CFDialog.Message">
         <item name="android:textSize">@dimen/cfdialog_description_font_size</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/cfdialog_desc_font_color</item>
         <item name="android:fontFamily" tools:targetApi="16">sans-serif-medium</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">left</item>
-        <item name="android:layout_marginLeft">@dimen/cfdialog_padding</item>
-        <item name="android:layout_marginTop">@dimen/cfdialog_padding_half</item>
-        <item name="android:layout_marginRight">@dimen/cfdialog_padding</item>
-        <item name="android:layout_marginBottom">@dimen/cfdialog_padding_half</item>
+    </style>
+
+    <style name="CFDialog.SelectionContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="CFDialog.ButtonsContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
 
     <style name="CFDialog.ContentImageView">
@@ -71,15 +73,12 @@
     <style name="CFDialog.IconImage">
         <item name="android:layout_width">@dimen/cfdialog_icon_dimen</item>
         <item name="android:layout_height">@dimen/cfdialog_icon_dimen</item>
-        <item name="android:layout_marginRight">10dp</item>
         <item name="android:scaleType">centerInside</item>
     </style>
 
     <style name="CFDialog.SelectableItemTextview">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginLeft">@dimen/cfdialog_padding</item>
-        <item name="android:layout_marginRight">@dimen/cfdialog_padding</item>
         <item name="android:layout_marginTop">@dimen/cfdialog_padding_half</item>
         <item name="android:layout_marginBottom">@dimen/cfdialog_padding_half</item>
         <item name="android:layout_centerVertical">true</item>
@@ -95,7 +94,6 @@
         <item name="android:layout_centerVertical">true</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:paddingLeft">@dimen/cfdialog_padding</item>
         <item name="android:clickable">true</item>
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
@@ -106,7 +104,6 @@
         <item name="android:layout_centerVertical">true</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:paddingLeft">@dimen/cfdialog_padding</item>
         <item name="android:paddingTop">@dimen/cfdialog_padding_half</item>
         <item name="android:paddingBottom">@dimen/cfdialog_padding_half</item>
         <item name="android:buttonTint" tools:targetApi="21">?android:attr/colorAccent</item>
