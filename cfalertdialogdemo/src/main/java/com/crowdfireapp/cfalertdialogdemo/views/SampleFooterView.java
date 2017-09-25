@@ -14,10 +14,6 @@ import com.crowdfireapp.cfalertdialogdemo.R;
 
 import java.util.Random;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 import static com.crowdfireapp.cfalertdialogdemo.views.SampleFooterView.ConfigurationState.COLLAPSED;
 import static com.crowdfireapp.cfalertdialogdemo.views.SampleFooterView.ConfigurationState.EXPANDED;
 import static com.crowdfireapp.cfalertdialogdemo.views.SampleFooterView.HeaderState.HIDDEN;
@@ -27,15 +23,11 @@ import static com.crowdfireapp.cfalertdialogdemo.views.SampleFooterView.HeaderSt
  * Created by rahul on 11/07/17.
  */
 
-public class SampleFooterView extends LinearLayout {
+public class SampleFooterView extends LinearLayout implements View.OnClickListener {
 
-    @BindView(R.id.background_color_preview)
     View backgroundColorPreview;
-    @BindView(R.id.header_toggle_button)
     CFPushButton headerToggleButton;
-    @BindView(R.id.configuration_container)
     LinearLayout configurationContainer;
-    @BindView(R.id.configuration_toggle_button)
     CFPushButton configurationToggleButton;
     FooterActionListener listener;
 
@@ -61,18 +53,20 @@ public class SampleFooterView extends LinearLayout {
         ((GradientDrawable) backgroundColorPreview.getBackground()).setColor(color);
     }
 
-    @OnClick({R.id.background_color_preview, R.id.header_toggle_button, R.id.configuration_toggle_button})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.background_color_preview:
-                changeBackgroundColor();
-                break;
-            case R.id.header_toggle_button:
-                toggleHeaderState((HeaderState) headerToggleButton.getTag());
-                break;
-            case R.id.configuration_toggle_button:
-                toggleState();
-                break;
+    private void setupSubviews() {
+        backgroundColorPreview = findViewById(R.id.background_color_preview);
+        backgroundColorPreview.setOnClickListener(this);
+        headerToggleButton = (CFPushButton) findViewById(R.id.header_toggle_button);
+        headerToggleButton.setOnClickListener(this);
+        configurationContainer = (LinearLayout) findViewById(R.id.configuration_container);
+        configurationToggleButton = (CFPushButton) findViewById(R.id.configuration_toggle_button);
+        configurationToggleButton.setOnClickListener(this);
+
+        collapseConfiguration();
+        if (listener.isHeaderVisible()) {
+            showHeader();
+        } else {
+            hideHeader();
         }
     }
 
@@ -112,17 +106,7 @@ public class SampleFooterView extends LinearLayout {
 
     private void init() {
         inflate(getContext(), R.layout.dialog_footer_layout, this);
-        bindViews();
-    }
-
-    private void bindViews() {
-        ButterKnife.bind(this);
-        collapseConfiguration();
-        if (listener.isHeaderVisible()) {
-            showHeader();
-        } else {
-            hideHeader();
-        }
+        setupSubviews();
     }
 
     private void toggleState() {
@@ -152,6 +136,21 @@ public class SampleFooterView extends LinearLayout {
         configurationToggleButton.setTextColor(ContextCompat.getColor(getContext(), R.color.close_button_text_color));
         ViewCompat.setBackground(configurationToggleButton, ContextCompat.getDrawable(getContext(), R.drawable.footer_button_disabled_drawable));
         configurationContainer.setVisibility(VISIBLE);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.background_color_preview:
+                changeBackgroundColor();
+                break;
+            case R.id.header_toggle_button:
+                toggleHeaderState((HeaderState) headerToggleButton.getTag());
+                break;
+            case R.id.configuration_toggle_button:
+                toggleState();
+                break;
+        }
     }
 
     enum ConfigurationState {
