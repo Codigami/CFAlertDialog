@@ -27,13 +27,13 @@ compile 'com.crowdfireapp.cfalertdialog:cfalertdialog:1.0.0'
 The above shown alert types can easily be implemented using the code snippet given below by some small tweaks
 ```android
         // Create Alert using Builder
-                CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this)
-                        .setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT)
-                        .setTitle("You've hit the limit")
-                        .setMessage("Looks like you've hit your usage limit. Upgrade to our paid plan to continue without any limits.")
-                        .addButton("UPGRADE", -1, -1, CFAlertActionStyle.POSITIVE, CFAlertActionAlignment.END, (dialog, which) -> {
-                            Toast.makeText(BaseActivity.this, "Upgrade tapped", Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
+        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this)
+                .setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT)
+                .setTitle("You've hit the limit")
+                .setMessage("Looks like you've hit your usage limit. Upgrade to our paid plan to continue without any limits.")
+                .addButton("UPGRADE", -1, -1, CFAlertActionStyle.POSITIVE, CFAlertActionAlignment.END, (dialog, which) -> {
+                    Toast.makeText(BaseActivity.this, "Upgrade tapped", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
                         })
         
                 // Show the alert
@@ -70,7 +70,8 @@ Gravity.END
 You can change the background (overlay) color of the alert using the method `setBackgroundColor` on the builder with the color of your choice.
 
 ##### Dismiss on background tap
-This determines whether the Alert dialog is dismissed when user taps on the background. Use the method `setCancelable` with a boolean value. By default it is set to true. 
+This determines whether the Alert dialog is dismissed when user taps on the background. Use the method `setCancelable` with a boolean value. By default it is set to true.
+The user will be able to interactively swipe to dismiss the notification dialog if this field is true.
 
 ##### Header / Footer
  You can add header and footer to the dialog. Use the method `setHeaderView` and `setFooterView` with any custom View. You can also pass the layout resource directly into the header/footer. Pass `null` to remove any existing header/footer.
@@ -113,13 +114,13 @@ alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
 ### Action Buttons
 You may add as many action buttons with the required styles. Use the `addButton` method on the builder.
 ```java
-builder.addButton("UPGRADE", Color.parseColor("#FFFFFF"), Color.parseColor("#429ef4"), CFAlertActionStyle.POSITIVE, CFAlertActionAlignment.CENTER, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(context, "Upgrade tapped", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-                }
-            });
+    builder.addButton("UPGRADE", Color.parseColor("#FFFFFF"), Color.parseColor("#429ef4"), CFAlertActionStyle.POSITIVE, CFAlertActionAlignment.CENTER, new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            Toast.makeText(context, "Upgrade tapped", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+        }
+    });
 ```                           
 ##### Title
 You can set the title of action button to be added.
