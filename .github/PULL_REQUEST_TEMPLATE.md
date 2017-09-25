@@ -1,7 +1,7 @@
 ### New Pull Request Checklist
 
 * [ ] I have read and understood the [CONTRIBUTING guide](https://github.com/Codigami/CFAlertDialog/blob/develop/.github/CONTRIBUTING.md)
-* [ ] I have read the [Documentation]()
+* [ ] I have read the [Documentation](https://github.com/Codigami/CFAlertDialog/blob/develop/README.md)
 * [ ] I have searched for a similar pull request in the [project](https://github.com/Codigami/CFAlertDialog/pulls) and found none
 
 * [ ] I have updated this branch with the latest master to avoid conflicts (via merge from master or rebase)
@@ -10,7 +10,7 @@
 * [ ] I have run the tests and they pass
 * [ ] I have run the lint and it passes
 
-This merge request fixes / reffers to the following issues: ...
+This merge request fixes / refers to the following issues: ...
 
 ### Pull Request Description
 

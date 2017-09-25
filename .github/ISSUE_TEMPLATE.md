@@ -1,7 +1,7 @@
 ### New Issue Checklist
 
 * [ ] I have read and understood the [CONTRIBUTING guide](https://github.com/Codigami/CFAlertDialog/blob/develop/.github/CONTRIBUTING.md)
-* [ ] I have read the [Documentation]()
+* [ ] I have read the [Documentation](https://github.com/Codigami/CFAlertDialog/blob/develop/README.md)
 * [ ] I have searched for a similar issue in the [project](https://github.com/Codigami/CFAlertDialog/issues) and found none
 
 ### Issue Info

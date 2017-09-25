@@ -26,7 +26,7 @@ This information will help us review and fix your issue faster.
 
 
 Please do not be offended if we close your issue and reference this document.
-If you believe the issue is truely a fault in the project’s codebase, re-open it.
+If you believe the issue is truly a fault in the project’s codebase, re-open it.
 
 ## Pull Requests
 
