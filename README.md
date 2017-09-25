@@ -1,8 +1,10 @@
 # CFAlertDialog
-[![CocoaPods](https://img.shields.io/cocoapods/v/CFAlertViewController.svg)](https://cocoapods.org/pods/CFAlertViewController)
-[![CocoaPods](https://img.shields.io/cocoapods/dt/CFAlertViewController.svg)](https://cocoapods.org/pods/CFAlertViewController)
-[![license](https://img.shields.io/github/license/codigami/cfalertviewcontroller.svg)](https://github.com/Codigami/CFAlertViewController/blob/master/README.md)
-[![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/home?status=CFAlertViewController%20-%20Now%20display%20and%20customise%20alerts%20and%20action%20sheets%20on%20iOS%20like%20never%20before!%20%23OpenSource%20https%3A//github.com/Codigami/CFAlertViewController)
+
+[![Bintray](https://img.shields.io/bintray/v/crowdfire/releases/cfalertdialog.svg?maxAge=2592000)](https://bintray.com/crowdfireapp/cfalertdialog/cfalertdialog)
+[ ![Download](https://api.bintray.com/packages/crowdfireapp/cfalertdialog/cfalertdialog/images/download.svg) ](https://bintray.com/crowdfireapp/cfalertdialog/cfalertdialog/_latestVersion)
+[![Github All Releases](https://img.shields.io/github/downloads/codigami/cfalertdialog/total.svg)]()
+[![license](https://img.shields.io/github/license/codigami/cfalertdialog.svg)]()
+[![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/home?status=CFAlertDialog%20-%20Now%20display%20and%20customise%20dialogs%20on%20android%20like%20never%20before!%20%23OpenSource%20https%3A//github.com/Codigami/CFAlertDialog)
 
 `CFAlertDialog` is a library that helps you display and customise **alert dialogs** on Android. It offers an adaptive UI support. It’s functionality is almost similar to the native `AlertDialog`.
 
@@ -133,7 +135,7 @@ Configure the style of the action button that is to be added to alert view. Set 
  CFAlertActionStyle.NEGATIVE
 ```
 
-##### Actions Alignment
+###### Actions Alignment
 Configure the alignment of the action button added to the alert view. Set `alignment` property of  CFAction constructor with one of the following action types
 ```java
  CFAlertActionAlignment.START,   
@@ -144,6 +146,66 @@ Configure the alignment of the action button added to the alert view. Set `align
 
 ##### Callback
 Pass an `onClickListener` to receive callbacks when the action buttons are tapped. 
+
+### Items
+There are 3 types of list supported by default.
+
+##### Simple List
+This will show a simple list view and give a callback when any of the item is tapped.
+```java
+    CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this);
+    builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT);
+    builder.setTitle("Select notification tone!");
+    builder.setItems(new String[]{"None", "Alert", "Delight", "Guitar", "Marbles", "Prompt"}, new OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int index) {
+            Toast.makeText(context, "Selected:"+index, Toast.LENGTH_SHORT).show();
+            dialogInterface.dismiss();
+        }
+    });
+    builder.show();
+```
+##### Single Choice
+This will show a list view with single choice items. It will give a callback when any of the items is selected.
+```java
+    CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this);
+    builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT);
+    builder.setTitle("Select notification tone!");
+    builder.setSingleChoiceItems(new String[]{"None", "Alert", "Delight", "Guitar", "Marbles", "Prompt"}, 3, new OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int index) {
+            Toast.makeText(context, "Selected:"+index, Toast.LENGTH_SHORT).show();
+        }
+    });
+    builder.addButton("DONE", -1, -1, CFAlertActionStyle.POSITIVE, CFAlertActionAlignment.END, new OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+            dialogInterface.dismiss();
+        }
+    });
+    builder.show();
+```
+##### Multiple choice
+This will show a list view with multi choice items. It will give a callback when any item is selected/unselected.
+```java
+    CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this);
+    builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT);
+    builder.setMessage("Select the topping for your pizza!!!");
+    builder.setMultiChoiceItems(new String[]{"Spinach", "Red & Yellow pepper", "Baby corn", "Olives", "Chicken"}, new boolean[]{false, false, false, false, false}, new DialogInterface.OnMultiChoiceClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int index, boolean b) {
+            Toast.makeText(context, "Row:"+index+" "+(b? "Selected":"Unselected"), Toast.LENGTH_SHORT).show();
+        }
+    });
+    builder.addButton("NEXT", -1, -1, CFAlertActionStyle.POSITIVE, CFAlertActionAlignment.END, new OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+            dialogInterface.dismiss();
+        }
+    });
+    builder.show();
+
+```
 
 ## License
 This code is distributed under the terms and conditions of the MIT license.
