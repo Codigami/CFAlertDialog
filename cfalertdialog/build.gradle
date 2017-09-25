@@ -13,8 +13,8 @@ buildscript {
 }
 
 // Variables
-int libraryVersionCode = 2
-String libraryVersion = '0.9.2'
+int libraryVersionCode = 3
+String libraryVersion = '0.9.3'
 String libraryGroup = 'com.crowdfireapp.cfalertdialog'
 
 String gitUrl = 'https://github.com/Codigami/CFAlertDialog.git'
