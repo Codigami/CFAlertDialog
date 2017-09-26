@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:background="#EFEFF4"
     android:animateLayoutChanges="true"
+    android:background="#EFEFF4"
+    android:fitsSystemWindows="true"
     tools:context="com.crowdfireapp.cfalertdialogdemo.StartActivity">
 
     <ScrollView
@@ -34,12 +33,12 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Alert Type"
-                        android:textSize="20sp"
                         android:textColor="@android:color/black"
-                        android:textStyle="bold"/>
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                     <RadioGroup
                         android:layout_width="match_parent"
@@ -52,7 +51,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Notification"/>
+                            android:text="Notification" />
 
                         <RadioButton
                             android:id="@+id/center_dialog_gravity_radio_button"
@@ -60,14 +59,14 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:checked="true"
-                            android:text="Alert"/>
+                            android:text="Alert" />
 
                         <RadioButton
                             android:id="@+id/bottom_dialog_gravity_radio_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Bottom Sheet"/>
+                            android:text="Bottom Sheet" />
                     </RadioGroup>
                 </LinearLayout>
 
@@ -86,46 +85,47 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Text Settings"
                         android:textColor="@android:color/black"
                         android:textSize="20sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
 
                     <CheckBox
                         android:id="@+id/show_title_icon"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:text="Show Title Icon"/>
+                        android:text="Show Title Icon" />
 
                     <EditText
                         android:id="@+id/title_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
+                        android:gravity="start"
                         android:hint="Title"
-                        android:text="Title of the message"/>
+                        android:text="Title of the message" />
 
                     <EditText
                         android:id="@+id/message_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
+                        android:gravity="start"
                         android:hint="Description"
-                        android:text="Add message body here. If the text exceeds a certain limit then the alert will automatically become scrollable."/>
-
+                        android:text="Add message body here. If the text exceeds a certain limit then the alert will automatically become scrollable." />
 
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:text="Alignment"
                         android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <RadioGroup
                         android:layout_width="match_parent"
@@ -139,24 +139,24 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:checked="true"
-                            android:text="Left"/>
+                            android:text="Left" />
 
                         <RadioButton
                             android:id="@+id/text_gravity_center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Center"/>
+                            android:text="Center" />
 
                         <RadioButton
                             android:id="@+id/text_gravity_right"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Right"/>
+                            android:text="Right" />
                     </RadioGroup>
 
-                    </LinearLayout>
+                </LinearLayout>
             </android.support.v7.widget.CardView>
 
             <!-- Buttons-->
@@ -172,49 +172,46 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Button Settings"
+                        android:textColor="@android:color/black"
                         android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/black"/>
+                        android:textStyle="bold" />
 
-                    <GridLayout
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:columnCount="1">
+                        android:orientation="vertical">
 
                         <CheckBox
                             android:id="@+id/neutral_button_checkbox"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_columnWeight="1"
                             android:checked="true"
-                            android:text="Neutral"/>
+                            android:text="Neutral" />
 
                         <CheckBox
                             android:id="@+id/positive_button_checkbox"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_columnWeight="1"
-                            android:text="Positive"/>
+                            android:text="Positive" />
 
                         <CheckBox
                             android:id="@+id/negative_button_checkbox"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_columnWeight="1"
-                            android:text="Negative"/>
-                    </GridLayout>
+                            android:text="Negative" />
+                    </LinearLayout>
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:text="Alignment"
                         android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <RadioGroup
                         android:layout_width="match_parent"
@@ -265,27 +262,31 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Background"
+                        android:textColor="@android:color/black"
                         android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/black" />
+                        android:textStyle="bold" />
 
                     <LinearLayout
                         android:id="@+id/background_color_selection_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textColor="@android:color/black"
-                            android:text="Background Color"/>
+                            android:gravity="start"
+                            android:text="Background Color"
+                            android:textColor="@android:color/black" />
 
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"/>
                         <View
                             android:id="@+id/background_color_preview"
                             android:layout_width="60dp"
@@ -295,17 +296,17 @@
                     </LinearLayout>
 
                     <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <CheckBox
-                        android:id="@+id/closes_on_background_tap"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="1"
-                        android:checked="true"
-                        android:text="Close on background tap" />
-                </LinearLayout>
+                        android:layout_height="wrap_content">
+
+                        <CheckBox
+                            android:id="@+id/closes_on_background_tap"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:checked="true"
+                            android:text="Close on background tap" />
+                    </LinearLayout>
 
 
                 </LinearLayout>
@@ -327,42 +328,40 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Other"
-                        android:textSize="20sp"
                         android:textColor="@android:color/black"
-                        android:textStyle="bold"/>
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-                    <GridLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:columnCount="1">
+                        android:orientation="vertical">
 
                         <CheckBox
                             android:id="@+id/add_header_checkbox"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_columnWeight="1"
-                            android:text="Add Header"/>
+                            android:text="Add Header" />
 
                         <CheckBox
                             android:id="@+id/add_footer_checkbox"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_columnWeight="1"
                             android:checked="true"
-                            android:text="Add Footer"/>
-                    </GridLayout>
+                            android:text="Add Footer" />
+                    </LinearLayout>
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:text="Selectable items list"
                         android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <RadioGroup
                         android:layout_width="match_parent"
@@ -373,25 +372,25 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="true"
-                            android:text="None"/>
+                            android:text="None" />
 
                         <RadioButton
                             android:id="@+id/items_radio_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Items"/>
+                            android:text="Items" />
 
                         <RadioButton
                             android:id="@+id/single_choice_items_radio_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Single choice items"/>
+                            android:text="Single choice items" />
 
                         <RadioButton
                             android:id="@+id/multi_select_choice_items_radio_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Multi choice items"/>
+                            android:text="Multi choice items" />
 
                     </RadioGroup>
 
@@ -409,9 +408,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:fabSize="normal"
-        app:srcCompat="@android:drawable/ic_menu_view"/>
+        app:srcCompat="@android:drawable/ic_menu_view" />
 
 </RelativeLayout>
