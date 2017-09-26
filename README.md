@@ -15,7 +15,13 @@
 - CFAlertDialog works on any device with Android API level 14 and above. 
 
 ### Install using gradle
+In your project's build.gradle.
+Add the following under repositories
+```java
+maven { url "https://crowdfireapp.bintray.com/cfalertdialog" }
+```
 
+Add the following under dependencies
 ```java 
 compile 'com.crowdfireapp.cfalertdialog:cfalertdialog:1.0.0'
 ```
