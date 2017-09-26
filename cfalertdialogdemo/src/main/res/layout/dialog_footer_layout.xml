@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!--Footer Content-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/footer_or_label_size_half"
+        android:background="@color/footer_bg"
+        android:animateLayoutChanges="true"
+        android:orientation="vertical"
+        android:padding="@dimen/layout_padding">
+
+        <!--Footer Note-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/footer_description_text_color"
+            android:textSize="11sp"
+            android:text="This is your custom footer view. Here we have added some custom properties that you can change dynamically for more detailed control." />
+
+        <!--Configurations container-->
+        <LinearLayout
+            android:id="@+id/configuration_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <!--Background-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Background"
+                android:textColor="@color/footer_section_title_color"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/footer_text_color"
+                    android:text="Color"
+                    android:textSize="14sp" />
+
+                <com.crowdfireapp.cfalertdialog.views.CFPushButton
+                    android:id="@+id/background_color_preview"
+                    android:layout_width="60dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/black_border" />
+            </LinearLayout>
+
+            <!--Header-->
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Header View"
+                android:textColor="@color/footer_section_title_color"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <com.crowdfireapp.cfalertdialog.views.CFPushButton
+                android:id="@+id/header_toggle_button"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginTop="10dp"
+                android:text="Add header"
+                android:textAllCaps="false"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="12sp"
+                android:textColor="@color/cfdialog_button_white_text_color"
+                android:background="@drawable/footer_button_drawable" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="11sp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/footer_description_text_color"
+                android:text="You can do the same for footer view as well." />
+
+            <!--Text Input-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Text Input"
+                android:textColor="@color/footer_section_title_color"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:paddingTop="0dp"
+                android:inputType="textMultiLine"
+                android:textColor="@color/footer_text_color"
+                android:textSize="16sp"
+                android:text="You can add text fields like these to header as well as footer" />
+
+        </LinearLayout>
+
+        <!--Configuration toggle button-->
+        <com.crowdfireapp.cfalertdialog.views.CFPushButton
+            android:id="@+id/configuration_toggle_button"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginTop="10dp"
+            android:textAllCaps="false"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="12sp"
+            android:textColor="@color/cfdialog_button_white_text_color"
+            android:background="@drawable/footer_button_drawable"
+            android:text="Configurations" />
+
+    </LinearLayout>
+
+    <!--OR label-->
+    <TextView
+        android:layout_width="@dimen/footer_or_label_size"
+        android:layout_height="@dimen/footer_or_label_size"
+        android:layout_marginTop="0dp"
+        android:textSize="14sp"
+        android:textColor="@color/footer_or_text_color"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/footer_or_drawable"
+        android:gravity="center"
+        android:text="OR"/>
+
+
+</RelativeLayout>

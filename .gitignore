@@ -44,3 +44,5 @@ Thumbs.db
 examples/examples.iml
 library/library.iml
 build/generated/mockable-android-25.jar
+
+local.properties

@@ -1,8 +1,10 @@
 # CFAlertDialog
-[![CocoaPods](https://img.shields.io/cocoapods/v/CFAlertViewController.svg)](https://cocoapods.org/pods/CFAlertViewController)
-[![CocoaPods](https://img.shields.io/cocoapods/dt/CFAlertViewController.svg)](https://cocoapods.org/pods/CFAlertViewController)
-[![license](https://img.shields.io/github/license/codigami/cfalertviewcontroller.svg)](https://github.com/Codigami/CFAlertViewController/blob/master/README.md)
-[![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/home?status=CFAlertViewController%20-%20Now%20display%20and%20customise%20alerts%20and%20action%20sheets%20on%20iOS%20like%20never%20before!%20%23OpenSource%20https%3A//github.com/Codigami/CFAlertViewController)
+
+[![Bintray](https://img.shields.io/bintray/v/crowdfire/releases/cfalertdialog.svg?maxAge=2592000)](https://bintray.com/crowdfireapp/cfalertdialog/cfalertdialog)
+[ ![Download](https://api.bintray.com/packages/crowdfireapp/cfalertdialog/cfalertdialog/images/download.svg) ](https://bintray.com/crowdfireapp/cfalertdialog/cfalertdialog/_latestVersion)
+[![Github All Releases](https://img.shields.io/github/downloads/codigami/cfalertdialog/total.svg)]()
+[![license](https://img.shields.io/github/license/codigami/cfalertdialog.svg)]()
+[![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/home?status=CFAlertDialog%20-%20Now%20display%20and%20customise%20dialogs%20on%20android%20like%20never%20before!%20%23OpenSource%20https%3A//github.com/Codigami/CFAlertDialog)
 
 `CFAlertDialog` is a library that helps you display and customise **alert dialogs** on Android. It offers an adaptive UI support. It’s functionality is almost similar to the native `AlertDialog`.
 
@@ -13,9 +15,15 @@
 - CFAlertDialog works on any device with Android API level 14 and above. 
 
 ### Install using gradle
+In your project's build.gradle.
+Add the following under repositories
+```java
+maven { url "https://crowdfireapp.bintray.com/cfalertdialog" }
+```
 
-```gradle 
-compile 'com.squareup.retrofit2:retrofit:2.3.0'
+Add the following under dependencies
+```java 
+compile 'com.crowdfireapp.cfalertdialog:cfalertdialog:1.0.0'
 ```
 
 
@@ -24,115 +32,186 @@ compile 'com.squareup.retrofit2:retrofit:2.3.0'
     <img src="https://github.com/Codigami/CFAlertViewController/blob/develop/Images/Alert%20%26%20Action%20sheet.png" style="width: 100%" />
 </p>
 
-The above shown alert and actionsheet can easily be implemented using the code snippet given below by some small tweaks
-```java
-// Create Alert using Builder
-CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this);
-builder.setDialogVerticalGravity(Gravity.CENTER_VERTICAL);      // Set position (TOP, CENTER_VERTICAL, BOTTOM)
-builder.setBackgroundColor(bgColor);        // Set background color
-builder.setTitle("You've hit the limit");
-builder.setMessage("Looks like you've hit your daily follow/unfollow limit. Upgrade to our paid plan to be able to remove your limits.");
+The above shown alert types can easily be implemented using the code snippet given below by some small tweaks
+```android
+        // Create Alert using Builder
+        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this)
+                .setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT)
+                .setTitle("You've hit the limit")
+                .setMessage("Looks like you've hit your usage limit. Upgrade to our paid plan to continue without any limits.")
+                .addButton("UPGRADE", -1, -1, CFAlertActionStyle.POSITIVE, CFAlertActionAlignment.END, (dialog, which) -> {
+                    Toast.makeText(BaseActivity.this, "Upgrade tapped", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                        })
+        
+                // Show the alert
+                builder.show();
 ```
 
 ## Customisations :
 
-### Alerts
-
-```swift
-public convenience init(title: String?,
-                        titleColor: UIColor?,
-                        message: String?,
-                        messageColor: UIColor?,
-                        textAlignment: NSTextAlignment,
-                        preferredStyle: CFAlertControllerStyle,
-                        headerView: UIView?,
-                        footerView: UIView?,
-                        didDismissAlertHandler dismiss: CFAlertViewControllerDismissBlock?)
-```
+##### Alert Type
+The alert type will determine the position and animation style for the dialog. You may set this by calling the `setAlertStyle` method with any of the following values.
+```java
+CFAlertStyle.NOTIFICATION,
+CFAlertStyle.ALERT,
+CFAlertStyle.BOTTOM_SHEET
+``` 
+The default type is `ALERT`.
 
 ##### Title and Message
-You can set a custom title and message text in the alert (pass `nil` if you don’t need them).
+You can set a custom title and message text in the alert, using the `setTitle` method on the builder (pass `null` if you don’t need them).
 
 ##### Title Color and Message Color
-You can set a custom title and message text color in the alert (pass `nil` if you want to use Default color values).
+You can set a custom title and message text color in the alert, using the `setTextColor` on the builder.
 
-##### Alignment
-You can customise alignment of the title and message. Set the `textAlignment` property with one of the following values : 
+##### Text Alignment
+You can customise alignment of the title and message. Use the  `setTextGravity` method on the builder with any of the following values: 
 
-```swift
-NSTextAlignment.left,    
-NSTextAlignment.right,    
-NSTextAlignment.center
-```
-
-##### Alert Style  
-Presentation style of the alert can be customised as Alert or Action sheet. Just set the `preferredStyle` property with one of the following values :
-```swift
-CFAlertControllerStyle.actionSheet,
-CFAlertControllerStyle.alert
-```
-
-##### Background style
-Background (overlay) of alert/action sheet can be blurred (Useful for security reasons in case the background needs to be hidden). Default value is `plain`. You can customize the blur style using `backgroundBlurView` property of type UIVisualEffectView. Update `backgroundStyle` property with one of the following enum values:
-
-```swift
-CFAlertControllerBackgroundStyle.plain,
-CFAlertControllerBackgroundStyle.blur
+```java
+Gravity.START,
+Gravity.CENTER_HORIZONTAL,
+Gravity.END
 ```
 
 ##### Background color
-You can change the background (overlay) color of the alert/actionsheet using the property `backgroundColor`.
+You can change the background (overlay) color of the alert using the method `setBackgroundColor` on the builder with the color of your choice.
 
 ##### Dismiss on background tap
-By default, the alert gets dismissed after tapping on the background (overlay). Change `shouldDismissOnBackgroundTap` property to `false` to disable it.
+This determines whether the Alert dialog is dismissed when user taps on the background. Use the method `setCancelable` with a boolean value. By default it is set to true.
+The user will be able to interactively swipe to dismiss the notification dialog if this field is true.
 
 ##### Header / Footer
- You can add header and footer to the alert. Set properties `headerView` and `footerView` with custom views (subclass of UIView). You can pass nil to this properties to opt them out.  
+ You can add header and footer to the dialog. Use the method `setHeaderView` and `setFooterView` with any custom View. You can also pass the layout resource directly into the header/footer. Pass `null` to remove any existing header/footer.
  
  1) Some examples where you can make the use of header in alert (the dollar image is in header)
 <p>
     <img src="https://github.com/Codigami/CFAlertViewController/blob/develop/Images/Alert%20With%20Header.png" style="width: 100%" />
 </p>
 
+```java
+builder.setHeaderView(R.layout.dialog_header_layout);
+OR
+builder.setHeaderView(headerView);
+```
+
 2) Some examples where you can make the use of footer in alert
 <p>
     <img src="https://github.com/Codigami/CFAlertViewController/blob/develop/Images/Alert%20With%20Footer.png" style="width: 100%" />
 </p>
 
-##### Callback
-A block (of type CFAlertViewControllerDismissBlock) gets called when the Alert / Action Sheet is dismissed. You can use it to handle call back.
+```java
+builder.setFooterView(R.layout.dialog_footer_layout);
+OR
+builder.setFooterView(footerView);
+```
 
-### Actions
-```swift
-public convenience init(title: String?,
-                        style: CFAlertActionStyle,
-                        alignment: CFAlertActionAlignment,
-                        backgroundColor: UIColor?,
-                        textColor: UIColor?,
-                        handler: CFAlertActionHandlerBlock?) {
+##### Dismiss Callback
+You may set a callback when dialog is dismissed with the native `setOnDismissListener` on the alert object.
+```java
+CFAlertDialog alertDialog = builder.show();
+alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        
+        // Do something here when dialog dismissed.
+    }
+});
+```
+
+### Action Buttons
+You may add as many action buttons with the required styles. Use the `addButton` method on the builder.
+```java
+    builder.addButton("UPGRADE", Color.parseColor("#FFFFFF"), Color.parseColor("#429ef4"), CFAlertActionStyle.POSITIVE, CFAlertActionAlignment.CENTER, new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            Toast.makeText(context, "Upgrade tapped", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+        }
+    });
 ```                           
 ##### Title
-You can set the title of action button to be added.  
+You can set the title of action button to be added.
 
 ##### Action Style
 Configure the style of the action button that is to be added to alert view. Set `style` property of the above method with one of the following Action style  
-```swift
- CFAlertActionStyle.Default,
- CFAlertActionStyle.Cancel,
- CFAlertActionStyle.Destructive
+```java
+ CFAlertActionStyle.DEFAULT,
+ CFAlertActionStyle.POSITIVE,
+ CFAlertActionStyle.NEGATIVE
 ```
 
-##### Actions Alignment
+###### Actions Alignment
 Configure the alignment of the action button added to the alert view. Set `alignment` property of  CFAction constructor with one of the following action types
-```swift
- CFAlertActionAlignment.justified,   // Action Button occupies the full width
- CFAlertActionAlignment.right,
- CFAlertActionAlignment.left,
- CFAlertActionAlignment.center
+```java
+ CFAlertActionAlignment.START,   
+ CFAlertActionAlignment.END,
+ CFAlertActionAlignment.CENTER,
+ CFAlertActionAlignment.JUSTIFIED   // Action Button occupies the full width
 ```
 
 ##### Callback
-A block (of type CFAlertActionHandlerBlock) gets invoked when action is tapped. 
+Pass an `onClickListener` to receive callbacks when the action buttons are tapped. 
+
+### Items
+There are 3 types of list supported by default.
+
+##### Simple List
+This will show a simple list view and give a callback when any of the item is tapped.
+```java
+    CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this);
+    builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT);
+    builder.setTitle("Select notification tone!");
+    builder.setItems(new String[]{"None", "Alert", "Delight", "Guitar", "Marbles", "Prompt"}, new OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int index) {
+            Toast.makeText(context, "Selected:"+index, Toast.LENGTH_SHORT).show();
+            dialogInterface.dismiss();
+        }
+    });
+    builder.show();
+```
+##### Single Choice
+This will show a list view with single choice items. It will give a callback when any of the items is selected.
+```java
+    CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this);
+    builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT);
+    builder.setTitle("Select notification tone!");
+    builder.setSingleChoiceItems(new String[]{"None", "Alert", "Delight", "Guitar", "Marbles", "Prompt"}, 3, new OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int index) {
+            Toast.makeText(context, "Selected:"+index, Toast.LENGTH_SHORT).show();
+        }
+    });
+    builder.addButton("DONE", -1, -1, CFAlertActionStyle.POSITIVE, CFAlertActionAlignment.END, new OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+            dialogInterface.dismiss();
+        }
+    });
+    builder.show();
+```
+##### Multiple choice
+This will show a list view with multi choice items. It will give a callback when any item is selected/unselected.
+```java
+    CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this);
+    builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT);
+    builder.setMessage("Select the topping for your pizza!!!");
+    builder.setMultiChoiceItems(new String[]{"Spinach", "Red & Yellow pepper", "Baby corn", "Olives", "Chicken"}, new boolean[]{false, false, false, false, false}, new DialogInterface.OnMultiChoiceClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int index, boolean b) {
+            Toast.makeText(context, "Row:"+index+" "+(b? "Selected":"Unselected"), Toast.LENGTH_SHORT).show();
+        }
+    });
+    builder.addButton("NEXT", -1, -1, CFAlertActionStyle.POSITIVE, CFAlertActionAlignment.END, new OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+            dialogInterface.dismiss();
+        }
+    });
+    builder.show();
+
+```
 
 ## License
 This code is distributed under the terms and conditions of the MIT license.
