@@ -81,9 +81,6 @@ public class CFAlertDialog extends AppCompatDialog {
     private ImageView cfDialogIconImageView;
     private ScrollView cfDialogScrollView;
 
-    private static final int DEFAULT_BACKGROUND_COLOR = Color.parseColor("#B3000000");
-    private static final int DEFAULT_DIALOG_BACKGROUND_COLOR = Color.parseColor("#FFFFFF");
-
     // endregion
 
     // region Setup methods
@@ -311,7 +308,7 @@ public class CFAlertDialog extends AppCompatDialog {
             int colorFrom = ((ColorDrawable)cfDialogBackground.getBackground()).getColor();
             int colorTo = color;
             ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
-            colorAnimation.setDuration(300); // milliseconds
+            colorAnimation.setDuration(getContext().getResources().getInteger(R.integer.cfdialog_animation_duration)); // milliseconds
             colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 
                 @Override
@@ -332,7 +329,7 @@ public class CFAlertDialog extends AppCompatDialog {
             int colorFrom = ((ColorDrawable)dialogCardView.getBackground()).getColor();
             int colorTo = color;
             ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
-            colorAnimation.setDuration(300); // milliseconds
+            colorAnimation.setDuration(getContext().getResources().getInteger(R.integer.cfdialog_animation_duration)); // milliseconds
             colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 
                 @Override
@@ -842,7 +839,9 @@ public class CFAlertDialog extends AppCompatDialog {
         }
 
         // Use the corner radius from params if provided.
-        if (params.dialogCornerRadius != -1) cornerRadius = params.dialogCornerRadius;
+        if (params.dialogCornerRadius != -1) {
+            cornerRadius = params.dialogCornerRadius;
+        }
 
         return cornerRadius;
     }
@@ -1039,8 +1038,8 @@ public class CFAlertDialog extends AppCompatDialog {
     private static class DialogParams {
 
         private Context context;
-        private @ColorInt int backgroundColor = DEFAULT_BACKGROUND_COLOR;
-        private @ColorInt int dialogBackgroundColor = DEFAULT_DIALOG_BACKGROUND_COLOR;
+        private @ColorInt int backgroundColor = Color.parseColor("#B3000000");
+        private @ColorInt int dialogBackgroundColor = Color.parseColor("#FFFFFF");
         private float dialogCornerRadius = -1;
         private CharSequence message, title;
         private @ColorInt int textColor = -1;

@@ -2,7 +2,7 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android">
 
     <alpha
-        android:duration="200"
+        android:duration="@integer/cfdialog_animation_duration_200"
         android:fromAlpha="0"
         android:interpolator="@anim/interpolator_acceleration_1_5"
         android:toAlpha="1"/>

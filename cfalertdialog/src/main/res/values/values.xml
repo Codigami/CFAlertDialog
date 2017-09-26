@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="cfdialog_animation_duration">300</integer>
+    <integer name="cfdialog_animation_duration_200">200</integer>
+    <integer name="cfdialog_animation_duration_400">400</integer>
+    <integer name="cfdialog_animation_duration_500">500</integer>
+</resources>

@@ -3,7 +3,7 @@
      android:interpolator="@anim/interpolator_overshoot_1_2">
 
     <scale
-        android:duration="300"
+        android:duration="@integer/cfdialog_animation_duration"
         android:fromXScale="1.4"
         android:fromYScale="1.4"
         android:pivotX="50%"

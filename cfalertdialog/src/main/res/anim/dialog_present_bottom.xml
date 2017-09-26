@@ -3,7 +3,7 @@
      android:interpolator="@anim/interpolator_deceleration_3">
 
     <translate
-        android:duration="500"
+        android:duration="@integer/cfdialog_animation_duration_500"
         android:fromXDelta="0"
         android:fromYDelta="100%"
         android:toXDelta="0"
