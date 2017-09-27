@@ -1,4 +1,4 @@
-# CFAlertDialog
+# CFAlertDialog ![Android](/Resources/android_medium.png)
 
 [![Bintray](https://img.shields.io/bintray/v/crowdfire/releases/cfalertdialog.svg?maxAge=2592000)](https://bintray.com/crowdfireapp/cfalertdialog/cfalertdialog)
 [ ![Download](https://api.bintray.com/packages/crowdfireapp/cfalertdialog/cfalertdialog/images/download.svg) ](https://bintray.com/crowdfireapp/cfalertdialog/cfalertdialog/_latestVersion)
@@ -7,6 +7,8 @@
 [![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/home?status=CFAlertDialog%20-%20Now%20display%20and%20customise%20dialogs%20on%20android%20like%20never%20before!%20%23OpenSource%20https%3A//github.com/Codigami/CFAlertDialog)
 
 `CFAlertDialog` is a library that helps you display and customise **alert dialogs** on Android. It offers an adaptive UI support. It’s functionality is almost similar to the native `AlertDialog`.
+
+You can also check out this library for ** iOS** by clicking [here](https://github.com/Codigami/CFAlertViewController)
 
 #### Types of use cases:
 <img src="/Resources/Demo-1.gif">
