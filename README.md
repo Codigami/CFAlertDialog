@@ -8,7 +8,11 @@
 
 `CFAlertDialog` is a library that helps you display and customise **alert dialogs** on Android. It offers an adaptive UI support. It’s functionality is almost similar to the native `AlertDialog`.
 
-<img src="https://github.com/Codigami/CFAlertViewController/blob/develop/Images/Demo.gif">
+#### Types of use cases:
+<img src="/Resources/Demo-1.gif">
+
+#### Configuration options:
+<img src="/Resources/Demo-2.gif">
 
 ## Requirements :
 
@@ -29,7 +33,7 @@ compile 'com.crowdfireapp.cfalertdialog:cfalertdialog:1.0.0'
 
 ## Usage :  
 <p>
-    <img src="https://github.com/Codigami/CFAlertViewController/blob/develop/Images/Alert%20%26%20Action%20sheet.png" style="width: 100%" />
+    <img src="/Resources/1.png" style="width: 100%" />
 </p>
 
 The above shown alert types can easily be implemented using the code snippet given below by some small tweaks
@@ -86,7 +90,7 @@ The user will be able to interactively swipe to dismiss the notification dialog 
  
  1) Some examples where you can make the use of header in alert (the dollar image is in header)
 <p>
-    <img src="https://github.com/Codigami/CFAlertViewController/blob/develop/Images/Alert%20With%20Header.png" style="width: 100%" />
+    <img src="/Resources/2.png" style="width: 100%" />
 </p>
 
 ```java
@@ -97,7 +101,7 @@ builder.setHeaderView(headerView);
 
 2) Some examples where you can make the use of footer in alert
 <p>
-    <img src="https://github.com/Codigami/CFAlertViewController/blob/develop/Images/Alert%20With%20Footer.png" style="width: 100%" />
+    <img src="/Resources/3.png" style="width: 100%" />
 </p>
 
 ```java
@@ -155,6 +159,9 @@ Pass an `onClickListener` to receive callbacks when the action buttons are tappe
 
 ### Items
 There are 3 types of list supported by default.
+<p>
+    <img src="/Resources/4.png" style="width: 100%" />
+</p>
 
 ##### Simple List
 This will show a simple list view and give a callback when any of the item is tapped.
