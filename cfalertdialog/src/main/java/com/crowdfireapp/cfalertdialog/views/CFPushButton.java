@@ -1,6 +1,7 @@
 package com.crowdfireapp.cfalertdialog.views;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -32,6 +33,8 @@ public class CFPushButton extends AppCompatButton {
         // Set centered text alignment
         setGravity(Gravity.CENTER);
         ViewUtil.addBounceEffect(this);
+
+        setTypeface(getTypeface(), Typeface.BOLD);
     }
 
 }
