@@ -3,8 +3,8 @@
 
     <color name="cfdialog_default_background_color">#B3000000</color>
     <color name="cfdialog_default_card_background_color">#FFFFFF</color>
-    <color name="cfdialog_title_font_color">#013356</color>
-    <color name="cfdialog_desc_font_color">#013356</color>
+    <color name="cfdialog_title_font_color">#000000</color>
+    <color name="cfdialog_desc_font_color">#434343</color>
     <color name="cfdialog_button_drawable_stroke">#0d000000</color>
 
     <color name="cfdialog_positive_button_color">#29c64d</color>
