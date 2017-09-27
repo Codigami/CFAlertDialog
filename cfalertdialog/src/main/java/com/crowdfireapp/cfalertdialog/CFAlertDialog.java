@@ -147,7 +147,7 @@ public class CFAlertDialog extends AppCompatDialog {
 
     private void createCardView() {
 
-        dialogCardView = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.cfalert_card_layout, null);
+        dialogCardView = (CardView) findViewById(R.id.cfdialog_cardview);
 
         bindCardSubviews();
 
@@ -155,8 +155,6 @@ public class CFAlertDialog extends AppCompatDialog {
 
         // Adjust the dialog width
         adjustDialogLayoutParams();
-
-        cfDialogContainer.addView(dialogCardView);
 
         populateCardView();
         setupCardBehaviour();
