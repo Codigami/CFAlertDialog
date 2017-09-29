@@ -41,18 +41,18 @@ compile 'com.crowdfireapp.cfalertdialog:cfalertdialog:1.0.0'
 
 The above shown alert types can easily be implemented using the code snippet given below by some small tweaks
 ```android
-        // Create Alert using Builder
-        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this)
-                .setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT)
-                .setTitle("You've hit the limit")
-                .setMessage("Looks like you've hit your usage limit. Upgrade to our paid plan to continue without any limits.")
-                .addButton("UPGRADE", -1, -1, CFAlertActionStyle.POSITIVE, CFAlertActionAlignment.END, (dialog, which) -> {
-                    Toast.makeText(BaseActivity.this, "Upgrade tapped", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-                        })
+// Create Alert using Builder
+CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this)
+    .setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT)
+    .setTitle("You've hit the limit")
+    .setMessage("Looks like you've hit your usage limit. Upgrade to our paid plan to continue without any limits.")
+    .addButton("UPGRADE", -1, -1, CFAlertActionStyle.POSITIVE, CFAlertActionAlignment.END, (dialog, which) -> {
+        Toast.makeText(BaseActivity.this, "Upgrade tapped", Toast.LENGTH_SHORT).show();
+        dialog.dismiss();
+    })
         
-                // Show the alert
-                builder.show();
+// Show the alert
+builder.show();
 ```
 
 ## Customisations :
@@ -129,13 +129,13 @@ alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
 ### Action Buttons
 You may add as many action buttons with the required styles. Use the `addButton` method on the builder.
 ```java
-    builder.addButton("UPGRADE", Color.parseColor("#FFFFFF"), Color.parseColor("#429ef4"), CFAlertActionStyle.POSITIVE, CFAlertActionAlignment.CENTER, new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-            Toast.makeText(context, "Upgrade tapped", Toast.LENGTH_SHORT).show();
-            dialog.dismiss();
-        }
-    });
+builder.addButton("UPGRADE", Color.parseColor("#FFFFFF"), Color.parseColor("#429ef4"), CFAlertActionStyle.POSITIVE, CFAlertActionAlignment.CENTER, new DialogInterface.OnClickListener() {
+    @Override
+    public void onClick(DialogInterface dialog, int which) {
+        Toast.makeText(context, "Upgrade tapped", Toast.LENGTH_SHORT).show();
+        dialog.dismiss();
+    }
+});
 ```                           
 ##### Title
 You can set the title of action button to be added.
@@ -143,18 +143,18 @@ You can set the title of action button to be added.
 ##### Action Style
 Configure the style of the action button that is to be added to alert view. Set `style` property of the above method with one of the following Action style  
 ```java
- CFAlertActionStyle.DEFAULT,
- CFAlertActionStyle.POSITIVE,
- CFAlertActionStyle.NEGATIVE
+CFAlertActionStyle.DEFAULT,
+CFAlertActionStyle.POSITIVE,
+CFAlertActionStyle.NEGATIVE
 ```
 
 ###### Actions Alignment
 Configure the alignment of the action button added to the alert view. Set `alignment` property of  CFAction constructor with one of the following action types
 ```java
- CFAlertActionAlignment.START,   
- CFAlertActionAlignment.END,
- CFAlertActionAlignment.CENTER,
- CFAlertActionAlignment.JUSTIFIED   // Action Button occupies the full width
+CFAlertActionAlignment.START,   
+CFAlertActionAlignment.END,
+CFAlertActionAlignment.CENTER,
+CFAlertActionAlignment.JUSTIFIED   // Action Button occupies the full width
 ```
 
 ##### Callback
@@ -169,57 +169,57 @@ There are 3 types of list supported by default.
 ##### Simple List
 This will show a simple list view and give a callback when any of the item is tapped.
 ```java
-    CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this);
-    builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT);
-    builder.setTitle("Select notification tone!");
-    builder.setItems(new String[]{"None", "Alert", "Delight", "Guitar", "Marbles", "Prompt"}, new OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialogInterface, int index) {
-            Toast.makeText(context, "Selected:"+index, Toast.LENGTH_SHORT).show();
-            dialogInterface.dismiss();
-        }
-    });
-    builder.show();
+CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this);
+builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT);
+builder.setTitle("Select notification tone!");
+builder.setItems(new String[]{"None", "Alert", "Delight", "Guitar", "Marbles", "Prompt"}, new OnClickListener() {
+    @Override
+    public void onClick(DialogInterface dialogInterface, int index) {
+        Toast.makeText(context, "Selected:"+index, Toast.LENGTH_SHORT).show();
+        dialogInterface.dismiss();
+    }
+});
+builder.show();
 ```
 ##### Single Choice
 This will show a list view with single choice items. It will give a callback when any of the items is selected.
 ```java
-    CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this);
-    builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT);
-    builder.setTitle("Select notification tone!");
-    builder.setSingleChoiceItems(new String[]{"None", "Alert", "Delight", "Guitar", "Marbles", "Prompt"}, 3, new OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialogInterface, int index) {
-            Toast.makeText(context, "Selected:"+index, Toast.LENGTH_SHORT).show();
-        }
-    });
-    builder.addButton("DONE", -1, -1, CFAlertActionStyle.POSITIVE, CFAlertActionAlignment.END, new OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialogInterface, int i) {
-            dialogInterface.dismiss();
-        }
-    });
-    builder.show();
+CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this);
+builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT);
+builder.setTitle("Select notification tone!");
+builder.setSingleChoiceItems(new String[]{"None", "Alert", "Delight", "Guitar", "Marbles", "Prompt"}, 3, new OnClickListener() {
+    @Override
+    public void onClick(DialogInterface dialogInterface, int index) {
+        Toast.makeText(context, "Selected:"+index, Toast.LENGTH_SHORT).show();
+    }
+});
+builder.addButton("DONE", -1, -1, CFAlertActionStyle.POSITIVE, CFAlertActionAlignment.END, new OnClickListener() {
+    @Override
+    public void onClick(DialogInterface dialogInterface, int i) {
+        dialogInterface.dismiss();
+    }
+});
+builder.show();
 ```
 ##### Multiple choice
 This will show a list view with multi choice items. It will give a callback when any item is selected/unselected.
 ```java
-    CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this);
-    builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT);
-    builder.setMessage("Select the topping for your pizza!!!");
-    builder.setMultiChoiceItems(new String[]{"Spinach", "Red & Yellow pepper", "Baby corn", "Olives", "Chicken"}, new boolean[]{false, false, false, false, false}, new DialogInterface.OnMultiChoiceClickListener() {
-        @Override
-        public void onClick(DialogInterface dialogInterface, int index, boolean b) {
-            Toast.makeText(context, "Row:"+index+" "+(b? "Selected":"Unselected"), Toast.LENGTH_SHORT).show();
-        }
-    });
-    builder.addButton("NEXT", -1, -1, CFAlertActionStyle.POSITIVE, CFAlertActionAlignment.END, new OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialogInterface, int i) {
-            dialogInterface.dismiss();
-        }
-    });
-    builder.show();
+CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this);
+builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT);
+builder.setMessage("Select the topping for your pizza!!!");
+builder.setMultiChoiceItems(new String[]{"Spinach", "Red & Yellow pepper", "Baby corn", "Olives", "Chicken"}, new boolean[]{false, false, false, false, false}, new DialogInterface.OnMultiChoiceClickListener() {
+    @Override
+    public void onClick(DialogInterface dialogInterface, int index, boolean b) {
+        Toast.makeText(context, "Row:"+index+" "+(b? "Selected":"Unselected"), Toast.LENGTH_SHORT).show();
+    }
+});
+builder.addButton("NEXT", -1, -1, CFAlertActionStyle.POSITIVE, CFAlertActionAlignment.END, new OnClickListener() {
+    @Override
+    public void onClick(DialogInterface dialogInterface, int i) {
+        dialogInterface.dismiss();
+    }
+});
+builder.show();
 
 ```
 

@@ -46,3 +46,4 @@ library/library.iml
 build/generated/mockable-android-25.jar
 
 local.properties
+bintray.properties
