@@ -1,4 +1,4 @@
-package com.crowdfireapp.cfalertdialog;
+package com.crowdfire.cfalertdialog;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
@@ -39,9 +39,9 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.crowdfireapp.cfalertdialog.utils.DeviceUtil;
-import com.crowdfireapp.cfalertdialog.utils.SwipeToHideViewListener;
-import com.crowdfireapp.cfalertdialog.views.CFPushButton;
+import com.crowdfire.cfalertdialog.utils.DeviceUtil;
+import com.crowdfire.cfalertdialog.utils.SwipeToHideViewListener;
+import com.crowdfire.cfalertdialog.views.CFPushButton;
 
 import java.util.ArrayList;
 import java.util.List;

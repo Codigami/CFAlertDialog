@@ -89,7 +89,7 @@ bintray {
     pkg {
         repo = 'cfalertdialog'
         name = 'cfalertdialog'
-        userOrg = 'crowdfireapp'
+        userOrg = 'crowdfire'
         licenses = ['Apache-2.0']
         vcsUrl = gitUrl
         publish = true

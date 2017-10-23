@@ -1,4 +1,4 @@
-package com.crowdfireapp.cfalertdialogdemo;
+package com.crowdfire.cfalertdialog;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.crowdfire.cfalertdialogdemo", appContext.getPackageName());
+        assertEquals("com.crowdfire.cfalertdialog.test", appContext.getPackageName());
     }
 }

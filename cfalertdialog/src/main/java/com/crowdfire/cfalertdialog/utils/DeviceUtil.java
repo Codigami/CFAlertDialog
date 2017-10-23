@@ -1,4 +1,4 @@
-package com.crowdfireapp.cfalertdialog.utils;
+package com.crowdfire.cfalertdialog.utils;
 
 import android.content.Context;
 import android.content.res.Resources;

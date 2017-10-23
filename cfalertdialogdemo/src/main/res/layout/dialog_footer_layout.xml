@@ -54,7 +54,7 @@
                     android:text="Color"
                     android:textSize="14sp" />
 
-                <com.crowdfireapp.cfalertdialog.views.CFPushButton
+                <com.crowdfire.cfalertdialog.views.CFPushButton
                     android:id="@+id/background_color_preview"
                     android:layout_width="60dp"
                     android:layout_height="32dp"
@@ -72,7 +72,7 @@
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
-            <com.crowdfireapp.cfalertdialog.views.CFPushButton
+            <com.crowdfire.cfalertdialog.views.CFPushButton
                 android:id="@+id/header_toggle_button"
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
@@ -116,7 +116,7 @@
         </LinearLayout>
 
         <!--Configuration toggle button-->
-        <com.crowdfireapp.cfalertdialog.views.CFPushButton
+        <com.crowdfire.cfalertdialog.views.CFPushButton
             android:id="@+id/configuration_toggle_button"
             android:layout_width="match_parent"
             android:layout_height="32dp"
