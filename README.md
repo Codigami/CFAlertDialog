@@ -25,12 +25,12 @@ You can also check out this library for ** iOS** by clicking [here](https://g
 In your project's build.gradle.
 Add the following under repositories
 ```java
-maven { url "https://crowdfireapp.bintray.com/cfalertdialog" }
+maven { url "https://dl.bintray.com/crowdfire/cfalertdialog" }
 ```
 
 Add the following under dependencies
 ```java 
-compile 'com.crowdfireapp.cfalertdialog:cfalertdialog:1.0.0'
+compile 'com.crowdfire.cfalertdialog:cfalertdialog:1.0.1'
 ```
 
 
