@@ -1,7 +1,7 @@
 # CFAlertDialog ![Android](/Resources/android_medium.png)
 
-[![Bintray](https://img.shields.io/bintray/v/crowdfire/releases/cfalertdialog.svg?maxAge=2592000)](https://bintray.com/crowdfireapp/cfalertdialog/cfalertdialog)
-[ ![Download](https://api.bintray.com/packages/crowdfireapp/cfalertdialog/cfalertdialog/images/download.svg) ](https://bintray.com/crowdfireapp/cfalertdialog/cfalertdialog/_latestVersion)
+[![Bintray](https://img.shields.io/bintray/v/crowdfire/releases/cfalertdialog.svg?maxAge=2592000)](https://bintray.com/crowdfire/cfalertdialog/cfalertdialog)
+[ ![Download](https://api.bintray.com/packages/crowdfire/cfalertdialog/cfalertdialog/images/download.svg) ](https://bintray.com/crowdfire/cfalertdialog/cfalertdialog/_latestVersion)
 [![Github All Releases](https://img.shields.io/github/downloads/codigami/cfalertdialog/total.svg)]()
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-CFAlertDialog-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6252)
 [![license](https://img.shields.io/github/license/codigami/cfalertdialog.svg)]()
