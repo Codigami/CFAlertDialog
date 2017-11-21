@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.ColorInt;
@@ -584,7 +585,10 @@ public class CFAlertDialog extends AppCompatDialog {
 
         //Button background color
         if (actionButton.backgroundColor != -1) {
-            button.setBackgroundColor(actionButton.backgroundColor);
+            GradientDrawable buttonDrawable = new GradientDrawable();
+            buttonDrawable.setColor(actionButton.backgroundColor);
+            buttonDrawable.setCornerRadius(getContext().getResources().getDimension(R.dimen.cfdialog_button_corner_radius));
+            ViewCompat.setBackground(button, buttonDrawable);
         }
         else if (actionButton.backgroundDrawableId != -1) {
             ViewCompat.setBackground(button, ContextCompat.getDrawable(getContext(), actionButton.backgroundDrawableId));

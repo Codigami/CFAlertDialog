@@ -22,5 +22,6 @@
     <dimen name="cfdialog_button_text_font_size">14sp</dimen>
 
     <dimen name="cfdialog_button_padding">10dp</dimen>
+    <dimen name="cfdialog_button_corner_radius">4dp</dimen>
 
 </resources>
