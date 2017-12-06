@@ -9,7 +9,7 @@
 
 `CFAlertDialog` is a library that helps you display and customise **alert dialogs** on Android. It offers an adaptive UI support. It’s functionality is almost similar to the native `AlertDialog`.
 
-You can also check out this library for ** iOS** by clicking [here](https://github.com/Codigami/CFAlertViewController)
+You can also check out this library for ** iOS** [here](https://github.com/Codigami/CFAlertViewController)
 
 #### Types of use cases:
 <img src="/Resources/Demo-1.gif">
@@ -22,15 +22,9 @@ You can also check out this library for ** iOS** by clicking [here](https://g
 - CFAlertDialog works on any device with Android API level 14 and above. 
 
 ### Install using gradle
-In your project's build.gradle.
-Add the following under repositories
-```java
-maven { url "https://dl.bintray.com/crowdfire/cfalertdialog" }
-```
-
-Add the following under dependencies
+In your project's build.gradle add the following under dependencies
 ```java 
-compile 'com.crowdfire.cfalertdialog:cfalertdialog:1.0.1'
+compile 'com.crowdfire.cfalertdialog:cfalertdialog:1.0.2'
 ```
 
 
