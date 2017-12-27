@@ -826,6 +826,10 @@ public class CFAlertDialog extends AppCompatDialog {
                 break;
         }
 
+        if (isCustomMargin()) {
+            maxWidth = screenWidth;     // Dialog can extend till the max screen width if custom margin is provided
+        }
+
         int width = screenWidth - (2 * horizontalMargin);
         width = Math.min(width, maxWidth);
         cardContainerLayoutParams.width = width;
@@ -862,6 +866,10 @@ public class CFAlertDialog extends AppCompatDialog {
         }
 
         return margin;
+    }
+
+    private boolean isCustomMargin() {
+        return params.dialogOuterMargin != -1;
     }
 
     // endregion
