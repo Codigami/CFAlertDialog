@@ -350,6 +350,12 @@ public class CFAlertDialog extends AppCompatDialog {
         dialogCardView.setRadius(getCornerRadius());
     }
 
+    public void setOuterMargin(int margin) {
+        this.params.dialogOuterMargin = margin;
+
+        adjustDialogLayoutParams();
+    }
+
     @Override
     public void setTitle(CharSequence title) {
         if (TextUtils.isEmpty(title)) {
@@ -803,7 +809,7 @@ public class CFAlertDialog extends AppCompatDialog {
 
         // Layout params
         RelativeLayout.LayoutParams cardContainerLayoutParams = (RelativeLayout.LayoutParams) cfDialogContainer.getLayoutParams();
-        int margin = (int)getContext().getResources().getDimension(R.dimen.cfdialog_outer_margin);
+        int margin = getOuterMargin();
 
         int horizontalMargin = margin;
         int topMargin = margin;
@@ -848,6 +854,16 @@ public class CFAlertDialog extends AppCompatDialog {
         return cornerRadius;
     }
 
+    private int getOuterMargin() {
+        int margin = (int)getContext().getResources().getDimension(R.dimen.cfdialog_outer_margin);
+
+        if (params.dialogOuterMargin != -1) {
+            margin = params.dialogOuterMargin;
+        }
+
+        return margin;
+    }
+
     // endregion
 
     public static class Builder {
@@ -887,6 +903,11 @@ public class CFAlertDialog extends AppCompatDialog {
 
         public Builder setCornerRadius(float cornerRadius) {
             this.params.dialogCornerRadius = cornerRadius;
+            return this;
+        }
+
+        public Builder setOuterMargin(int margin) {
+            this.params.dialogOuterMargin = margin;
             return this;
         }
 
@@ -1043,6 +1064,7 @@ public class CFAlertDialog extends AppCompatDialog {
         private @ColorInt int backgroundColor = Color.parseColor("#B3000000");
         private @ColorInt int dialogBackgroundColor = Color.parseColor("#FFFFFF");
         private float dialogCornerRadius = -1;
+        private int dialogOuterMargin = -1;
         private CharSequence message, title;
         private @ColorInt int textColor = -1;
         private int theme = R.style.CFDialog,
