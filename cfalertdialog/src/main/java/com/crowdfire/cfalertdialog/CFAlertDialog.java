@@ -602,7 +602,7 @@ public class CFAlertDialog extends AppCompatDialog {
 
         // Button text colors
         if (actionButton.textColor != -1) {
-            button.setTextColor(ContextCompat.getColor(getContext(), actionButton.textColor));
+            button.setTextColor(actionButton.textColor);
         }
     }
 
