@@ -601,9 +601,7 @@ public class CFAlertDialog extends AppCompatDialog {
         }
 
         // Button text colors
-        if (actionButton.textColor != -1) {
-            button.setTextColor(actionButton.textColor);
-        }
+        button.setTextColor(actionButton.textColor);
     }
 
     public void setItems(String[] items, final OnClickListener onClickListener) {
@@ -987,7 +985,7 @@ public class CFAlertDialog extends AppCompatDialog {
         }
 
         public Builder addButton(String buttonText, @ColorInt int textColor, @ColorInt int backgroundColor, CFAlertActionStyle style, CFAlertActionAlignment alignment, OnClickListener onClickListener) {
-            CFAlertActionButton button = new CFAlertActionButton(buttonText, textColor, backgroundColor, style, alignment, onClickListener);
+            CFAlertActionButton button = new CFAlertActionButton(this.params.context, buttonText, textColor, backgroundColor, style, alignment, onClickListener);
             this.params.buttons.add(button);
             return this;
         }
@@ -1109,6 +1107,7 @@ public class CFAlertDialog extends AppCompatDialog {
     }
 
     private static class CFAlertActionButton {
+        private Context context;
         private String buttonText;
         private DialogInterface.OnClickListener onClickListener;
         private int textColor = -1;
@@ -1117,7 +1116,8 @@ public class CFAlertDialog extends AppCompatDialog {
         private int backgroundColor = -1;
         private int backgroundDrawableId = -1;
 
-        public CFAlertActionButton(String buttonText, @ColorInt int textColor, @ColorInt int backgroundColor, CFAlertActionStyle style, CFAlertActionAlignment alignment, OnClickListener onClickListener) {
+        public CFAlertActionButton(Context context, String buttonText, @ColorInt int textColor, @ColorInt int backgroundColor, CFAlertActionStyle style, CFAlertActionAlignment alignment, OnClickListener onClickListener) {
+            this.context = context;
             this.buttonText = buttonText;
             this.textColor = textColor;
             this.backgroundColor = backgroundColor;
@@ -1148,17 +1148,17 @@ public class CFAlertDialog extends AppCompatDialog {
             return backgroundDrawable;
         }
 
-        private @ColorRes int getTextColor(CFAlertActionStyle style) {
-            @ColorRes int textColor = -1;
+        private @ColorInt int getTextColor(CFAlertActionStyle style) {
+            @ColorInt int textColor = -1;
             switch (style) {
                 case NEGATIVE:
-                    textColor = R.color.cfdialog_button_white_text_color;
+                    textColor = ContextCompat.getColor(context, R.color.cfdialog_button_white_text_color);
                     break;
                 case POSITIVE:
-                    textColor = R.color.cfdialog_button_white_text_color;
+                    textColor = ContextCompat.getColor(context, R.color.cfdialog_button_white_text_color);
                     break;
                 case DEFAULT:
-                    textColor = R.color.cfdialog_default_button_text_color;
+                    textColor = ContextCompat.getColor(context, R.color.cfdialog_default_button_text_color);
                     break;
             }
             return textColor;
