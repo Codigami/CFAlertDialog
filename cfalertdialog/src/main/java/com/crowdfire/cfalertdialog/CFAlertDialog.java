@@ -289,6 +289,18 @@ public class CFAlertDialog extends AppCompatDialog {
     private void alertPresented() {
 
         setEnabled(true);
+
+        // Auto dismiss if needed
+        if (params.autoDismissDuration > 0) {
+            Handler handler = new Handler();
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    dismiss();
+                }
+            };
+            handler.postDelayed(runnable, params.autoDismissDuration);
+        }
     }
 
     // region - Setters
@@ -1044,6 +1056,11 @@ public class CFAlertDialog extends AppCompatDialog {
             return this;
         }
 
+        public Builder setAutoDismissAfter(long duration) {
+            this.params.autoDismissDuration = duration;
+            return this;
+        }
+
         public CFAlertDialog create() {
             CFAlertDialog cfAlertDialog;
             if (params.theme == 0) {
@@ -1092,6 +1109,7 @@ public class CFAlertDialog extends AppCompatDialog {
         private OnClickListener onItemClickListener;
         private OnClickListener onSingleItemClickListener;
         private OnMultiChoiceClickListener onMultiChoiceClickListener;
+        private long autoDismissDuration = -1;
 
         public boolean isDialogBodyEmpty() {
             if (!TextUtils.isEmpty(title)) return false;
