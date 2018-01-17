@@ -24,7 +24,7 @@ You can also check out this library for ** iOS** [here](https://github.com/Co
 ### Install using gradle
 In your project's build.gradle add the following under dependencies
 ```java 
-compile 'com.crowdfire.cfalertdialog:cfalertdialog:1.0.2'
+compile 'com.crowdfire.cfalertdialog:cfalertdialog:1.1.0'
 ```
 
 
@@ -81,6 +81,9 @@ You can change the background (overlay) color of the alert using the method `set
 ##### Dismiss on background tap
 This determines whether the Alert dialog is dismissed when user taps on the background. Use the method `setCancelable` with a boolean value. By default it is set to true.
 The user will be able to interactively swipe to dismiss the notification dialog if this field is true.
+
+##### Dismiss automatically
+The alert dialog can be dismissed automatically using the method `setAutoDismissAfter(long duration)`.
 
 ##### Header / Footer
  You can add header and footer to the dialog. Use the method `setHeaderView` and `setFooterView` with any custom View. You can also pass the layout resource directly into the header/footer. Pass `null` to remove any existing header/footer.
