@@ -352,7 +352,7 @@ public class CFAlertDialog extends AppCompatDialog {
             colorAnimation.start();
         }
         else {
-            dialogCardView.setBackgroundColor(color);
+            cfDialogScrollView.setBackgroundColor(color);
         }
     }
 
