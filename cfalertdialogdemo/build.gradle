@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "com.crowdfireapp.cfalertdialogdemo"
         minSdkVersion 14
-        targetSdkVersion 25
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -20,14 +20,14 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:support-v4:25.4.0'
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.1.1-alpha01', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    compile project(':cfalertdialog')
-    compile 'com.android.support:appcompat-v7:25.4.0'
-    compile 'com.android.support:design:25.4.0'
-    testCompile 'junit:junit:4.12'
+    implementation project(':cfalertdialog')
+    implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
+    implementation 'com.google.android.material:material:1.1.0-alpha01'
+    testImplementation 'junit:junit:4.12'
 }

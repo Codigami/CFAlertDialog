@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal">
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/cfdialog_cardview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -126,7 +126,7 @@
                 </LinearLayout>
 
             </ScrollView>
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
 
