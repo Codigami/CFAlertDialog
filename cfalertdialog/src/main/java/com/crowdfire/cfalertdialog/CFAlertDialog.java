@@ -5,11 +5,13 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
@@ -21,6 +23,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.ViewCompat;
 import androidx.appcompat.app.AppCompatDialog;
 import androidx.cardview.widget.CardView;
+
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -185,9 +188,15 @@ public class CFAlertDialog extends AppCompatDialog {
         } else { setIcon(null); }
 
         // Title
+        if(params.titleTypeface!=null){
+            dialogTitleTextView.setTypeface(params.titleTypeface);
+        }
         setTitle(params.title);
 
         // Message
+        if(params.messageTypeface!=null){
+            dialogMessageTextView.setTypeface(params.messageTypeface);
+        }
         setMessage(params.message);
 
         // Text color
@@ -568,7 +577,9 @@ public class CFAlertDialog extends AppCompatDialog {
         setButtonLayout(button, actionButton);
 
         button.setText(actionButton.buttonText);
-
+        if(actionButton.typeface!=null){
+            button.setTypeface(actionButton.typeface);
+        }
         setButtonColors(button, actionButton);
 
         return button;
@@ -944,8 +955,18 @@ public class CFAlertDialog extends AppCompatDialog {
             return this;
         }
 
+        public Builder setMessageTyepface(Typeface typeface){
+            this.params.messageTypeface = typeface;
+            return this;
+        }
+
         public Builder setTitle(@StringRes int titleId) {
             this.params.title = params.context.getString(titleId);
+            return this;
+        }
+
+        public Builder setTitleTyepface(Typeface typeface){
+            this.params.titleTypeface = typeface;
             return this;
         }
 
@@ -998,6 +1019,12 @@ public class CFAlertDialog extends AppCompatDialog {
 
         public Builder addButton(String buttonText, @ColorInt int textColor, @ColorInt int backgroundColor, CFAlertActionStyle style, CFAlertActionAlignment alignment, OnClickListener onClickListener) {
             CFAlertActionButton button = new CFAlertActionButton(this.params.context, buttonText, textColor, backgroundColor, style, alignment, onClickListener);
+            this.params.buttons.add(button);
+            return this;
+        }
+
+        public Builder addButton(String buttonText,Typeface typeface, @ColorInt int textColor, @ColorInt int backgroundColor, CFAlertActionStyle style, CFAlertActionAlignment alignment, OnClickListener onClickListener) {
+            CFAlertActionButton button = new CFAlertActionButton(this.params.context,typeface, buttonText, textColor, backgroundColor, style, alignment, onClickListener);
             this.params.buttons.add(button);
             return this;
         }
@@ -1083,13 +1110,17 @@ public class CFAlertDialog extends AppCompatDialog {
 
     private static class DialogParams {
 
+        private Typeface titleTypeface,messageTypeface;
         private Context context;
-        private @ColorInt int backgroundColor = Color.parseColor("#B3000000");
-        private @ColorInt int dialogBackgroundColor = Color.parseColor("#FFFFFF");
+        private @ColorInt
+        int backgroundColor = Color.parseColor("#B3000000");
+        private @ColorInt
+        int dialogBackgroundColor = Color.parseColor("#FFFFFF");
         private float dialogCornerRadius = -1;
         private int dialogOuterMargin = -1;
         private CharSequence message, title;
-        private @ColorInt int textColor = -1;
+        private @ColorInt
+        int textColor = -1;
         private int theme = R.style.CFDialog,
                 textGravity = Gravity.LEFT,
                 iconDrawableId = -1,
@@ -1125,6 +1156,7 @@ public class CFAlertDialog extends AppCompatDialog {
     }
 
     private static class CFAlertActionButton {
+        private Typeface typeface;
         private Context context;
         private String buttonText;
         private DialogInterface.OnClickListener onClickListener;
@@ -1150,7 +1182,25 @@ public class CFAlertDialog extends AppCompatDialog {
             }
         }
 
-        private @DrawableRes int getBackgroundDrawable(CFAlertActionStyle style) {
+        public CFAlertActionButton(Context context, Typeface typeface, String buttonText, @ColorInt int textColor, @ColorInt int backgroundColor, CFAlertActionStyle style, CFAlertActionAlignment alignment, OnClickListener onClickListener) {
+            this.context = context;
+            this.buttonText = buttonText;
+            this.textColor = textColor;
+            this.backgroundColor = backgroundColor;
+            this.style = style;
+            this.backgroundDrawableId = getBackgroundDrawable(style);
+            this.alignment = alignment;
+            this.onClickListener = onClickListener;
+            this.typeface = typeface;
+
+            // default textColor
+            if (textColor == -1) {
+                this.textColor = getTextColor(style);
+            }
+        }
+
+        private @DrawableRes
+        int getBackgroundDrawable(CFAlertActionStyle style) {
             @DrawableRes int backgroundDrawable = 0;
             switch (style) {
                 case NEGATIVE:
