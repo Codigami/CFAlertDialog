@@ -353,6 +353,12 @@
                             android:layout_height="wrap_content"
                             android:checked="true"
                             android:text="Add Footer" />
+
+                        <CheckBox
+                            android:id="@+id/show_input_box"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Show Input Box" />
                     </LinearLayout>
 
                     <TextView

@@ -84,6 +84,13 @@
                             android:animateLayoutChanges="true"
                             tools:text="This is your description" />
 
+                        <!-- Input item -->
+                        <EditText
+                            android:id="@+id/tv_dialog_input"
+                            android:layout_margin="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
                         <!--Selection items-->
                         <LinearLayout
                             android:id="@+id/alert_selection_items_container"

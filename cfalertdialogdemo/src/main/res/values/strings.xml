@@ -2,6 +2,7 @@
     <string name="app_name">CFAlertDialogDemo</string>
     
     <string name="btn_sample_button">Sample Button</string>
+    <string name="inputHint">Test Hint</string>
 
     <string-array name="cfdialog_text_gravity">
         <item>Left</item>

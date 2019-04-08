@@ -18,9 +18,12 @@ import androidx.annotation.StringRes;
 import androidx.annotation.StyleRes;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.ViewCompat;
 import androidx.appcompat.app.AppCompatDialog;
 import androidx.cardview.widget.CardView;
+
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -32,6 +35,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -81,6 +85,7 @@ public class CFAlertDialog extends AppCompatDialog {
     private TextView dialogTitleTextView, dialogMessageTextView;
     private ImageView cfDialogIconImageView;
     private ScrollView cfDialogScrollView;
+    private EditText inputEditText;
 
     // endregion
 
@@ -174,6 +179,7 @@ public class CFAlertDialog extends AppCompatDialog {
         buttonContainerLinearLayout = (LinearLayout) dialogCardView.findViewById(R.id.alert_buttons_container);
         cfDialogFooterLinearLayout = (LinearLayout) dialogCardView.findViewById(R.id.alert_footer_container);
         selectableItemsContainer = (LinearLayout) dialogCardView.findViewById(R.id.alert_selection_items_container);
+        inputEditText = dialogCardView.findViewById(R.id.tv_dialog_input);
     }
 
     private void populateCardView() {
@@ -201,6 +207,15 @@ public class CFAlertDialog extends AppCompatDialog {
 
         // Buttons
         populateButtons(params.context, params.buttons);
+
+        // Input text
+        inputEditText.setVisibility(params.showInput ? View.VISIBLE : View.GONE);
+        if(params.inputTint != -1)
+            DrawableCompat.setTint(inputEditText.getBackground(), params.inputTint);
+        if(params.inputHint != null)
+            inputEditText.setHint(params.inputHint);
+        if(params.inputType != null)
+            inputEditText.setInputType(params.inputType);
 
         // Text gravity
         setTextGravity(params.textGravity);
@@ -273,6 +288,10 @@ public class CFAlertDialog extends AppCompatDialog {
 
         // Perform the present animation
         startPresentAnimation();
+    }
+
+    public String getInputText() {
+        return inputEditText.getText().toString();
     }
 
     @Override
@@ -1061,6 +1080,26 @@ public class CFAlertDialog extends AppCompatDialog {
             return this;
         }
 
+        public Builder setInputHint(@StringRes int hint) {
+            this.params.inputHint = hint;
+            return this;
+        }
+
+        public Builder showInput(boolean show) {
+            this.params.showInput = show;
+            return this;
+        }
+
+        public Builder setInputTint(@ColorInt int tintColor) {
+            this.params.inputTint = tintColor;
+            return this;
+        }
+
+        public Builder setInputType(int type) {
+            this.params.inputType = type;
+            return this;
+        }
+
         public CFAlertDialog create() {
             CFAlertDialog cfAlertDialog;
             if (params.theme == 0) {
@@ -1083,6 +1122,7 @@ public class CFAlertDialog extends AppCompatDialog {
 
     private static class DialogParams {
 
+
         private Context context;
         private @ColorInt int backgroundColor = Color.parseColor("#B3000000");
         private @ColorInt int dialogBackgroundColor = Color.parseColor("#FFFFFF");
@@ -1091,9 +1131,9 @@ public class CFAlertDialog extends AppCompatDialog {
         private CharSequence message, title;
         private @ColorInt int textColor = -1;
         private int theme = R.style.CFDialog,
-                textGravity = Gravity.LEFT,
-                iconDrawableId = -1,
-                contentImageDrawableId = -1;
+        textGravity = Gravity.LEFT,
+        iconDrawableId = -1,
+        contentImageDrawableId = -1;
         private CFAlertStyle dialogStyle = CFAlertStyle.ALERT;
         private View headerView, footerView;
         private int headerViewId = -1, footerViewId = -1;
@@ -1110,6 +1150,10 @@ public class CFAlertDialog extends AppCompatDialog {
         private OnClickListener onSingleItemClickListener;
         private OnMultiChoiceClickListener onMultiChoiceClickListener;
         private long autoDismissDuration = -1;
+        private Integer inputHint;
+        private boolean showInput;
+        private @ColorInt int inputTint = Color.parseColor("#B3000000");
+        private Integer inputType;
 
         public boolean isDialogBodyEmpty() {
             if (!TextUtils.isEmpty(title)) return false;
@@ -1123,8 +1167,8 @@ public class CFAlertDialog extends AppCompatDialog {
             return true;
         }
     }
-
     private static class CFAlertActionButton {
+
         private Context context;
         private String buttonText;
         private DialogInterface.OnClickListener onClickListener;
