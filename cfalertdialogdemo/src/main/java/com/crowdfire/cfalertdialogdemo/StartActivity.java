@@ -7,6 +7,8 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.core.view.ViewCompat;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.text.InputType;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -37,7 +39,7 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
             singleChoiceRadioButton;
     private RadioButton textGravityLeft, textGravityCenter, textGravityRight;
     private RadioButton buttonGravityLeft, buttonGravityRight, buttonGravityCenter, buttonGravityFull;
-    private CheckBox showTitleIcon;
+    private CheckBox showTitleIcon, showInputBox;
     private RadioButton topDialogGravityRadioButton, centerDialogGravityRadioButton, bottomDialogGravityRadioButton;
     private View selectedBackgroundColorView, selectBackgroundColorContainer;
     private FloatingActionButton showDialogFab;
@@ -139,6 +141,12 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
         if (showTitleIcon.isChecked()) {
             builder.setIcon(R.drawable.icon_drawable);
         }
+
+        // Input box
+        builder.showInput(showInputBox.isChecked());
+        builder.setInputHint(R.string.inputHint);
+        builder.setInputTint(getResources().getColor(R.color.colorAccent));
+        builder.setInputType(InputType.TYPE_CLASS_NUMBER);
 
         // Buttons
         if (positiveButtonCheckbox.isChecked()) {
@@ -303,6 +311,7 @@ public class StartActivity extends AppCompatActivity implements SampleFooterView
         singleChoiceRadioButton = (RadioButton) findViewById(R.id.single_choice_items_radio_button);
 
         showTitleIcon = (CheckBox) findViewById(R.id.show_title_icon);
+        showInputBox = (CheckBox) findViewById(R.id.show_input_box);
 
         topDialogGravityRadioButton = (RadioButton) findViewById(R.id.top_dialog_gravity_radio_button);
         centerDialogGravityRadioButton = (RadioButton) findViewById(R.id.center_dialog_gravity_radio_button);
