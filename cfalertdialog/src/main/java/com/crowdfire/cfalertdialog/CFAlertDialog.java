@@ -557,7 +557,7 @@ public class CFAlertDialog extends AppCompatDialog {
     }
 
     private View createButton(Context context, final CFAlertActionButton actionButton) {
-        CFPushButton button = new CFPushButton(context, null, R.style.CFDialog_Button);
+        CFPushButton button = new CFPushButton(context, null, style != -1 ? style : R.style.CFDialog_Button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
