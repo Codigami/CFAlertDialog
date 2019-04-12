@@ -64,6 +64,8 @@ public class SwipeToHideViewListener implements View.OnTouchListener {
                 break;
 
             case MotionEvent.ACTION_UP:
+
+                view.performClick();
             case MotionEvent.ACTION_OUTSIDE:
 
                 isTouching = false;

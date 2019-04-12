@@ -72,6 +72,7 @@ public class CFAlertDialog extends AppCompatDialog {
     // endregion
 
     // region Properties
+    private int style = -1;
     private DialogParams params;
 
     private RelativeLayout cfDialogBackground, cfDialogContainer;
@@ -91,6 +92,7 @@ public class CFAlertDialog extends AppCompatDialog {
 
     private CFAlertDialog(Context context, int theme) {
         super(context, theme);
+        style = theme;
     }
 
     @Override
@@ -162,18 +164,18 @@ public class CFAlertDialog extends AppCompatDialog {
     }
 
     private void bindCardSubviews() {
-        cfDialogScrollView = (ScrollView) dialogCardView.findViewById(R.id.cfdialog_scrollview);
-        cfDialogBodyContainer = (LinearLayout) dialogCardView.findViewById(R.id.alert_body_container);
-        cfDialogHeaderLinearLayout = (LinearLayout) dialogCardView.findViewById(R.id.alert_header_container);
+        cfDialogScrollView = dialogCardView.findViewById(R.id.cfdialog_scrollview);
+        cfDialogBodyContainer = dialogCardView.findViewById(R.id.alert_body_container);
+        cfDialogHeaderLinearLayout = dialogCardView.findViewById(R.id.alert_header_container);
         cfDialogHeaderLinearLayout.requestLayout();
         cfDialogHeaderLinearLayout.setVisibility(View.GONE);
-        dialogTitleTextView = (TextView) dialogCardView.findViewById(R.id.tv_dialog_title);
-        iconTitleContainer = (LinearLayout) dialogCardView.findViewById(R.id.icon_title_container);
-        cfDialogIconImageView = (ImageView) dialogCardView.findViewById(R.id.cfdialog_icon_imageview);
-        dialogMessageTextView = (TextView) dialogCardView.findViewById(R.id.tv_dialog_content_desc);
-        buttonContainerLinearLayout = (LinearLayout) dialogCardView.findViewById(R.id.alert_buttons_container);
-        cfDialogFooterLinearLayout = (LinearLayout) dialogCardView.findViewById(R.id.alert_footer_container);
-        selectableItemsContainer = (LinearLayout) dialogCardView.findViewById(R.id.alert_selection_items_container);
+        dialogTitleTextView = dialogCardView.findViewById(R.id.tv_dialog_title);
+        iconTitleContainer = dialogCardView.findViewById(R.id.icon_title_container);
+        cfDialogIconImageView = dialogCardView.findViewById(R.id.cfdialog_icon_imageview);
+        dialogMessageTextView = dialogCardView.findViewById(R.id.tv_dialog_content_desc);
+        buttonContainerLinearLayout = dialogCardView.findViewById(R.id.alert_buttons_container);
+        cfDialogFooterLinearLayout = dialogCardView.findViewById(R.id.alert_footer_container);
+        selectableItemsContainer = dialogCardView.findViewById(R.id.alert_selection_items_container);
     }
 
     private void populateCardView() {
@@ -309,7 +311,7 @@ public class CFAlertDialog extends AppCompatDialog {
         this.params = params;
     }
 
-    public void setEnabled(boolean enabled) {
+    private void setEnabled(boolean enabled) {
         setViewEnabled(cfDialogBackground, enabled);
     }
 
@@ -317,8 +319,7 @@ public class CFAlertDialog extends AppCompatDialog {
 
         if (animated) {
             int colorFrom = ((ColorDrawable)cfDialogBackground.getBackground()).getColor();
-            int colorTo = color;
-            ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+            ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, color);
             colorAnimation.setDuration(getContext().getResources().getInteger(R.integer.cfdialog_animation_duration)); // milliseconds
             colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 
@@ -338,8 +339,7 @@ public class CFAlertDialog extends AppCompatDialog {
     public void setDialogBackgroundColor(int color, boolean animated) {
         if (animated) {
             int colorFrom = ((ColorDrawable)dialogCardView.getBackground()).getColor();
-            int colorTo = color;
-            ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+            ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, color);
             colorAnimation.setDuration(getContext().getResources().getInteger(R.integer.cfdialog_animation_duration)); // milliseconds
             colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 
